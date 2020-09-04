@@ -7,7 +7,6 @@ import IntroScreen from "../screens/intro/intro";
 import LoginScreen from "../screens/login";
 import {Colors} from "../constants/styles/colors";
 import {Dimensions, Text, TouchableOpacity, View} from "react-native";
-import MyTabBar from "./MyTabBar";
 import { NavigationContainer } from '@react-navigation/native';
 import {navigate} from "./RootNavigation";
 
