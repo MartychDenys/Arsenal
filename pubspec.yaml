@@ -38,17 +38,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/auth/logo.png
-    - assets/auth/background.png
+    - assets/auth/
     - assets/icons/
-    - assets/icons/policy_icon.svg
-    - assets/images/bg.png
-    - assets/images/pulse.png
-    - assets/images/tablets.png
-    - assets/images/heart.png
     - assets/images/
-    - assets/splash/splash.png
-    - assets/splash/splash_logo.png
+    - assets/splash/
     - i18n/uk.json
     - i18n/ru.json
 

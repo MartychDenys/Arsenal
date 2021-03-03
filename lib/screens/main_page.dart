@@ -1,6 +1,5 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:arsenal_app/screens/bottom_navigation_page.dart';
-import 'package:arsenal_app/screens/communication_page.dart';
 import 'package:arsenal_app/widgets/icsurance_card.dart';
 import 'package:arsenal_app/widgets/user_info_card.dart';
 import 'package:flutter/material.dart';
