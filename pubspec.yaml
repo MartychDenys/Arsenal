@@ -1,0 +1,58 @@
+name: arsenal_app
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^4.3.3
+  bottom_navy_bar: ^5.6.0
+  flag: ^3.0.0
+  flutter_svg: ^0.18.0
+  circular_check_box: ^1.0.4
+  qr_flutter: ^3.1.0
+  flutter_native_splash: ^0.3.0
+  flutter_localizations:
+    sdk: flutter
+  shared_preferences: ^0.5.3+4
+
+
+
+
+  cupertino_icons: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/auth/
+    - assets/icons/
+    - assets/images/
+    - assets/splash/
+    - i18n/uk.json
+    - i18n/ru.json
+
+
+
+  fonts:
+    - family: FrizQuadrataCTT
+      fonts:
+        - asset: fonts/FrizQuadrataCTT.ttf
+
+    - family: HelveticaRegular
+      fonts:
+        - asset: fonts/HelveticaRegular.ttf
+
