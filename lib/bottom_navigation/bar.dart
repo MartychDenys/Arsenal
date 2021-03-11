@@ -143,7 +143,6 @@ class _ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        //width: isSelected ? 130 : 50,
         width: isSelected ? 160 : 50,
         height: double.maxFinite,
         duration: animationDuration,
@@ -161,7 +160,7 @@ class _ItemWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 IconTheme(

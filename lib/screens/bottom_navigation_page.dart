@@ -4,6 +4,7 @@ import 'package:arsenal_app/screens/communication_page.dart';
 import 'package:arsenal_app/screens/main_page.dart';
 import 'package:arsenal_app/screens/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationPage extends StatefulWidget {
   static const routeName = '/navigation';

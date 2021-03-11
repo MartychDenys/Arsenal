@@ -57,7 +57,9 @@ class ExitDialog extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      SystemChannels.platform
+                          .invokeMethod<void>('SystemNavigator.pop');
                     },
                     child: Text(
                       AppLocalizations.of(context).translate('cancel'),

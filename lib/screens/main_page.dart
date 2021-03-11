@@ -52,23 +52,26 @@ class MainPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(7.0),
               ),
               color: red,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context).translate('call_assistant'),
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                      fontFamily: 'HelveticaRegular',
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 13),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).translate('call_assistant'),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                        fontFamily: 'HelveticaRegular',
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: SvgPicture.asset('assets/icons/phone_reverse.svg'),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: SvgPicture.asset('assets/icons/phone_reverse.svg'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

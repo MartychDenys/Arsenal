@@ -110,36 +110,19 @@ class ComeToDoctorPage extends StatelessWidget {
                         fontFamily: 'HelveticaRegular',
                         color: Color.fromRGBO(96, 110, 117, 1)),
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 30,
-                        width: 70,
-                        child: TextFormField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: '13:30',
-                          ),
+                  Container(
+                    width: 160,
+                    height: 30,
+                    child: TextFormField(
+                      keyboardType: TextInputType.datetime,
+                      decoration: InputDecoration(
+                        hintText: '00:00',
+                        suffixIcon: Icon(
+                          Icons.access_time,
+                          color: Color.fromRGBO(18, 151, 71, 1),
                         ),
                       ),
-                      Text(
-                        ' - ',
-                        style: TextStyle(
-                            fontFamily: 'HelveticaRegular',
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 70,
-                        child: TextFormField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: '15:30',
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
