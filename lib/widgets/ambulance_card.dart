@@ -58,7 +58,7 @@ class AmbulanceCard extends StatelessWidget {
                     AppLocalizations.of(context).translate('alarm'),
                     style: TextStyle(
                       height: 1.5,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       fontSize: 14,
                       fontFamily: 'HelveticaRegular',
                       color: Color.fromRGBO(96, 110, 117, 1),
