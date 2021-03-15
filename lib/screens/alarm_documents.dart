@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DocumentsAlarm extends StatelessWidget {
+  final FontWeight fontWeight;
+
+  DocumentsAlarm({this.fontWeight});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +23,7 @@ class DocumentsAlarm extends StatelessWidget {
               AppLocalizations.of(context).translate('how_to_sent'),
               style: TextStyle(
                 height: 1.5,
-                fontWeight: FontWeight.w400,
+                fontWeight: fontWeight,
                 fontSize: 13,
                 fontFamily: 'HelveticaRegular',
                 color: Color.fromRGBO(96, 110, 117, 1),

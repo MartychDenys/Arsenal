@@ -75,7 +75,9 @@ class PayPage extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            DocumentsAlarm(),
+            DocumentsAlarm(
+              fontWeight: FontWeight.w700,
+            ),
             SizedBox(
               height: 45,
             ),
