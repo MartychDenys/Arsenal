@@ -74,31 +74,35 @@ class _AuthPageState extends State<AuthPage> {
     return Container(
       height: 70,
       alignment: Alignment.center,
-      child: Column(
-        children: [
-          Text(
-            AppLocalizations.of(ctx).translate('user_auth'),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'FrizQuadrataCTT',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Text(
+              AppLocalizations.of(ctx).translate('user_auth'),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'FrizQuadrataCTT',
+              ),
             ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            AppLocalizations.of(context).translate('identify_yourself'),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 13,
-              color: Color.fromRGBO(96, 110, 117, 1),
-              fontWeight: FontWeight.w400,
-              fontFamily: 'HelveticaRegular',
+            SizedBox(
+              height: 8,
             ),
-          ),
-        ],
+            Text(
+              AppLocalizations.of(context).translate('identify_yourself'),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                letterSpacing: 0.2,
+                color: Color.fromRGBO(96, 110, 117, 1),
+                fontWeight: FontWeight.w400,
+                fontFamily: 'HelveticaRegular',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
