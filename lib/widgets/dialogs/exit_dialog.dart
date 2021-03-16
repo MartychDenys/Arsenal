@@ -1,4 +1,5 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
+import 'package:arsenal_app/screens/bottom_navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -57,9 +58,7 @@ class ExitDialog extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      //Navigator.of(context).pop();
-                      SystemChannels.platform
-                          .invokeMethod<void>('SystemNavigator.pop');
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       AppLocalizations.of(context).translate('cancel'),
@@ -78,7 +77,9 @@ class ExitDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   onPressed: () {
-                    SystemNavigator.pop();
+                    //SystemNavigator.pop();
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/auth', (r) => false);
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(

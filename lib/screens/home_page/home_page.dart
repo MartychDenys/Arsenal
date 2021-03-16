@@ -1,7 +1,7 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:arsenal_app/screens/bottom_navigation_page.dart';
-import 'package:arsenal_app/widgets/icsurance_card.dart';
-import 'package:arsenal_app/widgets/user_info_card.dart';
+import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/home_page/widgets/icsurance_card.dart';
+import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/home_page/widgets/user_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:arsenal_app/const/styles-consts.dart';
@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
             child: Column(
               children: [
                 UserInfoCard(),
-                CallAssistant(context),
+                callAssistant(context),
                 InsuranceCard(),
               ],
             ),
@@ -29,7 +29,7 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget CallAssistant(context) {
+  Widget callAssistant(context) {
     return Container(
       child: Column(
         children: [
@@ -53,7 +53,7 @@ class MainPage extends StatelessWidget {
               ),
               color: red,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 13),
+                padding: EdgeInsets.symmetric(vertical: 26),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
