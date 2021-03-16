@@ -24,15 +24,13 @@ class CallMenu extends StatelessWidget {
               title: 'Telegram',
               iconPath: 'assets/icons/telegram.svg',
               messenger: TelegramDialog(),
-              //buttonColor: Color.fromRGBO(60, 171, 221, 1),
-              buttonColor: Color.fromRGBO(18, 151, 71, 1),
+              buttonColor: Color.fromRGBO(60, 171, 221, 1),
             ),
             CallMenuItem(
               title: 'Viber',
               iconPath: 'assets/icons/viber.svg',
               messenger: ViberDialog(),
-              //buttonColor: Color.fromRGBO(123, 84, 155, 1),
-              buttonColor: Color.fromRGBO(18, 151, 71, 1),
+              buttonColor: Color.fromRGBO(123, 84, 155, 1),
             ),
             CallMenuItem(
               title: 'Email',
