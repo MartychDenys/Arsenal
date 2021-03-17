@@ -1,7 +1,7 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:arsenal_app/widgets/ambulance_card.dart';
 import 'package:arsenal_app/widgets/call_menu.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/communication_page/widgets/function_menu.dart';
+import 'package:arsenal_app/screens/communication_page/widgets/function_menu.dart';
 import 'package:arsenal_app/widgets/history_card.dart';
 import 'package:flutter/material.dart';
 

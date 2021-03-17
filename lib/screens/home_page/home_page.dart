@@ -1,7 +1,7 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:arsenal_app/screens/bottom_navigation_page.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/home_page/widgets/icsurance_card.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/home_page/widgets/user_info_card.dart';
+import 'package:arsenal_app/screens/home_page/widgets/icsurance_card.dart';
+import 'package:arsenal_app/screens/home_page/widgets/user_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:arsenal_app/const/styles-consts.dart';

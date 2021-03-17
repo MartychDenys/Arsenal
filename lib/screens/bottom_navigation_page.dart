@@ -1,8 +1,8 @@
 import 'package:arsenal_app/bottom_navigation/bar.dart';
 import 'package:arsenal_app/locale/app_localizations.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/communication_page/communication_page.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/home_page/home_page.dart';
-import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/settings_page/settings_page.dart';
+import 'package:arsenal_app/screens/communication_page/communication_page.dart';
+import 'package:arsenal_app/screens/home_page/home_page.dart';
+import 'package:arsenal_app/screens/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
