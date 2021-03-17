@@ -1,8 +1,17 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceCard extends StatelessWidget {
+  Future<void> _makePhoneCall(num) async {
+    if (await canLaunch('tel:$num')) {
+      await launch('tel:$num');
+    } else {
+      throw 'Could not launch $num';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +34,9 @@ class AmbulanceCard extends StatelessWidget {
                 Container(
                   width: 120,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _makePhoneCall('0504238999');
+                    },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(7.0),
                     ),

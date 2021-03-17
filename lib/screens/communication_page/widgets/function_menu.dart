@@ -1,7 +1,7 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-import 'function_menu_item.dart';
+import '../../../widgets/function_menu_item.dart';
 
 class FunctionMenu extends StatelessWidget {
   @override
