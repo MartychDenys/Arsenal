@@ -4,14 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CallMenuItem extends StatelessWidget {
   final String title;
   final String iconPath;
-  final Widget messenger;
   final Color buttonColor;
+  final onPressButton;
 
-  CallMenuItem(
-      {@required this.title,
-      @required this.iconPath,
-      this.messenger,
-      @required this.buttonColor});
+  CallMenuItem({
+    @required this.title,
+    @required this.iconPath,
+    @required this.buttonColor,
+    @required this.onPressButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,7 @@ class CallMenuItem extends StatelessWidget {
             //shape: ,
             child: FlatButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext ctx) {
-                    return messenger;
-                  },
-                );
+                onPressButton();
               },
               color: buttonColor,
               shape: RoundedRectangleBorder(
