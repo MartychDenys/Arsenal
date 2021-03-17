@@ -1,8 +1,8 @@
 import 'package:arsenal_app/locale/app_language.dart';
 import 'package:arsenal_app/locale/app_localizations.dart';
-import 'package:arsenal_app/widgets/exit_card.dart';
-import 'package:arsenal_app/widgets/language_card.dart';
-import 'package:arsenal_app/widgets/policy_card.dart';
+import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/settings_page/widgets/exit_card.dart';
+import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/settings_page/widgets/language_card.dart';
+import 'file:///C:/Users/Eugene/arsenal_app/lib/screens/settings_page/widgets/policy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

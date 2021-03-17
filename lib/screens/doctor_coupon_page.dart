@@ -65,7 +65,7 @@ class _DoctorCouponPageState extends State<DoctorCouponPage> {
                 height: 48,
               ),
               Text(
-                AppLocalizations.of(context).translate('desired_date'),
+                AppLocalizations.of(context).translate('desired_date_full'),
                 style: TextStyle(
                   fontFamily: 'FrizQuadrataCTT',
                   fontSize: 18,

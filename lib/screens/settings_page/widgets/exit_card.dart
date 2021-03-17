@@ -2,7 +2,7 @@ import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'dialogs/exit_dialog.dart';
+import '../../../widgets/dialogs/exit_dialog.dart';
 
 class ExitCard extends StatelessWidget {
   Widget build(BuildContext context) {
