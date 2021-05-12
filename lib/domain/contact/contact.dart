@@ -11,15 +11,6 @@ class Contact {
     this.data,
   });
 
-  /*factory Contact.fromJson(Map<String, dynamic> json) {
-    return Contact(
-      status: json['status'] as String,
-      data: ContactData.fromJson(
-        json['data'] as Map<String, dynamic>,
-      ),
-    );
-  }*/
-
   factory Contact.fromJson(Map<String, dynamic> json) =>
       _$ContactFromJson(json);
 

@@ -16,18 +16,6 @@ class ContactData {
     this.mainContact,
   });
 
-  /*factory ContactData.fromJson(Map<String, dynamic> json) {
-    return ContactData(
-      name: json['NAME'] as String,
-      lastName: json['LAST_NAME'] as String,
-      secondName: json['SECOND_NAME'] as String,
-      birthDate: json['BIRTHDATE'] as String,
-      fullName: json['FULL_NAME'] as String,
-      phone: json['PHONE'] as String,
-      userCode: json['UF_DMS_USER_CODE'] as String,
-    );
-  }*/
-
   factory ContactData.fromJson(Map<String, dynamic> json) =>
       _$ContactDataFromJson(json);
 
