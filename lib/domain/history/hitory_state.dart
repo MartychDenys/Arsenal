@@ -1,0 +1,4 @@
+enum ShowHistoryState {
+  visible,
+  invisible,
+}
