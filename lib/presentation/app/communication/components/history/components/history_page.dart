@@ -14,7 +14,6 @@ import '../../../../../constants/style_constants.dart';
 import '../../../../../loader.dart';
 import '../../../../components/app_bar_with_back_button.dart';
 import '../../../../components/helvetica_text.dart';
-import '../../../../../../domain/history/confirmed_item.dart';
 import '../../../../../../application/app/communication/history/hitory_state_provider.dart';
 
 class HistoryPage extends HookWidget {
@@ -162,17 +161,6 @@ class HistoryPage extends HookWidget {
                       ]
                     ],
                   );
-                  /*return ListView(
-                    physics: const ScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      for (final item in data.data) ...[
-                        ListTile(
-                          title: Text(item.symptoms),
-                        ),
-                      ]
-                    ],
-                  );*/
                 } else {
                   return Text('Unknown error');
                 }
