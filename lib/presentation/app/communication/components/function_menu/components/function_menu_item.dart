@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../constants/style_constants.dart';
 import '../../../../components/friz_text.dart';
 import '../../../../components/helvetica_text.dart';
 
-class FunctionMenuItem extends StatelessWidget {
+class FunctionMenuItem extends HookWidget {
   const FunctionMenuItem({
     Key key,
     @required this.buttonTitle,

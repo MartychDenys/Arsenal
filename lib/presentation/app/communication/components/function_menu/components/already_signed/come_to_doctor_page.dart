@@ -1,4 +1,4 @@
-import 'package:arsenal_app/application/app/contact/contact_state_notifier.dart';
+import '../../../../../../../application/app/contact/contact_state_notifier.dart';
 
 import '../../../../../../helpers/validators/validate_date.dart';
 import '../../../../../../helpers/validators/validate_symptoms.dart';

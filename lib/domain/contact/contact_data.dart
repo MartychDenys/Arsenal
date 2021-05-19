@@ -38,5 +38,5 @@ class ContactData {
   @JsonKey(name: 'PHONE')
   final String phone;
   @JsonKey(name: 'maincontact')
-  final bool mainContact;
+  bool mainContact;
 }

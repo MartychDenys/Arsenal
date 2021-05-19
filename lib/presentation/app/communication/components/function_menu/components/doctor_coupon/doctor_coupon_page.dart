@@ -1,3 +1,6 @@
+import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
+import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
+
 import '../../../../../../../domain/doctor_coupon/medical_list_state.dart';
 
 import '../../../../../../../application/app/contact/contact_state_notifier.dart';
@@ -36,7 +39,9 @@ class DoctorCouponPage extends HookWidget {
     final authData = useProvider(authDataStateNotifierProvider).state;
     final controllerKey = useProvider(controllerKeyProvider);
     final contact = useProvider(contactStateNotifier).state;
+    final userId = useProvider(currentContactStateNotifierProvider.state);
     final changeMedList = useProvider(changeRadioStateProvider);
+    final insuranceId = useProvider(insuranceIdStateNotifierProvider.state);
 
     void _processResponse(dynamic response) {
       print(response.status);
@@ -296,7 +301,8 @@ class DoctorCouponPage extends HookWidget {
                       final response = await _doctorCouponService.sendQuery(
                         doctorCouponState,
                         authData.data.token,
-                        contact.data.first.userCode,
+                        userId,
+                        insuranceId,
                       );
 
                       _processResponse(response);

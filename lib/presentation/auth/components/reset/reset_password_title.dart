@@ -36,16 +36,6 @@ class ResetPasswordTitle extends StatelessWidget {
               ),
             ),
             SpaceH8(),
-            Text(
-              'operator'.tr(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                color: Color.fromRGBO(96, 110, 117, 1),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'HelveticaRegular',
-              ),
-            ),
           ],
         ),
       ),

@@ -18,5 +18,5 @@ class Insurance {
   Map<String, dynamic> toJson() => _$InsuranceToJson(this);
 
   final String status;
-  final List<InsuranceItem> data;
+  final List<InsuranceData> data;
 }

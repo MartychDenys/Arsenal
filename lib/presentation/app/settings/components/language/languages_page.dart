@@ -1,3 +1,6 @@
+import 'package:arsenal_app/presentation/app/components/helvetica_text.dart';
+
+import '../../../components/friz_text.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -14,20 +17,16 @@ class LanguagesPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.5,
-        title: Text(
-          'app_lang'.tr(),
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'FrizQuadrataCTT',
-            color: Color.fromRGBO(40, 46, 58, 1),
-          ),
+        title: FrizText(
+          text: 'app_lang'.tr(),
+          size: 18,
+          color: textColor,
         ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Color.fromRGBO(40, 46, 58, 1),
+            color: textColor,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -46,16 +45,12 @@ class LanguagesPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                 ),
-                child: Text(
-                  'choose_lang'.tr(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    height: 1.5,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'HelveticaRegular',
-                    color: subtitleColor,
-                  ),
+                child: HelveticaText(
+                  text: 'choose_lang'.tr(),
+                  size: 14,
+                  color: subtitleColor,
+                  align: TextAlign.center,
+                  height: 1.5,
                 ),
               ),
               SpaceH32(),
@@ -65,11 +60,10 @@ class LanguagesPage extends StatelessWidget {
                 ),
                 child: Divider(
                   height: 1,
-                  color: Color.fromRGBO(227, 227, 229, 1),
+                  color: dividerColor,
                 ),
               ),
-              //if (model.appLocal.languageCode == 'ru')
-                if(context.locale.languageCode == 'ru')
+              if (context.locale.languageCode == 'ru')
                 const LanguageRow(
                   countryCode: 'RU',
                   countryName: 'Русский',
@@ -87,11 +81,11 @@ class LanguagesPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Divider(
                   height: 1,
-                  color: Color.fromRGBO(227, 227, 229, 1),
+                  color: dividerColor,
                 ),
               ),
               //if (model.appLocal.languageCode == 'uk')
-              if(context.locale.languageCode == 'uk')
+              if (context.locale.languageCode == 'uk')
                 const LanguageRow(
                   countryCode: 'UA',
                   countryName: 'Українська',
@@ -109,7 +103,7 @@ class LanguagesPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Divider(
                   height: 1,
-                  color: Color.fromRGBO(227, 227, 229, 1),
+                  color: dividerColor,
                 ),
               ),
             ],
