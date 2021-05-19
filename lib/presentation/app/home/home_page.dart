@@ -16,7 +16,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'components/call_assistant_button.dart';
 import 'components/user_info_card/components/user_info_card.dart';
 import 'components/user_insurances_card/icsurance_card.dart';
-import '../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
 
 class HomePage extends HookWidget {
   @override

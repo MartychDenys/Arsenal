@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final insuranceIdStateNotifierProvider =
-    StateNotifierProvider.autoDispose<InsuranceIdStateNotifier>(
+    StateNotifierProvider<InsuranceIdStateNotifier>(
   (ref) => InsuranceIdStateNotifier(),
 );
 

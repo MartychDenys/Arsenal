@@ -1,3 +1,6 @@
+import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
+import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
+
 import '../../../../../../../application/app/contact/contact_state_notifier.dart';
 
 import '../../../../../../helpers/validators/validate_date.dart';
@@ -34,7 +37,8 @@ class ComeToDoctorPage extends HookWidget {
     final _comeToDoctorService = ComeToDoctorService();
     final authData = useProvider(authDataStateNotifierProvider).state;
     final controllerKey = useProvider(controllerKeyProvider);
-    final contact = useProvider(contactStateNotifier).state;
+    final userId = useProvider(currentContactStateNotifierProvider.state);
+    final insuranceId = useProvider(insuranceIdStateNotifierProvider.state);
 
     void _processResponse(dynamic response) {
       print(response.status);
@@ -235,7 +239,8 @@ class ComeToDoctorPage extends HookWidget {
                       final response = await _comeToDoctorService.sendQuery(
                         comeToDoctorState,
                         authData.data.token,
-                        contact.data.first.userCode,
+                        userId,
+                        insuranceId,
                       );
 
                       _processResponse(response);

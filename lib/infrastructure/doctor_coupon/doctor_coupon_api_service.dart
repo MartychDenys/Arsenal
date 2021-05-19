@@ -11,9 +11,7 @@ class DoctorCouponApiService {
       String token, String userId, String dealId) async {
     const url =
         'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointment/';
-    print(token);
-    print(userId);
-    print(dealId);
+
     Map<String, dynamic> _query = {
       '_token': token,
       'contactId': userId,

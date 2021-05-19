@@ -7,14 +7,14 @@ class ComeToDoctorApiService {
   ComeToDoctorData comeToDoctorData;
 
   Future<dynamic> sendRequest(ComeToDoctorRequest comeToDoctorRequest,
-      String token, String userId) async {
+      String token, String userId, String insuranceId) async {
     const url =
         'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointmentConfirmation/';
 
     Map<String, dynamic> _query = {
       '_token': token,
-      'contactId': '144',
-      'dealID': 'userId',
+      'contactId': userId,
+      'dealID': insuranceId,
       'data[SYMPTOMS]': '${comeToDoctorRequest.symptoms}',
       'data[VISIT_DATE]': '${comeToDoctorRequest.visitDate}',
       'data[VISIT_TIME]': '${comeToDoctorRequest.visitTime}',
