@@ -14,6 +14,7 @@ import 'components/login/login_fields.dart';
 import 'components/reset/reset_password_form.dart';
 import 'components/reset/reset_password_buttons.dart';
 import 'components/reset/reset_password_title.dart';
+import 'components/reset/reset_password_sms_form.dart';
 
 class Authentication extends HookWidget {
   static const routeName = '/auth';
@@ -33,7 +34,7 @@ class Authentication extends HookWidget {
                 Column(
                   children: [
                     AuthTitleRow(),
-                    SpaceH20(),
+                    SpaceH16(),
                     LoginFields(),
                     SpaceH105(),
                     LoginButtons(),
@@ -41,10 +42,17 @@ class Authentication extends HookWidget {
                   ],
                 ),
               ],
+              if (auth.state == AuthState.resetSms) ...[
+                ResetPasswordTitle(),
+                SpaceH16(),
+                ResetPasswordForm(),
+                SpaceH100(),
+                ResetPasswordButtons(),
+              ],
               if (auth.state == AuthState.reset) ...[
                 ResetPasswordTitle(),
-                SpaceH32(),
-                ResetPasswordForm(),
+                SpaceH16(),
+                ResetPasswordSmsForm(),
                 SpaceH100(),
                 ResetPasswordButtons(),
               ],

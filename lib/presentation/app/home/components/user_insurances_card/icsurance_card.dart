@@ -1,35 +1,45 @@
+import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
+import 'package:arsenal_app/domain/insurance/insurance_data.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../user_contract_page.dart';
 import '../../../../navigator_push.dart';
-
-import '../../../../../application/app/insurances/insurances_future_provider.dart';
-import '../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../constants/spacers.dart';
 import '../../../../constants/style_constants.dart';
-import '../../../../loader.dart';
 import '../../../components/friz_text.dart';
 import '../../../components/helvetica_text.dart';
 
 class InsuranceCard extends HookWidget {
+  InsuranceCard({
+    Key key,
+    @required this.insuranceList,
+  }) : super(key: key);
+
+  final List<InsuranceData> insuranceList;
+
   @override
   Widget build(BuildContext context) {
-    final authData = useProvider(authDataStateNotifierProvider).state;
-    final insurance = useProvider(insurancesFutureProvider(
-      authData.data.token,
-    ));
+    final insuranceId = useProvider(insuranceIdStateNotifierProvider);
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 24,
-      ),
-      child: insurance.when(
-        data: (insurance) {
-          return Column(
+    insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
+    if ((insuranceList[0].dealInfo.dmsLimit) == null ||
+        (insuranceList[0].dealInfo.closeDate) == null) {
+      return Text('Error data');
+    } else {
+      return InkWell(
+        onTap: () => navigatorPush(
+          context,
+          UserContractPage(
+            item: insuranceList[0],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 12,
+          ),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FrizText(
@@ -81,7 +91,8 @@ class InsuranceCard extends HookWidget {
                               ),
                               children: <InlineSpan>[
                                 TextSpan(
-                                  text: '50000 грн',
+                                  text: insuranceList[0].dealInfo.dmsLimit +
+                                      ' грн',
                                   style: TextStyle(
                                     fontFamily: 'HelveticaRegular',
                                     fontWeight: FontWeight.w700,
@@ -104,10 +115,8 @@ class InsuranceCard extends HookWidget {
                               ),
                               children: <InlineSpan>[
                                 TextSpan(
-                                  text:
-                                      /*(insurance.data.first.dealInfo.closeDate)
-                                          .substring(0, 10),*/
-                                      '12.05.2021',
+                                  text: (insuranceList[0].dealInfo.closeDate)
+                                      .substring(0, 10),
                                   style: TextStyle(
                                     fontFamily: 'HelveticaRegular',
                                     fontWeight: FontWeight.w700,
@@ -119,39 +128,27 @@ class InsuranceCard extends HookWidget {
                             ),
                           ),
                           SpaceH24(),
-                          Text.rich(
-                            TextSpan(
-                              text: 'view_contract'.tr(),
-                              style: const TextStyle(
-                                fontFamily: 'HelveticaRegular',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.of(context)
-                                      .pushNamed('/user_contract');
-                                },
+                          Text(
+                            'view_contract'.tr(),
+                            style: const TextStyle(
+                              fontFamily: 'HelveticaRegular',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
                             ),
                           ),
                         ],
                       ),
                     ),
                     //bottom pulse image
-                    GestureDetector(
-                      onTap: () {
-                        navigatorPush(context, UserContractPage());
-                      },
-                      child: Align(
-                        alignment: const Alignment(
-                          -0.7,
-                          1,
-                        ),
-                        child: Image.asset(
-                          'assets/images/pulse.png',
-                          width: MediaQuery.of(context).size.width,
-                        ),
+                    Align(
+                      alignment: const Alignment(
+                        -0.7,
+                        1,
+                      ),
+                      child: Image.asset(
+                        'assets/images/pulse.png',
+                        width: MediaQuery.of(context).size.width,
                       ),
                     ),
                     Align(
@@ -220,15 +217,9 @@ class InsuranceCard extends HookWidget {
                 ),
               ),
             ],
-          );
-        },
-        loading: () => Loader(),
-        error: (object, stackTrace) {
-          return Center(
-            child: Text('$object'),
-          );
-        },
-      ),
-    );
+          ),
+        ),
+      );
+    }
   }
 }

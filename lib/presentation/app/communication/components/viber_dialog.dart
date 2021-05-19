@@ -17,7 +17,8 @@ class ViberDialog extends StatelessWidget {
         universalLinksOnly: true,
       );
       if (!nativeAppLaunchSucceeded) {
-        await launch('viber://add?number=0509501099', forceSafariVC: true);
+        await launch('viber://chat?number=%2B380509501099',
+            forceSafariVC: true);
       }
     }
   }

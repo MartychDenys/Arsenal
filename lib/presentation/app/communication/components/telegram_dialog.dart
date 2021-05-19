@@ -12,12 +12,12 @@ class TelegramDialog extends StatelessWidget {
   Future<void> _launchTelegram() async {
     if (await canLaunch('https://www.telegram.me/+380509501099')) {
       final bool nativeAppLaunchSucceeded = await launch(
-        'https://www.telegram.me/+380509501099',
+        'https://www.telegram.me/ArsenalAssistans',
         forceSafariVC: false,
         universalLinksOnly: true,
       );
       if (!nativeAppLaunchSucceeded) {
-        await launch('https://www.telegram.me/+380509501099',
+        await launch('https://www.telegram.me/ArsenalAssistans',
             forceSafariVC: true);
       }
     }

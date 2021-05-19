@@ -8,20 +8,21 @@ class DoctorCouponApiService {
   DoctorCouponData doctorCouponData;
 
   Future<dynamic> sendRequest(DoctorCouponRequest doctorCouponRequest,
-      String token, String userId) async {
+      String token, String userId, String dealId) async {
     const url =
         'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointment/';
-
+    print(token);
+    print(userId);
+    print(dealId);
     Map<String, dynamic> _query = {
       '_token': token,
-      'contactId': '144',
-      'dealID': userId,
+      'contactId': userId,
+      'dealID': dealId,
       'data[SYMPTOMS]': '${doctorCouponRequest.symptoms}',
       'data[VISIT_DATE]': '${doctorCouponRequest.visitDate}',
       'data[VISIT_TIME_FROM]': '${doctorCouponRequest.visitTimeFrom}',
       'data[VISIT_TIME_TO]': '${doctorCouponRequest.visitTimeTo}',
       'data[MEDICAL_INSTITUTION]': '${doctorCouponRequest.medicalInstitution}',
-      //'data[SICK_LIST_REQ]': '${doctorCouponRequest.medicalList}',
       'data[SICK_LIST_REQ]': false,
       'data[COMMENT]': '${doctorCouponRequest.comment}',
     };

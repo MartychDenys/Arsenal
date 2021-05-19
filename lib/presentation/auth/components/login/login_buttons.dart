@@ -1,3 +1,8 @@
+import 'package:arsenal_app/application/app/contact/contact_future_provider.dart';
+import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
+import 'package:arsenal_app/domain/contact/contact.dart';
+import 'package:arsenal_app/infrastructure/contact/contact_service.dart';
+
 import '../../../constants/spacers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +22,8 @@ import '../../../app/components/helvetica_text.dart';
 import '../../../app/components/main_button.dart';
 import '../../../constants/style_constants.dart';
 import '../../../helpers/show_message_snack_bar.dart';
+import '../../../loader.dart';
+import '../../../../application/app/contact/contact_list_state_notifier_provider.dart';
 
 class LoginButtons extends HookWidget {
   @override
@@ -24,15 +31,19 @@ class LoginButtons extends HookWidget {
     final auth = useProvider(authStateProvider);
     final loginFormKey = useProvider(loginFormKeyProvider);
     final _authService = AuthService();
+    final _contactService = ContactService();
     final loginState = useProvider(loginStateNotifierProvider.state);
     final authData = useProvider(authDataStateNotifierProvider);
+    final contactData = useProvider(contactListStateNotifierProvider);
+    final userId = useProvider(currentContactStateNotifierProvider);
     final controller = useProvider(controllerStateProvider);
     final controllerKey = useProvider(controllerKeyProvider);
 
-    void _processResponse(dynamic response) {
+    void _processResponse(dynamic response) async {
       authData.updateAuthData(response);
       print(response.status);
       if (response.status == 'success') {
+        print(response.data.token);
         controller.state = ControllerState.authorized;
       } else {
         showMessageSnackBar(
@@ -75,7 +86,15 @@ class LoginButtons extends HookWidget {
 
                   final response = await _authService.login(loginState);
 
-                  _processResponse(response);
+                  if (response.status == 'success') {
+                    final contactList =
+                        await _contactService.getContact(response.data.token);
+                    if (contactList is Contact) {
+                      contactData.updateContactData(contactList);
+                      userId.state = contactList.data.first.id;
+                    }
+                    _processResponse(response);
+                  }
                 }
               },
             ),

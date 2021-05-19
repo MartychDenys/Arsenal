@@ -1,3 +1,8 @@
+import 'package:arsenal_app/application/controller/controller_key_provider.dart';
+import 'package:arsenal_app/presentation/helpers/show_message_snack_bar.dart';
+
+import '../../../../application/auth/reset_password/reset_phone_form_key_provider.dart';
+
 import '../../../../application/auth/auth_state_provider.dart';
 import '../../../../domain/auth/auth_state.dart';
 import '../../../app/components/helvetica_text.dart';
@@ -7,13 +12,30 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'reset_pass_dialog.dart';
+import '../../../../infrastructure/reset/reset_service.dart';
+import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 
 class ResetPasswordButtons extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
+    final resetPasswordFormKey = useProvider(resetPasswordPhoneFormKeyProvider);
+    final _resetService = ResetService();
+    final resetState = useProvider(resetByPhoneStateNotifierProvider.state);
+    final controllerKey = useProvider(controllerKeyProvider);
+
+    void _processResponse(dynamic response) {
+      if (response.status == 'success') {
+        auth.state = AuthState.resetSms;
+      } else {
+        showMessageSnackBar(
+          message: 'Incorrect data',
+          scaffoldKey: controllerKey,
+          color: mainColor,
+        );
+        auth.state = AuthState.reset;
+      }
+    }
 
     return Column(
       children: [
@@ -29,10 +51,12 @@ class ResetPasswordButtons extends HookWidget {
                   onTap: () {
                     auth.state = AuthState.login;
                   },
-                  child: HelveticaText(
-                    text: 'authorization'.tr(),
-                    color: mainColor,
-                    size: 14,
+                  child: Center(
+                    child: HelveticaText(
+                      text: 'authorization'.tr(),
+                      color: mainColor,
+                      size: 14,
+                    ),
                   ),
                 ),
               ),
@@ -41,13 +65,21 @@ class ResetPasswordButtons extends HookWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  onPressed: () {
-                    showDialog(
+                  onPressed: () async {
+                    if (resetPasswordFormKey.currentState.validate()) {
+                      auth.state = AuthState.loading;
+
+                      final response =
+                          await _resetService.resetByPhone(resetState);
+
+                      _processResponse(response);
+                    }
+                    /*showDialog(
                       context: context,
                       builder: (BuildContext ctx) {
                         return ResetPassDialog();
                       },
-                    );
+                    );*/
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(

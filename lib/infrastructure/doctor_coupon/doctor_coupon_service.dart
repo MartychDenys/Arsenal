@@ -6,8 +6,8 @@ class DoctorCouponService {
   final _doctorCouponApiService = DoctorCouponApiService();
 
   Future<dynamic> sendQuery(
-      DoctorCouponRequest doctorCouponRequest, String token, String userId) {
+      DoctorCouponRequest doctorCouponRequest, String token, String userId, String dealId) {
     return _doctorCouponApiService.sendRequest(
-        doctorCouponRequest, token, userId);
+        doctorCouponRequest, token, userId, dealId);
   }
 }

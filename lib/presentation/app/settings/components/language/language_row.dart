@@ -48,13 +48,8 @@ class LanguageRow extends StatelessWidget {
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onChanged: (bool value) {
               EasyLocalization.of(context).setLocale(
-                Locale('uk', 'UA'),
+                Locale(langCode, countryCode),
               );
-              /*context.setLocale(
-                Locale(
-                  '$langCode-$countryCode',
-                ),
-              );*/
             },
           ),
         ),

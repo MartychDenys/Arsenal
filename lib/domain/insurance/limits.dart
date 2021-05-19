@@ -21,7 +21,7 @@ class Limits {
   @JsonKey(name: 'TYPE')
   final String type;
   @JsonKey(name: 'NAME')
-  final Limits name;
+  final String name;
   @JsonKey(name: 'LIMIT_SUMM')
-  final Limits limitSum;
+  final String limitSum;
 }

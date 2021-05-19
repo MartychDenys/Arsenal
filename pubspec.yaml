@@ -18,13 +18,14 @@ dependencies:
   circular_check_box: ^1.0.4 # Displaying circular check box
   qr_flutter: ^3.1.0 # Generate QR codes
   flutter_svg: ^0.19.3 # Displaying SVG files
-  flutter_stack_card: ^0.2.0+1 # Cards stack widget
-
+  pin_code_fields: ^7.1.0 #reset password fields
+  expandable: ^5.0.1 # Expandable containers
 
   # STATE MANAGEMENT
   provider: ^5.0.0
   hooks_riverpod: ^0.12.2 # Riverpod with hooks from Remi Rousselet
   flutter_hooks: ^0.15.0 # additional hooks' functionality
+  equatable: ^2.0.0 # equatable annotations
 
 
   #NETWORKING

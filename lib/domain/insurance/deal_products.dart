@@ -1,6 +1,7 @@
+import 'limits.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'limits.dart';
+import 'exclusions.dart';
 
 part 'deal_products.g.dart';
 
@@ -9,6 +10,8 @@ class DealProducts {
   DealProducts({
     @required this.name,
     @required this.price,
+    @required this.limits,
+    @required this.exclusions,
   });
 
   factory DealProducts.fromJson(Map<String, dynamic> json) =>
@@ -19,5 +22,9 @@ class DealProducts {
   @JsonKey(name: 'NAME')
   final String name;
   @JsonKey(name: 'PRICE')
-  final String price;
+  final int price;
+  @JsonKey(name: 'LIMITS')
+  final List<Limits> limits;
+  @JsonKey(name: 'EXCLUSIONS')
+  final List<Exclusions> exclusions;
 }
