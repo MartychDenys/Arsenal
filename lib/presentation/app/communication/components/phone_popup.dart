@@ -14,11 +14,7 @@ class PhonePopup {
     ];
 
     Future<void> _makePhoneCall(num) async {
-      if (await canLaunch('tel:$num')) {
-        await launch('tel:$num');
-      } else {
-        throw 'Could not launch $num';
-      }
+      await launch('tel:$num');
     }
 
     return showModalBottomSheet(
