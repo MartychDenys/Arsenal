@@ -3,17 +3,16 @@ import '../../domain/doctor_coupon/doctor_coupon_data.dart';
 import '../../domain/doctor_coupon/doctor_coupon_request.dart';
 import 'package:dio/dio.dart';
 
+import '../constants.dart';
+
 class DoctorCouponApiService {
   final _dio = Dio();
   DoctorCouponData doctorCouponData;
 
   Future<dynamic> sendRequest(DoctorCouponRequest doctorCouponRequest,
       String token, String userId, String dealId) async {
-    const url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointment/';
-    print(token);
-    print(userId);
-    print(dealId);
+    const url = '${apiUrl}/dms/appointment/addAppointment/';
+
     Map<String, dynamic> _query = {
       '_token': token,
       'contactId': userId,

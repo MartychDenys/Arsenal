@@ -2,23 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
 import '../../components/friz_text.dart';
 import '../../components/helvetica_text.dart';
 
 class ViberDialog extends StatelessWidget {
-  Future<void> _launchViber() async {
-    if (await canLaunch('viber://add?number=0509501099')) {
+  Future<void> _launchViber(String link) async {
+    if (await canLaunch(link)) {
       final bool nativeAppLaunchSucceeded = await launch(
-        'viber://add?number=0509501099',
+        link,
         forceSafariVC: false,
         universalLinksOnly: true,
       );
       if (!nativeAppLaunchSucceeded) {
-        await launch('viber://chat?number=%2B380509501099',
-            forceSafariVC: true);
+        await launch(link, forceSafariVC: true);
       }
     }
   }
@@ -87,7 +85,10 @@ class ViberDialog extends StatelessWidget {
                       5,
                     ),
                   ),
-                  onPressed: _launchViber,
+                  onPressed: () {
+                    //_launchViber('viber://chat?number=380509501099');
+                    _launchViber('https://msng.link/o/?380509501099=vi');
+                  },
                   color: mainColor,
                   child: Container(
                     padding: const EdgeInsets.symmetric(

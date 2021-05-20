@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../domain/auth/auth_data.dart';
 import '../../domain/auth/login_request.dart';
+import '../constants.dart';
 
 class AuthApiService {
   final _dio = Dio();
@@ -15,7 +16,7 @@ class AuthApiService {
     });
 
     var response = await _dio.post(
-      'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/arsenal/auth/login/',
+      '${apiUrl}/arsenal/auth/login/',
       data: formData,
     );
 

@@ -24,6 +24,7 @@ class InsuranceCard extends HookWidget {
     final insuranceId = useProvider(insuranceIdStateNotifierProvider);
 
     insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
+
     if ((insuranceList[0].dealInfo.dmsLimit) == null ||
         (insuranceList[0].dealInfo.closeDate) == null) {
       return Text('Error data');

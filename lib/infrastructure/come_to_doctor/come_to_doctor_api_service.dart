@@ -1,20 +1,20 @@
 import '../../domain/come_to_doctor/come_to_doctor_request.dart';
 import 'package:dio/dio.dart';
 import '../../domain/come_to_doctor/come_to_doctor_data.dart';
+import '../constants.dart';
 
 class ComeToDoctorApiService {
   final _dio = Dio();
   ComeToDoctorData comeToDoctorData;
 
   Future<dynamic> sendRequest(ComeToDoctorRequest comeToDoctorRequest,
-      String token, String userId) async {
-    const url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointmentConfirmation/';
+      String token, String userId, String insuranceId) async {
+    const url = '${apiUrl}/dms/appointment/addAppointmentConfirmation/';
 
     Map<String, dynamic> _query = {
       '_token': token,
-      'contactId': '144',
-      'dealID': 'userId',
+      'contactId': userId,
+      'dealID': insuranceId,
       'data[SYMPTOMS]': '${comeToDoctorRequest.symptoms}',
       'data[VISIT_DATE]': '${comeToDoctorRequest.visitDate}',
       'data[VISIT_TIME]': '${comeToDoctorRequest.visitTime}',

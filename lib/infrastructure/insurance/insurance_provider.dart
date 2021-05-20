@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../../domain/insurance/insurance.dart';
+import '../constants.dart';
 
 class InsuranceProvider {
   Future<Insurance> getUserInsurance(String token, String id) async {
@@ -7,7 +8,7 @@ class InsuranceProvider {
     Insurance insurance;
 
     final url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/personal/getDeals/?_token=$token&contactId=$id&filter[CATEGORY_ID]=2';
+        '${apiUrl}/dms/personal/getDeals/?_token=$token&contactId=$id&filter[CATEGORY_ID]=2';
 
     try {
       final response = await _dio.get(url);
