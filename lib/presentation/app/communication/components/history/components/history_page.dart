@@ -62,125 +62,120 @@ class HistoryPage extends HookWidget {
             historyData.when(
               data: (data) {
                 if (data is ConfirmedList) {
-                  if (data.data.isEmpty) {
-                    return Text('Історія порожня');
-                  } else {
-                    return ListView(
-                      shrinkWrap: true,
-                      physics: const ScrollPhysics(),
-                      children: [
-                        for (final item in data.data) ...[
-                          Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: ExpandablePanel(
-                              header: FrizText(
-                                text: 'sign_up_to_doctor'.tr(),
-                                size: 18,
+                  return ListView(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    children: [
+                      for (final item in data.data) ...[
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: ExpandablePanel(
+                            header: FrizText(
+                              text: 'sign_up_to_doctor'.tr(),
+                              size: 18,
+                            ),
+                            collapsed: HelveticaText(
+                              text: item.visitDate,
+                              size: 14,
+                              color: subtitleColor,
+                            ),
+                            expanded: Container(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'date'.tr() + ': ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.visitDate,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                  SpaceH16(),
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'complaints'.tr() + ': ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.symptoms,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                  SpaceH16(),
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'visit_time'.tr() + ' ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.visitTime,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                  SpaceH16(),
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'date'.tr() + ': ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.visitDate,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                  SpaceH16(),
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'medical institution'.tr() + ': ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.medInstitution,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                  SpaceH16(),
+                                  Row(
+                                    children: [
+                                      FrizText(
+                                        text: 'coment'.tr() + ': ',
+                                        size: 14,
+                                      ),
+                                      HelveticaText(
+                                        text: item.comment,
+                                        size: 14,
+                                        color: textColor,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              collapsed: HelveticaText(
-                                text: item.visitDate,
-                                size: 14,
-                                color: subtitleColor,
-                              ),
-                              expanded: Container(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text: 'date'.tr() + ': ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.visitDate,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SpaceH16(),
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text: 'complaints'.tr() + ': ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.symptoms,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SpaceH16(),
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text: 'visit_time'.tr() + ' ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.visitTime,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SpaceH16(),
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text: 'date'.tr() + ': ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.visitDate,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SpaceH16(),
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text:
-                                              'medical institution'.tr() + ': ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.medInstitution,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SpaceH16(),
-                                    Row(
-                                      children: [
-                                        FrizText(
-                                          text: 'coment'.tr() + ': ',
-                                          size: 14,
-                                        ),
-                                        HelveticaText(
-                                          text: item.comment,
-                                          size: 14,
-                                          color: textColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                padding: const EdgeInsets.all(
-                                  16,
-                                ),
+                              padding: const EdgeInsets.all(
+                                16,
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ],
-                    );
-                  }
+                    ],
+                  );
                 } else {
                   return Text('Unknown error');
                 }
