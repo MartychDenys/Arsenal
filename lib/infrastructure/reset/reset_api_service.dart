@@ -1,6 +1,7 @@
 import '../../domain/auth/reset/phone_response_body.dart';
 import 'package:dio/dio.dart';
 import '../../domain/auth/reset/phone_request.dart';
+import '../constants.dart';
 
 class ResetApiService {
   final _dio = Dio();
@@ -13,7 +14,7 @@ class ResetApiService {
     });
 
     var response = await _dio.post(
-      'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/arsenal/auth/forgot/',
+      '${apiUrl}/arsenal/auth/forgot/',
       data: formData,
     );
 

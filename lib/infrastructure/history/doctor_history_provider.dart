@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../../domain/history/doctor_list.dart';
+import '../constants.dart';
 
 class DoctorHistoryProvider {
   Future<DoctorList> getDoctorHistory(
@@ -8,7 +9,7 @@ class DoctorHistoryProvider {
     DoctorList doctorList;
 
     final url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/appointmentGetList/?_token=$token&contactId=$id&dealID=$insuranceId';
+        '${apiUrl}/dms/appointment/appointmentGetList/?_token=$token&contactId=$id&dealID=$insuranceId';
     try {
       final response = await _dio.get(url);
 

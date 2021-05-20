@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../../domain/insurance/insurance.dart';
 import '../../domain/history/confirmed_list.dart';
+import '../constants.dart';
 
 class HistoryProvider {
   Future<ConfirmedList> getUserHistory(
@@ -10,7 +10,7 @@ class HistoryProvider {
     ConfirmedList confirmedList;
 
     final url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/appointmentConfirmationGetList/?_token=$token&contactId=$id&dealID=$insuranceId';
+        '${apiUrl}/dms/appointment/appointmentConfirmationGetList/?_token=$token&contactId=$id&dealID=$insuranceId';
     try {
       final response = await _dio.get(url);
 

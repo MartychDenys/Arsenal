@@ -1,7 +1,5 @@
-import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
-import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
-
-import '../../../../../../../application/app/contact/contact_state_notifier.dart';
+import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
 
 import '../../../../../../helpers/validators/validate_date.dart';
 import '../../../../../../helpers/validators/validate_symptoms.dart';
@@ -169,7 +167,7 @@ class ComeToDoctorPage extends HookWidget {
                 ),
                 SpaceH16(),
                 TextFormField(
-                  validator: validateMedicalInstitution,
+                  validator: validateMedicalInstitutionDoctorCoupon,
                   onChanged: (String value) =>
                       comeToDoctor.updateMedicalInstitution(value),
                   decoration: InputDecoration(

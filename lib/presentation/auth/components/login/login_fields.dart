@@ -38,7 +38,7 @@ class LoginFields extends HookWidget {
             TextFormField(
               cursorColor: subtitleColor,
               decoration: const InputDecoration(
-                hintText: 'Номер телефона',
+                hintText: '380631111111',
                 prefixIcon: Icon(
                   Icons.phone,
                   color: subtitleColor,

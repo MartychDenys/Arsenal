@@ -1,6 +1,7 @@
 import '../../domain/come_to_doctor/come_to_doctor_request.dart';
 import 'package:dio/dio.dart';
 import '../../domain/come_to_doctor/come_to_doctor_data.dart';
+import '../constants.dart';
 
 class ComeToDoctorApiService {
   final _dio = Dio();
@@ -8,8 +9,7 @@ class ComeToDoctorApiService {
 
   Future<dynamic> sendRequest(ComeToDoctorRequest comeToDoctorRequest,
       String token, String userId, String insuranceId) async {
-    const url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/appointment/addAppointmentConfirmation/';
+    const url = '${apiUrl}/dms/appointment/addAppointmentConfirmation/';
 
     Map<String, dynamic> _query = {
       '_token': token,

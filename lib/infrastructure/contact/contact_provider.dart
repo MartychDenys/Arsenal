@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import '../../domain/contact/contact.dart';
+import '../constants.dart';
 
 class ContactProvider {
   Future<Contact> getUserContact(String token) async {
     Contact contact;
 
-    const url =
-        'https://b24arsenal-strahovanie.s11.itua.in.ua/local/api/dms/personal/getContactData/';
+    const url = '${apiUrl}/dms/personal/getContactData/';
     final _dio = Dio();
 
     try {
