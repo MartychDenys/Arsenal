@@ -97,7 +97,7 @@ class UserInfoCard extends HookWidget {
                         fontFamily: 'HelveticaRegular',
                       ),
                     ),
-                    SpaceH10(),
+                    /*SpaceH10(),
                     Container(
                       width: 16,
                       height: 16,
@@ -113,7 +113,7 @@ class UserInfoCard extends HookWidget {
                           copy,
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ],

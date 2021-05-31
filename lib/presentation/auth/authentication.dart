@@ -15,6 +15,10 @@ import 'components/reset/reset_password_form.dart';
 import 'components/reset/reset_password_buttons.dart';
 import 'components/reset/reset_password_title.dart';
 import 'components/reset/reset_password_sms_form.dart';
+import 'components/reset/reset_by_sms_buttons.dart';
+import 'components/reset/change_password_title.dart';
+import 'components/reset/change_password_buttons.dart';
+import 'components/reset/change_password_form.dart';
 
 class Authentication extends HookWidget {
   static const routeName = '/auth';
@@ -42,19 +46,25 @@ class Authentication extends HookWidget {
                   ],
                 ),
               ],
-              if (auth.state == AuthState.resetSms) ...[
+              if (auth.state == AuthState.reset) ...[
                 ResetPasswordTitle(),
                 SpaceH16(),
                 ResetPasswordForm(),
                 SpaceH100(),
                 ResetPasswordButtons(),
               ],
-              if (auth.state == AuthState.reset) ...[
+              if (auth.state == AuthState.resetSms) ...[
                 ResetPasswordTitle(),
                 SpaceH16(),
                 ResetPasswordSmsForm(),
                 SpaceH100(),
-                ResetPasswordButtons(),
+                ResetBySmsPasswordButtons(),
+              ],
+              if (auth.state == AuthState.changePassword) ...[
+                ChangePasswordTitle(),
+                ChangePasswordForm(),
+                SpaceH100(),
+                ChangePasswordButtons(),
               ],
               AuthPolicy(),
             ],

@@ -1,28 +1,28 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../domain/auth/reset/phone_request.dart';
+import '../../../domain/auth/reset/sms_request.dart';
 
 final resetBySmsStateNotifierProvider =
     StateNotifierProvider.autoDispose<ResetBySms>(
   (ref) => ResetBySms(),
 );
 
-class ResetBySms extends StateNotifier<PhoneRequest> {
+class ResetBySms extends StateNotifier<SmsRequest> {
   ResetBySms()
       : super(
-          PhoneRequest(
-            phone: '',
+          SmsRequest(
+            code: '',
           ),
         );
 
-  void updatePhone(String phone) {
-    state = PhoneRequest(
-      phone: phone,
+  void updateCode(String code) {
+    state = SmsRequest(
+      code: code,
     );
   }
 
   void clearFields() {
-    state = PhoneRequest(
-      phone: '',
+    state = SmsRequest(
+      code: '',
     );
   }
 }

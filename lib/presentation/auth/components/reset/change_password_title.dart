@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/spacers.dart';
 
-class ChangePasswordTitle extends StatelessWidget {
+class ResetPasswordTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -34,14 +34,17 @@ class ResetPasswordForm extends HookWidget {
             TextFormField(
               onChanged: (String value) => login.updatePhone(value),
               cursorColor: mainColor,
+              initialValue: '380',
               decoration: InputDecoration(
-                hintText: 'Номер телефона',
+                counterText: '',
+                hintText: '380631111111',
                 prefixIcon: Icon(
                   Icons.phone,
                   color: subtitleColor,
                 ),
               ),
-              keyboardType: TextInputType.phone,
+              keyboardType: TextInputType.number,
+              maxLength: 12,
               validator: validatePhone,
             ),
           ],

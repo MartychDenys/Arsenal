@@ -1,10 +1,8 @@
-import 'package:arsenal_app/domain/auth/reset/phone_response_body.dart';
+import '../../../../application/auth/reset_password/reset_by_sms_state_notifier_provider.dart';
 
+import '../../../../application/auth/reset_password/reset_by_sms_form_key_provider.dart';
 import '../../../../application/controller/controller_key_provider.dart';
 import '../../../helpers/show_message_snack_bar.dart';
-
-import '../../../../application/auth/reset_password/reset_phone_form_key_provider.dart';
-
 import '../../../../application/auth/auth_state_provider.dart';
 import '../../../../domain/auth/auth_state.dart';
 import '../../../app/components/helvetica_text.dart';
@@ -15,34 +13,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../infrastructure/reset/reset_service.dart';
-import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
 
-class ResetPasswordButtons extends HookWidget {
+class ResetBySmsPasswordButtons extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
-    final resetPasswordFormKey = useProvider(resetPasswordPhoneFormKeyProvider);
+    final resetPasswordFormKey = useProvider(resetPasswordSmsFormKeyProvider);
     final _resetService = ResetService();
-    final resetState = useProvider(resetByPhoneStateNotifierProvider.state);
+    final resetState = useProvider(resetBySmsStateNotifierProvider.state);
     final controllerKey = useProvider(controllerKeyProvider);
-    final resetData = useProvider(resetDataStateNotifierProvider);
+    final token = useProvider(resetDataStateNotifierProvider.state).token;
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        if (response is PhoneResponseBody) {
-          resetData.updateData(response.data);
-          auth.state = AuthState.resetSms;
-        } else {
-          auth.state = AuthState.login;
-        }
+        auth.state = AuthState.changePassword;
       } else {
         showMessageSnackBar(
           message: 'Incorrect data',
           scaffoldKey: controllerKey,
           color: mainColor,
         );
-        auth.state = AuthState.reset;
+        auth.state = AuthState.resetSms;
       }
     }
 
@@ -79,7 +71,7 @@ class ResetPasswordButtons extends HookWidget {
                       auth.state = AuthState.loading;
 
                       final response =
-                          await _resetService.resetByPhone(resetState);
+                          await _resetService.resetBySms(resetState, token);
 
                       _processResponse(response);
                     }
