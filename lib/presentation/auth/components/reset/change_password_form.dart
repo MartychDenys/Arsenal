@@ -2,7 +2,6 @@ import '../../../../application/auth/reset_password/reset_by_sms_state_notifier_
 
 import '../../../../application/auth/reset_password/change_password_form_key.dart';
 import '../../../constants/spacers.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,10 +9,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../app/components/friz_text.dart';
 import '../../../constants/style_constants.dart';
 import 'package:flutter/material.dart';
+import '../../../../application/auth/reset_password/change_password_state_notifier.dart';
 
 class ChangePasswordForm extends HookWidget {
   final changePasswordFormKey = useProvider(changePasswordFormKeyProvider);
   final smsCode = useProvider(resetBySmsStateNotifierProvider);
+  final changePass = useProvider(changePasswordStateNotifierProvider);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class ChangePasswordForm extends HookWidget {
               decoration: const InputDecoration(
                 counterText: '',
               ),
-              //onChanged: (String value) => login.updatePhone(value),
+              onChanged: (String value) => changePass.updatePassword(value),
               //validator: validatePhone,
             ),
             SpaceH20(),
@@ -52,7 +53,8 @@ class ChangePasswordForm extends HookWidget {
               decoration: const InputDecoration(
                 counterText: '',
               ),
-              //onChanged: (String value) => login.updatePhone(value),
+              onChanged: (String value) =>
+                  changePass.updatePasswordConfirm(value),
               //validator: validatePhone,
             ),
           ],
