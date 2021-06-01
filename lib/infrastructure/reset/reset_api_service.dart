@@ -4,6 +4,7 @@ import '../../domain/auth/reset/sms_response_body.dart';
 import '../../domain/auth/reset/phone_response_body.dart';
 import 'package:dio/dio.dart';
 import '../../domain/auth/reset/phone_request.dart';
+import 'package:arsenal_app/domain/auth/reset/change_password_response_body.dart';
 import '../constants.dart';
 
 class ResetApiService {
@@ -45,5 +46,26 @@ class ResetApiService {
     smsResponseBody = SmsResponseBody.fromJson(data);
     print(response.data);
     return smsResponseBody;
+  }
+
+  Future<dynamic> changePassword(
+      String pass, String confirmPass, String token) async {
+    ChangePasswordResponseBody changePasswordResponseBody;
+
+    var formData = FormData.fromMap({
+      'data[password]': '$pass',
+      'data[confirm_password]': '$confirmPass',
+      '_token': '$token'
+    });
+
+    var response = await _dio.post(
+      '${apiUrl}/arsenal/auth/savePassword/',
+      data: formData,
+    );
+
+    var data = response.data;
+    changePasswordResponseBody = ChangePasswordResponseBody.fromJson(data);
+    print(response.data);
+    return changePasswordResponseBody;
   }
 }

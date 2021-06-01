@@ -13,4 +13,8 @@ class ResetService {
   Future<dynamic> resetBySms(SmsRequest smsRequest, String token) {
     return _resetService.resetBySms(smsRequest, token);
   }
+
+  Future<dynamic> changePassword(String pass, String newPass, String token) {
+    return _resetService.changePassword(pass, newPass, token);
+  }
 }

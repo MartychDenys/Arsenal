@@ -1,4 +1,6 @@
-import '../../../../application/auth/reset_password/reset_by_sms_state_notifier_provider.dart';
+import 'package:arsenal_app/presentation/auth/components/reset/reset_pass_dialog.dart';
+
+import '../../../../application/auth/reset_password/change_password_state_notifier.dart';
 
 import '../../../../application/auth/reset_password/reset_by_sms_form_key_provider.dart';
 import '../../../../application/controller/controller_key_provider.dart';
@@ -21,20 +23,27 @@ class ChangePasswordButtons extends HookWidget {
     final auth = useProvider(authStateProvider);
     final resetPasswordFormKey = useProvider(resetPasswordSmsFormKeyProvider);
     final _resetService = ResetService();
-    final resetState = useProvider(resetBySmsStateNotifierProvider.state);
+    final changePasswordState =
+        useProvider(changePasswordStateNotifierProvider.state);
     final controllerKey = useProvider(controllerKeyProvider);
     final token = useProvider(resetDataStateNotifierProvider.state).token;
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        auth.state = AuthState.changePassword;
+        showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return ResetPassDialog();
+          },
+        );
+        //auth.state = AuthState.login;
       } else {
         showMessageSnackBar(
           message: 'Incorrect data',
           scaffoldKey: controllerKey,
           color: mainColor,
         );
-        auth.state = AuthState.resetSms;
+        auth.state = AuthState.changePassword;
       }
     }
 
@@ -70,17 +79,13 @@ class ChangePasswordButtons extends HookWidget {
                     if (resetPasswordFormKey.currentState.validate()) {
                       auth.state = AuthState.loading;
 
-                      final response =
-                          await _resetService.resetBySms(resetState, token);
+                      final response = await _resetService.changePassword(
+                          changePasswordState.password,
+                          changePasswordState.passwordConfirm,
+                          token);
 
                       _processResponse(response);
                     }
-                    /*showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return ResetPassDialog();
-                      },
-                    );*/
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(
