@@ -11,7 +11,7 @@ class AuthApiService {
     AuthData authData;
 
     var formData = FormData.fromMap({
-      'data[phone]': '${loginRequest.phone}',
+      'data[phone]': '380${loginRequest.phone}',
       'data[password]': '${loginRequest.password}',
     });
 

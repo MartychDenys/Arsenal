@@ -273,7 +273,7 @@ class UserContractPage extends HookWidget {
                 height: 1,
                 color: Color.fromRGBO(227, 227, 229, 1),
               ),
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: ExpandablePanel(
                   header: FrizText(
@@ -306,7 +306,7 @@ class UserContractPage extends HookWidget {
                         ),
                       )),
                 ),
-              ),
+              ),*/
               Divider(
                 height: 1,
                 color: Color.fromRGBO(227, 227, 229, 1),
