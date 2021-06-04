@@ -43,6 +43,7 @@ dependencies:
   # APPLICATION
   url_launcher: ^6.0.2 # Launch third-party app
   intl_phone_number_input: ^0.7.0+2
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:

@@ -1,35 +1,40 @@
-import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
-import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
-
-import '../../../../../../../domain/doctor_coupon/medical_list_state.dart';
-
-import '../../../../../../../application/app/contact/contact_state_notifier.dart';
-import '../../../../../../../application/controller/controller_key_provider.dart';
-import '../../../doctor_dialog.dart';
-import '../../../../../../helpers/show_message_snack_bar.dart';
-import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import '../submit_button.dart';
+import '../../../doctor_dialog.dart';
+import '../../../../../components/app_bar_with_back_button.dart';
+import '../../../../../components/friz_text.dart';
+import '../../../../../components/helvetica_text.dart';
+import '../../../../../../constants/spacers.dart';
+import '../../../../../../constants/style_constants.dart';
+import '../../../../../../helpers/show_message_snack_bar.dart';
 import '../../../../../../helpers/validators/validate_symptoms.dart';
 import '../../../../../../helpers/validators/validate_date.dart';
 import '../../../../../../helpers/validators/validate_time.dart';
 import '../../../../../../helpers/validators/validate_comment.dart';
 import '../../../../../../helpers/validators/validate_medical_institution.dart';
+import '../../../../../../../application/controller/controller_key_provider.dart';
+import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_form_key_provider.dart';
-import '../../../../../../constants/spacers.dart';
-import '../../../../../../constants/style_constants.dart';
-import '../../../../../components/app_bar_with_back_button.dart';
-import '../../../../../components/friz_text.dart';
-import '../../../../../components/helvetica_text.dart';
-import '../submit_button.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_state_notifier.dart';
-import '../../../../../../../infrastructure/doctor_coupon/doctor_coupon_service.dart';
 import '../../../../../../../application/app/communication/medical_list_provider.dart';
+import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../../../../application/app/contact/contact_state_notifier.dart';
+import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
+import '../../../../../../../domain/doctor_coupon/medical_list_state.dart';
+import '../../../../../../../infrastructure/doctor_coupon/doctor_coupon_service.dart';
+import '../../../../../../../widgets/time_picker.dart';
 
 class DoctorCouponPage extends HookWidget {
+  var dateController = new TextEditingController();
+
+  var timeFromController = new TextEditingController();
+  var timeToController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final doctorCouponFormKey = useProvider(doctorCouponFormKeyProvider);
@@ -125,6 +130,22 @@ class DoctorCouponPage extends HookWidget {
                         width: 160,
                         height: 50,
                         child: TextFormField(
+                          controller: dateController,
+                          onTap: () {
+                            DatePicker.showDatePicker(context, showTitleActions: true,
+                                onChanged: (date)
+                            {
+                              dateController.text =
+                              '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+                              doctorCoupon.updateVisitDate(date.toString());
+                            }, onConfirm: (date) {
+                              print('confirm $date');
+                              dateController.text =
+                              '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+                              doctorCoupon.updateVisitDate(date.toString());
+                              },
+                                currentTime: DateTime.now(), locale: LocaleType.ru);
+                          },
                           validator: validateDate,
                           onChanged: (String value) =>
                               doctorCoupon.updateVisitDate(value),
@@ -156,6 +177,23 @@ class DoctorCouponPage extends HookWidget {
                           height: 30,
                           width: 70,
                           child: TextFormField(
+                            controller: timeFromController,
+                            onTap: () {
+                              DatePicker.showPicker(context, showTitleActions: true,
+                                  onChanged: (date)
+                                  {
+                                    timeFromController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeFrom(date.toString());
+                                  }, onConfirm: (date) {
+                                    print('confirm $date');
+                                    timeFromController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeFrom(date.toString());
+                                  },
+                                  pickerModel: TimePicker(currentTime: DateTime.now(), locale: LocaleType.ru),
+                                  locale: LocaleType.ru);
+                            },
                             validator: validateTime,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeFrom(value),
@@ -174,6 +212,23 @@ class DoctorCouponPage extends HookWidget {
                           height: 30,
                           width: 70,
                           child: TextFormField(
+                            controller: timeToController,
+                            onTap: () {
+                              DatePicker.showPicker(context, showTitleActions: true,
+                                  onChanged: (date)
+                                  {
+                                    timeToController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeTo(date.toString());
+                                  }, onConfirm: (date) {
+                                    print('confirm $date');
+                                    timeToController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeTo(date.toString());
+                                  },
+                                  pickerModel: TimePicker(currentTime: DateTime.now(), locale: LocaleType.ru),
+                                  locale: LocaleType.ru);
+                            },
                             validator: validateTime,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeTo(value),
