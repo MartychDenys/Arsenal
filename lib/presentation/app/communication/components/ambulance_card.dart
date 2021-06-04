@@ -11,7 +11,7 @@ import '../../components/helvetica_text.dart';
 class AmbulanceCard extends StatelessWidget {
   Future<void> _makePhoneCall(num) async {
     if (await canLaunch('tel:$num')) {
-      await launch('tel:$num');
+      await launch('tel://$num');
     } else {
       throw 'Could not launch $num';
     }

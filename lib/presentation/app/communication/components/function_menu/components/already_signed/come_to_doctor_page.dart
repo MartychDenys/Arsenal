@@ -126,12 +126,16 @@ class ComeToDoctorPage extends HookWidget {
                                 {
                                   dateController.text =
                                   '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
-                                  comeToDoctor.updateVisitDate(date.toString());
+                                  comeToDoctor.updateVisitDate(
+                                      '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
+                                  );
                                 }, onConfirm: (date) {
                                   print('confirm $date');
                                   dateController.text =
                                   '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
-                                  comeToDoctor.updateVisitDate(date.toString());
+                                  comeToDoctor.updateVisitDate(
+                                      '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
+                                  );
                                 },
                                 currentTime: DateTime.now(), locale: LocaleType.ru);
                           },
@@ -171,12 +175,16 @@ class ComeToDoctorPage extends HookWidget {
                               {
                                 timeController.text =
                                 '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
-                                comeToDoctor.updateVisitTime(date.toString());
+                                comeToDoctor.updateVisitTime(
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                );
                               }, onConfirm: (date) {
                                 print('confirm $date');
                                 timeController.text =
                                 '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
-                                comeToDoctor.updateVisitTime(date.toString());
+                                comeToDoctor.updateVisitTime(
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                );
                               },
                               pickerModel: TimePicker(currentTime: DateTime.now(), locale: LocaleType.ru),
                               locale: LocaleType.ru);

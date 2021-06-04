@@ -17,7 +17,7 @@ import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
-  PhoneNumber number = PhoneNumber(isoCode: 'UA');
+  PhoneNumber number = PhoneNumber(isoCode: 'UA', phoneNumber: '637461887');
   @override
   Widget build(BuildContext context) {
     final login = useProvider(loginStateNotifierProvider);
@@ -40,7 +40,6 @@ class LoginFields extends HookWidget {
             ),
             InternationalPhoneNumberInput(
                 onInputChanged: (PhoneNumber number) {
-                  print(number.phoneNumber);
                   login.updatePhone(number.phoneNumber.substring(1));
                 },
                 selectorConfig: SelectorConfig(
@@ -64,6 +63,7 @@ class LoginFields extends HookWidget {
             ),
             TextFormField(
               cursorColor: mainColor,
+              initialValue: '380637461887',
               obscureText: (showPassword.state == ShowPasswordState.invisible)
                   ? true
                   : false,

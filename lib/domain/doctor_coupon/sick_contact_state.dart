@@ -1,0 +1,4 @@
+enum SickContactState {
+  yes,
+  no,
+}

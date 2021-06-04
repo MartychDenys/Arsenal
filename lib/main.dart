@@ -1,3 +1,5 @@
+import 'package:arsenal_app/presentation/app/communication/components/function_menu/components/doctor_coupon/doctor_coupon_page.dart';
+
 import 'presentation/splash/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
