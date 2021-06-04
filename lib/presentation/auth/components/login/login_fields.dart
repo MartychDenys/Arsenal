@@ -13,7 +13,6 @@ import '../../../app/components/friz_text.dart';
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
 import '../../../helpers/validators/login/validate_password.dart';
-import '../../../helpers/validators/login/validate_phone.dart';
 import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
@@ -57,55 +56,6 @@ class LoginFields extends HookWidget {
                 keyboardType: TextInputType.phone,
                 countries: ['UA']
             ),
-            // TextFormField(
-            //   maxLength: 9,
-            //   decoration: InputDecoration(
-            //     counterText: '',
-            //     hintText: '631111111',
-            //     prefixStyle: TextStyle(
-            //       color: Colors.black,
-            //       fontSize: 16,
-            //     ),
-            //     prefixIcon: Container(
-            //       width: 72,
-            //       padding: const EdgeInsets.only(left: 12),
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.start,
-            //         children: [
-            //           Container(
-            //             child: SvgPicture.asset(
-            //               'assets/icons/phone.svg',
-            //               color: subtitleColor,
-            //               width: 18,
-            //               height: 18,
-            //             ),
-            //           ),
-            //           SpaceW10(),
-            //           Column(
-            //             mainAxisAlignment: MainAxisAlignment.start,
-            //             children: [
-            //               Text(
-            //                 '380 ',
-            //                 style: TextStyle(
-            //                   color: Colors.black,
-            //                   fontSize: 16,
-            //                 ),
-            //               ),
-            //               SpaceH5(),
-            //             ],
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     /*Icon(
-            //       Icons.phone,
-            //       color: subtitleColor,
-            //     ),*/
-            //   ),
-            //   keyboardType: TextInputType.phone,
-            //   onChanged: (String value) => login.updatePhone(value),
-            //   validator: validatePhone,
-            // ),
             SpaceH45(),
             FrizText(
               text: 'password'.tr(),
