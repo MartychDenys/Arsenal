@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../domain/auth/auth_data.dart';
 import '../../domain/auth/login_request.dart';
@@ -11,7 +12,7 @@ class AuthApiService {
     AuthData authData;
 
     var formData = FormData.fromMap({
-      'data[phone]': '380${loginRequest.phone}',
+      'data[phone]': '${loginRequest.phone}',
       'data[password]': '${loginRequest.password}',
     });
 

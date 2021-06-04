@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../../application/auth/login_form_key_provider.dart';
 import '../../../../application/auth/login_state_notifier_provider.dart';
@@ -17,6 +18,7 @@ import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
+  PhoneNumber number = PhoneNumber(isoCode: 'UA');
   @override
   Widget build(BuildContext context) {
     final login = useProvider(loginStateNotifierProvider);
@@ -37,55 +39,73 @@ class LoginFields extends HookWidget {
               size: 18,
               color: textColor,
             ),
-            TextFormField(
-              maxLength: 9,
-              decoration: InputDecoration(
-                counterText: '',
-                hintText: '631111111',
-                prefixStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+            InternationalPhoneNumberInput(
+                onInputChanged: (PhoneNumber number) {
+                  print(number.phoneNumber);
+                  login.updatePhone(number.phoneNumber.substring(1));
+                },
+                selectorConfig: SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
-                prefixIcon: Container(
-                  width: 72,
-                  padding: const EdgeInsets.only(left: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: SvgPicture.asset(
-                          'assets/icons/phone.svg',
-                          color: subtitleColor,
-                          width: 18,
-                          height: 18,
-                        ),
-                      ),
-                      SpaceW10(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            '380 ',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SpaceH5(),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                /*Icon(
-                  Icons.phone,
-                  color: subtitleColor,
-                ),*/
-              ),
-              keyboardType: TextInputType.phone,
-              onChanged: (String value) => login.updatePhone(value),
-              validator: validatePhone,
+                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
+                ignoreBlank: false,
+                initialValue: number,
+                formatInput: true,
+                hintText: 'phone_number'.tr(),
+                errorMessage: 'phone_number_error'.tr(),
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: TextInputType.phone,
+                countries: ['UA']
             ),
+            // TextFormField(
+            //   maxLength: 9,
+            //   decoration: InputDecoration(
+            //     counterText: '',
+            //     hintText: '631111111',
+            //     prefixStyle: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 16,
+            //     ),
+            //     prefixIcon: Container(
+            //       width: 72,
+            //       padding: const EdgeInsets.only(left: 12),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         children: [
+            //           Container(
+            //             child: SvgPicture.asset(
+            //               'assets/icons/phone.svg',
+            //               color: subtitleColor,
+            //               width: 18,
+            //               height: 18,
+            //             ),
+            //           ),
+            //           SpaceW10(),
+            //           Column(
+            //             mainAxisAlignment: MainAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 '380 ',
+            //                 style: TextStyle(
+            //                   color: Colors.black,
+            //                   fontSize: 16,
+            //                 ),
+            //               ),
+            //               SpaceH5(),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     /*Icon(
+            //       Icons.phone,
+            //       color: subtitleColor,
+            //     ),*/
+            //   ),
+            //   keyboardType: TextInputType.phone,
+            //   onChanged: (String value) => login.updatePhone(value),
+            //   validator: validatePhone,
+            // ),
             SpaceH45(),
             FrizText(
               text: 'password'.tr(),

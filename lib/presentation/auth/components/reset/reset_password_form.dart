@@ -1,3 +1,5 @@
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +17,8 @@ class ResetPasswordForm extends HookWidget {
       useProvider(resetPasswordPhoneFormKeyProvider);
   final reset = useProvider(resetByPhoneStateNotifierProvider);
 
+  PhoneNumber number = PhoneNumber(isoCode: 'UA');
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -31,22 +35,39 @@ class ResetPasswordForm extends HookWidget {
               size: 18,
               color: textColor,
             ),
-            TextFormField(
-              onChanged: (String value) => reset.updatePhone(value),
-              cursorColor: mainColor,
-              initialValue: '380',
-              decoration: InputDecoration(
-                counterText: '',
-                hintText: '380631111111',
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: subtitleColor,
+            InternationalPhoneNumberInput(
+                onInputChanged: (PhoneNumber number) {
+                  reset.updatePhone(number.phoneNumber.substring(1));
+                },
+                selectorConfig: SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
-              ),
-              keyboardType: TextInputType.number,
-              maxLength: 12,
-              validator: validateResetPhone,
+                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
+                ignoreBlank: false,
+                initialValue: number,
+                formatInput: true,
+                hintText: 'phone_number'.tr(),
+                errorMessage: 'phone_number_error'.tr(),
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: TextInputType.phone,
+                countries: ['UA']
             ),
+            // TextFormField(
+            //   onChanged: (String value) => reset.updatePhone(value),
+            //   cursorColor: mainColor,
+            //   initialValue: '380',
+            //   decoration: InputDecoration(
+            //     counterText: '',
+            //     hintText: '380631111111',
+            //     prefixIcon: Icon(
+            //       Icons.phone,
+            //       color: subtitleColor,
+            //     ),
+            //   ),
+            //   keyboardType: TextInputType.number,
+            //   maxLength: 12,
+            //   validator: validateResetPhone,
+            // ),
           ],
         ),
       ),
