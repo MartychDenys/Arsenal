@@ -1,5 +1,6 @@
 import 'package:arsenal_app/application/app/contact/contact_future_provider.dart';
 import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
+import 'package:arsenal_app/domain/auth/auth_data.dart';
 import 'package:arsenal_app/domain/contact/contact.dart';
 import 'package:arsenal_app/infrastructure/contact/contact_service.dart';
 
@@ -85,15 +86,23 @@ class LoginButtons extends HookWidget {
                   auth.state = AuthState.loading;
 
                   final response = await _authService.login(loginState);
-
-                  if (response.status == 'success') {
-                    final contactList =
-                        await _contactService.getContact(response.data.token);
-                    if (contactList is Contact) {
-                      contactData.updateContactData(contactList);
-                      userId.state = contactList.data.first.id;
+                  if (response is AuthData) {
+                    if (response.status == 'success') {
+                      final contactList =
+                          await _contactService.getContact(response.data.token);
+                      if (contactList is Contact) {
+                        contactData.updateContactData(contactList);
+                        userId.state = contactList.data.first.id;
+                      }
+                      _processResponse(response);
+                    } else {
+                      showMessageSnackBar(
+                        message: 'Incorrect data',
+                        scaffoldKey: controllerKey,
+                        color: mainColor,
+                      );
+                      auth.state = AuthState.login;
                     }
-                    _processResponse(response);
                   }
                 }
               },

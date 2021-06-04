@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/auth/login_form_key_provider.dart';
@@ -36,16 +38,49 @@ class LoginFields extends HookWidget {
               color: textColor,
             ),
             TextFormField(
-              cursorColor: subtitleColor,
-              initialValue: '380',
-              maxLength: 12,
-              decoration: const InputDecoration(
+              maxLength: 9,
+              decoration: InputDecoration(
                 counterText: '',
-                hintText: '380631111111',
-                prefixIcon: Icon(
+                hintText: '631111111',
+                prefixStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+                prefixIcon: Container(
+                  width: 72,
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: SvgPicture.asset(
+                          'assets/icons/phone.svg',
+                          color: subtitleColor,
+                          width: 18,
+                          height: 18,
+                        ),
+                      ),
+                      SpaceW10(),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            '380 ',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                          SpaceH5(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                /*Icon(
                   Icons.phone,
                   color: subtitleColor,
-                ),
+                ),*/
               ),
               keyboardType: TextInputType.phone,
               onChanged: (String value) => login.updatePhone(value),
@@ -77,10 +112,17 @@ class LoginFields extends HookWidget {
                     color: subtitleColor,
                   ),
                 ),
-                prefixIcon: const Icon(
+                prefixIcon: Container(
+                  padding: const EdgeInsets.all(13),
+                  child: SvgPicture.asset(
+                    'assets/icons/lock.svg',
+                    color: subtitleColor,
+                  ),
+                ),
+                /*const Icon(
                   Icons.lock_outline,
                   color: subtitleColor,
-                ),
+                ),*/
               ),
               onChanged: (String value) => login.updatePassword(value),
               validator: validatePassword,

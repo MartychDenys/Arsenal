@@ -1,4 +1,4 @@
-import 'package:arsenal_app/application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
+import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,7 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 class ResetPasswordForm extends HookWidget {
   final resetPasswordPhoneFormKey =
       useProvider(resetPasswordPhoneFormKeyProvider);
-  final login = useProvider(resetByPhoneStateNotifierProvider);
+  final reset = useProvider(resetByPhoneStateNotifierProvider);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ResetPasswordForm extends HookWidget {
               color: textColor,
             ),
             TextFormField(
-              onChanged: (String value) => login.updatePhone(value),
+              onChanged: (String value) => reset.updatePhone(value),
               cursorColor: mainColor,
               initialValue: '380',
               decoration: InputDecoration(
@@ -45,7 +45,7 @@ class ResetPasswordForm extends HookWidget {
               ),
               keyboardType: TextInputType.number,
               maxLength: 12,
-              validator: validatePhone,
+              validator: validateResetPhone,
             ),
           ],
         ),

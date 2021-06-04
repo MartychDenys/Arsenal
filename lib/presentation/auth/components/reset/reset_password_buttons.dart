@@ -83,12 +83,6 @@ class ResetPasswordButtons extends HookWidget {
 
                       _processResponse(response);
                     }
-                    /*showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return ResetPassDialog();
-                      },
-                    );*/
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(

@@ -35,7 +35,8 @@ class ResetApiService {
       'data[sms_code]': '${smsRequest.code}',
       '_token': token,
     });
-
+    print('RESET CODE' + token);
+    print('SMS CODE:' + smsRequest.code);
     var response = await _dio.post(
       '${apiUrl}/arsenal/auth/confirmSms/',
       data: formData,
