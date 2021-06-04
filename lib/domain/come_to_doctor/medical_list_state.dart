@@ -1,4 +1,4 @@
 enum MedicalListState {
-  need,
-  dontNeed,
+  necessary,
+  unnecessary,
 }

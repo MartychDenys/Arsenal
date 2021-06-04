@@ -11,8 +11,8 @@ class LoginStateNotifier extends StateNotifier<LoginRequest> {
   LoginStateNotifier()
       : super(
           LoginRequest(
-            phone: '3807461887',
-            password: '3807461887',
+            phone: '',
+            password: '',
           ),
         );
 

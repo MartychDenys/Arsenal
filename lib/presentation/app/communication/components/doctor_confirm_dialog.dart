@@ -59,7 +59,8 @@ class DoctorConfirmDialog extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      int count = 0;
+                      Navigator.of(context).popUntil((_) => count++ >= 2);
                     },
                     child: HelveticaText(
                       text: 'ask'.tr(),
@@ -75,7 +76,8 @@ class DoctorConfirmDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   onPressed: () {
-                    navigatorPush(
+                    Navigator.of(context).pushNamedAndRemoveUntil('/controller', (r) => false);
+                    navigatorPushReplacement(
                       context,
                       const NavigationPage(
                         index: 0,

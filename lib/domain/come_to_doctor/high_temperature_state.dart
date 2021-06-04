@@ -1,0 +1,4 @@
+enum HighTemperatureState {
+  yes,
+  no,
+}

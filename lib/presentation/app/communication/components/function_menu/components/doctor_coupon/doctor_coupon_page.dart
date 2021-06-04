@@ -21,9 +21,9 @@ import '../../../../../../../application/controller/controller_key_provider.dart
 import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_form_key_provider.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_state_notifier.dart';
-import '../../../../../../../application/app/communication/high_temperature_provider.dart';
-import '../../../../../../../application/app/communication/medical_list_provider.dart';
-import '../../../../../../../application/app/communication/sick_contact_provider.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/high_temperature_provider.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/medical_list_provider.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/sick_contact_provider.dart';
 import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
 import '../../../../../../../application/app/contact/contact_state_notifier.dart';
 import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';

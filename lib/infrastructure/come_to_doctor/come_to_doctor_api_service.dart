@@ -20,6 +20,9 @@ class ComeToDoctorApiService {
       'data[VISIT_TIME]': '${comeToDoctorRequest.visitTime}',
       'data[MEDICAL_INSTITUTION]': '${comeToDoctorRequest.medicalInstitution}',
       'data[DOCTOR_FIO]': '${comeToDoctorRequest.doctorName}',
+      'data[SICK_LIST_REQ]': comeToDoctorRequest.medicalList,
+      'data[HIGH_TEMPERATURE]': comeToDoctorRequest.highTemperature,
+      'data[SICK_CONTACT]': comeToDoctorRequest.sickContact,
       'data[COMMENT]': '${comeToDoctorRequest.comment}',
     };
 

@@ -85,7 +85,6 @@ class DoctorDialog extends HookWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Navigator.of(context).popUntil((Route<dynamic> route) => false);
                     Navigator.of(context).pushNamedAndRemoveUntil('/controller', (r) => false);
                     navigatorPushReplacement(
                       context,
