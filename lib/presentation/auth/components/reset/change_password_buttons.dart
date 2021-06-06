@@ -30,13 +30,18 @@ class ChangePasswordButtons extends HookWidget {
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        showDialog(
+        showMessageSnackBar(
+          message: 'Password successfully changed',
+          scaffoldKey: controllerKey,
+          color: mainColor,
+        );
+        /*showDialog(
           context: context,
           builder: (BuildContext ctx) {
             return ResetPassDialog();
           },
-        );
-        //auth.state = AuthState.login;
+        );*/
+        auth.state = AuthState.login;
       } else {
         showMessageSnackBar(
           message: 'Incorrect data',
@@ -76,16 +81,14 @@ class ChangePasswordButtons extends HookWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   onPressed: () async {
-                    if (resetPasswordFormKey.currentState.validate()) {
-                      auth.state = AuthState.loading;
+                    auth.state = AuthState.loading;
 
-                      final response = await _resetService.changePassword(
-                          changePasswordState.password,
-                          changePasswordState.passwordConfirm,
-                          token);
+                    final response = await _resetService.changePassword(
+                        changePasswordState.password,
+                        changePasswordState.passwordConfirm,
+                        token);
 
-                      _processResponse(response);
-                    }
+                    _processResponse(response);
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(

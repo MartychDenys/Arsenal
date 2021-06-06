@@ -4,7 +4,7 @@ import '../../domain/auth/reset/sms_response_body.dart';
 import '../../domain/auth/reset/phone_response_body.dart';
 import 'package:dio/dio.dart';
 import '../../domain/auth/reset/phone_request.dart';
-import 'package:arsenal_app/domain/auth/reset/change_password_response_body.dart';
+import '../../domain/auth/reset/change_password_response_body.dart';
 import '../constants.dart';
 
 class ResetApiService {
@@ -33,12 +33,12 @@ class ResetApiService {
 
     var formData = FormData.fromMap({
       'data[sms_code]': '${smsRequest.code}',
-      '_token': token,
+      //'_token': token,
     });
-    print('RESET CODE' + token);
+    print('RESET CODE:' + token);
     print('SMS CODE:' + smsRequest.code);
     var response = await _dio.post(
-      '${apiUrl}/arsenal/auth/confirmSms/',
+      '${apiUrl}/arsenal/auth/confirmSms/?_token=$token',
       data: formData,
     );
 
@@ -56,11 +56,11 @@ class ResetApiService {
     var formData = FormData.fromMap({
       'data[password]': '$pass',
       'data[confirm_password]': '$confirmPass',
-      '_token': '$token'
+      //'_token': '$token'
     });
 
     var response = await _dio.post(
-      '${apiUrl}/arsenal/auth/savePassword/',
+      '${apiUrl}/arsenal/auth/savePassword/?_token=$token',
       data: formData,
     );
 
