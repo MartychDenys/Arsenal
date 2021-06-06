@@ -1,19 +1,21 @@
-import 'package:arsenal_app/application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import '../../../app/components/friz_text.dart';
 import '../../../constants/style_constants.dart';
-import '../../../helpers/validators/login/validate_phone.dart';
 import '../../../../application/auth/reset_password/reset_phone_form_key_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordForm extends HookWidget {
   final resetPasswordPhoneFormKey =
       useProvider(resetPasswordPhoneFormKeyProvider);
-  final login = useProvider(resetByPhoneStateNotifierProvider);
+  final reset = useProvider(resetByPhoneStateNotifierProvider);
+
+  PhoneNumber number = PhoneNumber(isoCode: 'UA');
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +33,22 @@ class ResetPasswordForm extends HookWidget {
               size: 18,
               color: textColor,
             ),
-            TextFormField(
-              onChanged: (String value) => login.updatePhone(value),
-              cursorColor: mainColor,
-              decoration: InputDecoration(
-                hintText: 'Номер телефона',
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: subtitleColor,
+            InternationalPhoneNumberInput(
+                onInputChanged: (PhoneNumber number) {
+                  reset.updatePhone(number.phoneNumber.substring(1));
+                },
+                selectorConfig: SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
-              ),
-              keyboardType: TextInputType.phone,
-              validator: validatePhone,
+                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
+                ignoreBlank: false,
+                initialValue: number,
+                formatInput: true,
+                hintText: 'phone_number'.tr(),
+                errorMessage: 'phone_number_error'.tr(),
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: TextInputType.phone,
+                countries: ['UA']
             ),
           ],
         ),

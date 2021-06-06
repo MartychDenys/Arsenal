@@ -17,6 +17,8 @@ class DoctorStateNotifier extends StateNotifier<DoctorCouponRequest> {
             visitTimeTo: '',
             medicalInstitution: '',
             medicalList: false,
+            sickContact: false,
+            highTemperature: false,
             comment: '',
           ),
         );
@@ -28,43 +30,54 @@ class DoctorStateNotifier extends StateNotifier<DoctorCouponRequest> {
       visitTimeFrom: state.visitTimeFrom,
       visitTimeTo: state.visitTimeFrom,
       medicalInstitution: state.medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
 
   void updateVisitDate(String visitDate) {
+    print('visitDate: ${visitDate}');
     state = DoctorCouponRequest(
       symptoms: state.symptoms,
       visitDate: visitDate,
       visitTimeFrom: state.visitTimeFrom,
       visitTimeTo: state.visitTimeFrom,
       medicalInstitution: state.medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
 
   void updateVisitTimeFrom(String visitTimeFrom) {
+    print('visitTimeFrom: ${visitTimeFrom}');
     state = DoctorCouponRequest(
       symptoms: state.symptoms,
       visitDate: state.visitDate,
       visitTimeFrom: visitTimeFrom,
       visitTimeTo: state.visitTimeFrom,
       medicalInstitution: state.medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
 
   void updateVisitTimeTo(String visitTimeTo) {
+    print('visitTimeTo: ${visitTimeTo}');
     state = DoctorCouponRequest(
       symptoms: state.symptoms,
       visitDate: state.visitDate,
       visitTimeFrom: state.visitTimeFrom,
       visitTimeTo: visitTimeTo,
       medicalInstitution: state.medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
@@ -76,12 +89,15 @@ class DoctorStateNotifier extends StateNotifier<DoctorCouponRequest> {
       visitTimeFrom: state.visitTimeFrom,
       visitTimeTo: state.visitTimeTo,
       medicalInstitution: medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
 
   void updateMedicalList(bool medicalList) {
+    print('medicalList: ${medicalList}');
     state = DoctorCouponRequest(
       symptoms: state.symptoms,
       visitDate: state.visitDate,
@@ -89,18 +105,52 @@ class DoctorStateNotifier extends StateNotifier<DoctorCouponRequest> {
       visitTimeTo: state.visitTimeTo,
       medicalInstitution: state.medicalInstitution,
       medicalList: medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
 
-  void updateComment(String comment) {
+  void updateSickContact(bool sickContact) {
+    print('sickContact: ${sickContact}');
     state = DoctorCouponRequest(
       symptoms: state.symptoms,
       visitDate: state.visitDate,
       visitTimeFrom: state.visitTimeFrom,
       visitTimeTo: state.visitTimeTo,
       medicalInstitution: state.medicalInstitution,
-      medicalList: false,
+      medicalList: state.medicalList,
+      sickContact: sickContact,
+      highTemperature: state.highTemperature,
+      comment: state.comment,
+    );
+  }
+
+  void updateHighTemperature(bool highTemperature) {
+    state = DoctorCouponRequest(
+      symptoms: state.symptoms,
+      visitDate: state.visitDate,
+      visitTimeFrom: state.visitTimeFrom,
+      visitTimeTo: state.visitTimeTo,
+      medicalInstitution: state.medicalInstitution,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: highTemperature,
+      comment: state.comment,
+    );
+  }
+
+  void updateComment(String comment) {
+    print('comment: ${comment}');
+    state = DoctorCouponRequest(
+      symptoms: state.symptoms,
+      visitDate: state.visitDate,
+      visitTimeFrom: state.visitTimeFrom,
+      visitTimeTo: state.visitTimeTo,
+      medicalInstitution: state.medicalInstitution,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: comment,
     );
   }
@@ -113,7 +163,11 @@ class DoctorStateNotifier extends StateNotifier<DoctorCouponRequest> {
         visitTimeTo: '',
         medicalInstitution: '',
         medicalList: false,
+        sickContact: false,
+        highTemperature: false,
         comment: '',
     );
+
+    print('DoctorCouponRequest: ${state.symptoms}');
   }
 }

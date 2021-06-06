@@ -21,9 +21,9 @@ class InsuranceCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final insuranceId = useProvider(insuranceIdStateNotifierProvider);
-
-    insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
+    // final insuranceId = useProvider(insuranceIdStateNotifierProvider);
+    //
+    // insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
 
     if ((insuranceList[0].dealInfo.dmsLimit) == null ||
         (insuranceList[0].dealInfo.closeDate) == null) {

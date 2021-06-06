@@ -22,9 +22,13 @@ class DoctorCouponApiService {
       'data[VISIT_TIME_FROM]': '${doctorCouponRequest.visitTimeFrom}',
       'data[VISIT_TIME_TO]': '${doctorCouponRequest.visitTimeTo}',
       'data[MEDICAL_INSTITUTION]': '${doctorCouponRequest.medicalInstitution}',
-      'data[SICK_LIST_REQ]': false,
+      'data[SICK_LIST_REQ]': doctorCouponRequest.medicalList,
+      'data[HIGH_TEMPERATURE]': doctorCouponRequest.highTemperature,
+      'data[SICK_CONTACT]': doctorCouponRequest.sickContact,
       'data[COMMENT]': '${doctorCouponRequest.comment}',
     };
+
+    print('request: ${_query}');
 
     var response = await _dio.post(
       url,
@@ -32,6 +36,7 @@ class DoctorCouponApiService {
     );
 
     var data = response.data;
+    print('response: ${data}');
     doctorCouponData = DoctorCouponData.fromJson(data);
 
     return doctorCouponData;

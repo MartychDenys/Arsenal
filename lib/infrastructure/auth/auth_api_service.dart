@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../domain/auth/auth_data.dart';
 import '../../domain/auth/login_request.dart';

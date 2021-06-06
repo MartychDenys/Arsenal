@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../../application/auth/login_form_key_provider.dart';
 import '../../../../application/auth/login_state_notifier_provider.dart';
@@ -10,11 +13,11 @@ import '../../../app/components/friz_text.dart';
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
 import '../../../helpers/validators/login/validate_password.dart';
-import '../../../helpers/validators/login/validate_phone.dart';
 import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
+  PhoneNumber number = PhoneNumber(isoCode: 'UA');
   @override
   Widget build(BuildContext context) {
     final login = useProvider(loginStateNotifierProvider);
@@ -35,18 +38,22 @@ class LoginFields extends HookWidget {
               size: 18,
               color: textColor,
             ),
-            TextFormField(
-              cursorColor: subtitleColor,
-              decoration: const InputDecoration(
-                hintText: '380631111111',
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: subtitleColor,
+            InternationalPhoneNumberInput(
+                onInputChanged: (PhoneNumber number) {
+                  login.updatePhone(number.phoneNumber.substring(1));
+                },
+                selectorConfig: SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
-              ),
-              keyboardType: TextInputType.phone,
-              onChanged: (String value) => login.updatePhone(value),
-              validator: validatePhone,
+                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
+                ignoreBlank: false,
+                initialValue: number,
+                formatInput: true,
+                hintText: 'phone_number'.tr(),
+                errorMessage: 'phone_number_error'.tr(),
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: TextInputType.phone,
+                countries: ['UA']
             ),
             SpaceH45(),
             FrizText(
@@ -56,6 +63,7 @@ class LoginFields extends HookWidget {
             ),
             TextFormField(
               cursorColor: mainColor,
+              initialValue: '',
               obscureText: (showPassword.state == ShowPasswordState.invisible)
                   ? true
                   : false,
@@ -74,10 +82,17 @@ class LoginFields extends HookWidget {
                     color: subtitleColor,
                   ),
                 ),
-                prefixIcon: const Icon(
+                prefixIcon: Container(
+                  padding: const EdgeInsets.all(13),
+                  child: SvgPicture.asset(
+                    'assets/icons/lock.svg',
+                    color: subtitleColor,
+                  ),
+                ),
+                /*const Icon(
                   Icons.lock_outline,
                   color: subtitleColor,
-                ),
+                ),*/
               ),
               onChanged: (String value) => login.updatePassword(value),
               validator: validatePassword,

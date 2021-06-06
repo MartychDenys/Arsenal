@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/spacers.dart';
 
-class ResetPasswordTitle extends StatelessWidget {
+class ChangePasswordTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +26,7 @@ class ResetPasswordTitle extends StatelessWidget {
               height: 8,
             ),
             Text(
-              'renew_condition'.tr(),
+              'new_password'.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,

@@ -1,35 +1,43 @@
-import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
-import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
-
-import '../../../../../../../domain/doctor_coupon/medical_list_state.dart';
-
-import '../../../../../../../application/app/contact/contact_state_notifier.dart';
-import '../../../../../../../application/controller/controller_key_provider.dart';
-import '../../../doctor_dialog.dart';
-import '../../../../../../helpers/show_message_snack_bar.dart';
-import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import '../submit_button.dart';
+import '../../../doctor_dialog.dart';
+import '../../../../../components/app_bar_with_back_button.dart';
+import '../../../../../components/friz_text.dart';
+import '../../../../../components/helvetica_text.dart';
+import '../../../../../../constants/spacers.dart';
+import '../../../../../../constants/style_constants.dart';
+import '../../../../../../helpers/show_message_snack_bar.dart';
 import '../../../../../../helpers/validators/validate_symptoms.dart';
 import '../../../../../../helpers/validators/validate_date.dart';
 import '../../../../../../helpers/validators/validate_time.dart';
 import '../../../../../../helpers/validators/validate_comment.dart';
 import '../../../../../../helpers/validators/validate_medical_institution.dart';
+import '../../../../../../../application/controller/controller_key_provider.dart';
+import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_form_key_provider.dart';
-import '../../../../../../constants/spacers.dart';
-import '../../../../../../constants/style_constants.dart';
-import '../../../../../components/app_bar_with_back_button.dart';
-import '../../../../../components/friz_text.dart';
-import '../../../../../components/helvetica_text.dart';
-import '../submit_button.dart';
 import '../../../../../../../application/app/communication/doctor_coupon/doctor_coupon_state_notifier.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/high_temperature_provider.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/medical_list_provider.dart';
+import '../../../../../../../application/app/communication/doctor_coupon/sick_contact_provider.dart';
+import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../../../../application/app/contact/contact_state_notifier.dart';
+import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
+import '../../../../../../../domain/doctor_coupon/high_temperature_state.dart';
+import '../../../../../../../domain/doctor_coupon/medical_list_state.dart';
+import '../../../../../../../domain/doctor_coupon/sick_contact_state.dart';
 import '../../../../../../../infrastructure/doctor_coupon/doctor_coupon_service.dart';
-import '../../../../../../../application/app/communication/medical_list_provider.dart';
+import '../../../../../../../widgets/time_picker.dart';
 
 class DoctorCouponPage extends HookWidget {
+  final dateController = new TextEditingController();
+  final timeFromController = new TextEditingController();
+  final timeToController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final doctorCouponFormKey = useProvider(doctorCouponFormKeyProvider);
@@ -40,7 +48,9 @@ class DoctorCouponPage extends HookWidget {
     final controllerKey = useProvider(controllerKeyProvider);
     final contact = useProvider(contactStateNotifier).state;
     final userId = useProvider(currentContactStateNotifierProvider.state);
-    final changeMedList = useProvider(changeRadioStateProvider);
+    final changeMedList = useProvider(medicalListStateProvider);
+    final highTemperatureList = useProvider(highTemperatureStateProvider);
+    final sickContactList = useProvider(sickContactStateProvider);
     final insuranceId = useProvider(insuranceIdStateNotifierProvider.state);
 
     void _processResponse(dynamic response) {
@@ -125,9 +135,26 @@ class DoctorCouponPage extends HookWidget {
                         width: 160,
                         height: 50,
                         child: TextFormField(
+                          controller: dateController,
+                          onTap: () {
+                            DatePicker.showDatePicker(context, showTitleActions: true,
+                                onChanged: (date)
+                            {
+                              dateController.text =
+                              '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+                              doctorCoupon.updateVisitDate(
+                                  '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
+                              );
+                            }, onConfirm: (date) {
+                              dateController.text =
+                              '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+                              doctorCoupon.updateVisitDate(
+                                '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
+                              );
+                              },
+                                currentTime: DateTime.now(), locale: LocaleType.ru);
+                          },
                           validator: validateDate,
-                          onChanged: (String value) =>
-                              doctorCoupon.updateVisitDate(value),
                           keyboardType: TextInputType.datetime,
                           decoration: const InputDecoration(
                             hintText: 'дд.мм.гггг',
@@ -156,6 +183,27 @@ class DoctorCouponPage extends HookWidget {
                           height: 30,
                           width: 70,
                           child: TextFormField(
+                            controller: timeFromController,
+                            onTap: () {
+                              DatePicker.showPicker(context, showTitleActions: true,
+                                  onChanged: (date)
+                                  {
+                                    timeFromController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeFrom(
+                                        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                    );
+                                  }, onConfirm: (date) {
+                                    print('confirm $date');
+                                    timeFromController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeFrom(
+                                        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                    );
+                                  },
+                                  pickerModel: TimePicker(currentTime: DateTime.now(), locale: LocaleType.ru),
+                                  locale: LocaleType.ru);
+                            },
                             validator: validateTime,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeFrom(value),
@@ -174,6 +222,26 @@ class DoctorCouponPage extends HookWidget {
                           height: 30,
                           width: 70,
                           child: TextFormField(
+                            controller: timeToController,
+                            onTap: () {
+                              DatePicker.showPicker(context, showTitleActions: true,
+                                  onChanged: (date)
+                                  {
+                                    timeToController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeTo(
+                                        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                    );
+                                  }, onConfirm: (date) {
+                                    timeToController.text =
+                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                                    doctorCoupon.updateVisitTimeTo(
+                                        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+                                    );
+                                  },
+                                  pickerModel: TimePicker(currentTime: DateTime.now(), locale: LocaleType.ru),
+                                  locale: LocaleType.ru);
+                            },
                             validator: validateTime,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeTo(value),
@@ -238,8 +306,8 @@ class DoctorCouponPage extends HookWidget {
                             value: MedicalListState.unnecessary,
                             groupValue: changeMedList.state,
                             onChanged: (MedicalListState value) {
-                              changeMedList.state =
-                                  MedicalListState.unnecessary;
+                              changeMedList.state = MedicalListState.unnecessary;
+                              doctorCoupon.updateMedicalList(false);
                             },
                           ),
                         ),
@@ -256,6 +324,102 @@ class DoctorCouponPage extends HookWidget {
                             groupValue: changeMedList.state,
                             onChanged: (MedicalListState value) {
                               changeMedList.state = MedicalListState.necessary;
+                              doctorCoupon.updateMedicalList(true);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SpaceH45(),
+                FrizText(
+                  text: 'high_temperature'.tr(),
+                  size: 18,
+                  color: textColor,
+                ),
+                SpaceH8(),
+                Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: HelveticaText(
+                            text: 'no'.tr(),
+                            size: 16,
+                            color: textColor,
+                          ),
+                          leading: Radio(
+                            value: HighTemperatureState.no,
+                            groupValue: highTemperatureList.state,
+                            onChanged: (HighTemperatureState value) {
+                              highTemperatureList.state = HighTemperatureState.no;
+                              doctorCoupon.updateHighTemperature(false);
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: HelveticaText(
+                            text: 'yes'.tr(),
+                            size: 16,
+                            color: textColor,
+                          ),
+                          leading: Radio(
+                            value: HighTemperatureState.yes,
+                            groupValue: highTemperatureList.state,
+                            onChanged: (HighTemperatureState value) {
+                              highTemperatureList.state = HighTemperatureState.yes;
+                              doctorCoupon.updateHighTemperature(true);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SpaceH45(),
+                FrizText(
+                  text: 'covid_contact'.tr(),
+                  size: 18,
+                  color: textColor,
+                ),
+                SpaceH8(),
+                Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: HelveticaText(
+                            text: 'no'.tr(),
+                            size: 16,
+                            color: textColor,
+                          ),
+                          leading: Radio(
+                            value: SickContactState.no,
+                            groupValue: sickContactList.state,
+                            onChanged: (SickContactState value) {
+                              sickContactList.state =
+                                  SickContactState.no;
+                              doctorCoupon.updateSickContact(false);
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: HelveticaText(
+                            text: 'yes'.tr(),
+                            size: 16,
+                            color: textColor,
+                          ),
+                          leading: Radio(
+                            value: SickContactState.yes,
+                            groupValue: sickContactList.state,
+                            onChanged: (SickContactState value) {
+                              sickContactList.state = SickContactState.yes;
+                              doctorCoupon.updateSickContact(true);
                             },
                           ),
                         ),

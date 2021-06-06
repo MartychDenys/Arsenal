@@ -1,5 +1,7 @@
-import 'package:arsenal_app/application/controller/controller_key_provider.dart';
-import 'package:arsenal_app/presentation/helpers/show_message_snack_bar.dart';
+import 'package:arsenal_app/domain/auth/reset/phone_response_body.dart';
+
+import '../../../../application/controller/controller_key_provider.dart';
+import '../../../helpers/show_message_snack_bar.dart';
 
 import '../../../../application/auth/reset_password/reset_phone_form_key_provider.dart';
 
@@ -14,6 +16,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../infrastructure/reset/reset_service.dart';
 import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
+import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
 
 class ResetPasswordButtons extends HookWidget {
   @override
@@ -23,10 +26,16 @@ class ResetPasswordButtons extends HookWidget {
     final _resetService = ResetService();
     final resetState = useProvider(resetByPhoneStateNotifierProvider.state);
     final controllerKey = useProvider(controllerKeyProvider);
+    final resetData = useProvider(resetDataStateNotifierProvider);
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        auth.state = AuthState.resetSms;
+        if (response is PhoneResponseBody) {
+          resetData.updateData(response.data);
+          auth.state = AuthState.resetSms;
+        } else {
+          auth.state = AuthState.login;
+        }
       } else {
         showMessageSnackBar(
           message: 'Incorrect data',
@@ -74,12 +83,6 @@ class ResetPasswordButtons extends HookWidget {
 
                       _processResponse(response);
                     }
-                    /*showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return ResetPassDialog();
-                      },
-                    );*/
                   },
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(

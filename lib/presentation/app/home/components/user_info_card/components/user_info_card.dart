@@ -73,7 +73,7 @@ class UserInfoCard extends HookWidget {
               children: [
                 QrImage(
                   //data: contact.data.fullName + contact.data.userCode,
-                  data: userName + userCode,
+                  data: userCode,
                   size: 85,
                   backgroundColor: Colors.white,
                   foregroundColor: mainColor,
@@ -81,23 +81,23 @@ class UserInfoCard extends HookWidget {
                 SpaceH18(),
                 HelveticaText(
                   text: 'service_number'.tr(),
-                  size: 12,
+                  size: 14,
                   color: Colors.white,
                 ),
-                SpaceH2(),
+                SpaceH10(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       userCode,
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                         fontFamily: 'HelveticaRegular',
                       ),
                     ),
-                    SpaceH10(),
+                    /*SpaceH10(),
                     Container(
                       width: 16,
                       height: 16,
@@ -113,7 +113,7 @@ class UserInfoCard extends HookWidget {
                           copy,
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ],

@@ -7,6 +7,9 @@ class ComeToDoctorRequest {
     @required this.visitTime,
     @required this.medicalInstitution,
     @required this.doctorName,
+    this.medicalList,
+    this.sickContact,
+    this.highTemperature,
     this.comment,
   });
 
@@ -15,5 +18,8 @@ class ComeToDoctorRequest {
   final String visitTime;
   final String medicalInstitution;
   final String doctorName;
+  final bool medicalList;
+  final bool sickContact;
+  final bool highTemperature;
   final String comment;
 }

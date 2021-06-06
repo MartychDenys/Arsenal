@@ -15,6 +15,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
             visitTime: '',
             medicalInstitution: '',
             doctorName: '',
+            medicalList: false,
+            sickContact: false,
+            highTemperature: false,
             comment: '',
           ),
         );
@@ -26,6 +29,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: state.visitTime,
       medicalInstitution: state.medicalInstitution,
       doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
@@ -37,6 +43,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: state.visitTime,
       medicalInstitution: state.medicalInstitution,
       doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
@@ -48,6 +57,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: visitTime,
       medicalInstitution: state.medicalInstitution,
       doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
@@ -59,6 +71,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: state.visitTime,
       medicalInstitution: medicalInstitution,
       doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: state.comment,
     );
   }
@@ -70,6 +85,51 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: state.visitTime,
       medicalInstitution: state.medicalInstitution,
       doctorName: doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
+      comment: state.comment,
+    );
+  }
+
+  void updateMedicalList(bool medicalList) {
+    state = ComeToDoctorRequest(
+      symptoms: state.symptoms,
+      visitDate: state.visitDate,
+      visitTime: state.visitTime,
+      medicalInstitution: state.medicalInstitution,
+      doctorName: state.doctorName,
+      medicalList: medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
+      comment: state.comment,
+    );
+  }
+
+  void updateSickContact(bool sickContact) {
+    state = ComeToDoctorRequest(
+      symptoms: state.symptoms,
+      visitDate: state.visitDate,
+      visitTime: state.visitTime,
+      medicalInstitution: state.medicalInstitution,
+      doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: sickContact,
+      highTemperature: state.highTemperature,
+      comment: state.comment,
+    );
+  }
+
+  void updateHighTemperature(bool highTemperature) {
+    state = ComeToDoctorRequest(
+      symptoms: state.symptoms,
+      visitDate: state.visitDate,
+      visitTime: state.visitTime,
+      medicalInstitution: state.medicalInstitution,
+      doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: highTemperature,
       comment: state.comment,
     );
   }
@@ -81,6 +141,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: state.visitTime,
       medicalInstitution: state.medicalInstitution,
       doctorName: state.doctorName,
+      medicalList: state.medicalList,
+      sickContact: state.sickContact,
+      highTemperature: state.highTemperature,
       comment: comment,
     );
   }
@@ -92,6 +155,9 @@ class ComeToDoctorStateNotifier extends StateNotifier<ComeToDoctorRequest> {
       visitTime: '',
       medicalInstitution: '',
       doctorName: '',
+      medicalList: false,
+      sickContact: false,
+      highTemperature: false,
       comment: '',
     );
   }

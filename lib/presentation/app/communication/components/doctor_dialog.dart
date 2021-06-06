@@ -60,12 +60,14 @@ class DoctorDialog extends HookWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      navigatorPushReplacement(
-                        context,
-                        const NavigationPage(
-                          index: 2,
-                        ),
-                      );
+                      int count = 0;
+                      Navigator.of(context).popUntil((_) => count++ >= 2);
+                      // navigatorPushReplacement(
+                      //   context,
+                      //   const NavigationPage(
+                      //     index: 2,
+                      //   ),
+                      // );
                     },
                     child: HelveticaText(
                       text: 'set_question'.tr(),
@@ -83,6 +85,7 @@ class DoctorDialog extends HookWidget {
                     ),
                   ),
                   onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil('/controller', (r) => false);
                     navigatorPushReplacement(
                       context,
                       const NavigationPage(

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:arsenal_app/locale/app_localizations.dart';
+import '../locale/app_localizations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

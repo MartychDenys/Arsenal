@@ -14,7 +14,7 @@ class PhonePopup {
     ];
 
     Future<void> _makePhoneCall(num) async {
-      await launch('tel:$num');
+      launch('tel://${num.replaceAll(new RegExp(r"\s+"), "")}');
     }
 
     return showModalBottomSheet(

@@ -3,4 +3,5 @@ enum AuthState {
   reset,
   resetSms,
   loading,
+  changePassword,
 }

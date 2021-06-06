@@ -1,3 +1,4 @@
+import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
 import 'package:arsenal_app/domain/insurance/insurance.dart';
 import 'package:arsenal_app/presentation/constants/spacers.dart';
 
@@ -90,6 +91,8 @@ class HomePage extends HookWidget {
                     return InsuranceCard(
                       insuranceList: data.data,
                     );
+                    print('data: ${data.data}');
+                    return Text('blah');
                   } else {
                     return Text('Error');
                   }
