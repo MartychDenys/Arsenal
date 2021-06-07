@@ -155,7 +155,8 @@ class DoctorCouponPage extends HookWidget {
                                 currentTime: DateTime.now(), locale: LocaleType.ru);
                           },
                           validator: validateDate,
-                          keyboardType: TextInputType.datetime,
+                          showCursor: true,
+                          readOnly: true,
                           decoration: const InputDecoration(
                             hintText: 'дд.мм.гггг',
                             suffixIcon: Icon(
@@ -205,6 +206,8 @@ class DoctorCouponPage extends HookWidget {
                                   locale: LocaleType.ru);
                             },
                             validator: validateTime,
+                            showCursor: true,
+                            readOnly: true,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeFrom(value),
                             textAlign: TextAlign.center,
@@ -243,6 +246,8 @@ class DoctorCouponPage extends HookWidget {
                                   locale: LocaleType.ru);
                             },
                             validator: validateTime,
+                            showCursor: true,
+                            readOnly: true,
                             onChanged: (String value) =>
                                 doctorCoupon.updateVisitTimeTo(value),
                             textAlign: TextAlign.center,

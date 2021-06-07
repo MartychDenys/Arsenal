@@ -151,7 +151,8 @@ class ComeToDoctorPage extends HookWidget {
                           validator: validateDate,
                           onChanged: (String value) =>
                               comeToDoctor.updateVisitDate(value),
-                          keyboardType: TextInputType.datetime,
+                          showCursor: true,
+                          readOnly: true,
                           decoration: const InputDecoration(
                             hintText: 'дд.мм.гггг',
                             suffixIcon: Icon(
@@ -201,7 +202,8 @@ class ComeToDoctorPage extends HookWidget {
                         validator: validateTime,
                         onChanged: (String value) =>
                             comeToDoctor.updateVisitTime(value),
-                        keyboardType: TextInputType.datetime,
+                        showCursor: true,
+                        readOnly: true,
                         decoration: const InputDecoration(
                           hintText: '00:00',
                           suffixIcon: Icon(
