@@ -1,15 +1,14 @@
-import 'package:arsenal_app/application/app/insurances/insurance_id_state_notifier_provider.dart';
-import 'package:arsenal_app/domain/insurance/insurance_data.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../user_contract_page.dart';
-import '../../../../navigator_push.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+import '../user_contract_page.dart';
+import '../../../components/helvetica_text.dart';
+import '../../../components/friz_text.dart';
 import '../../../../constants/spacers.dart';
 import '../../../../constants/style_constants.dart';
-import '../../../components/friz_text.dart';
-import '../../../components/helvetica_text.dart';
+import '../../../../navigator_push.dart';
+import '../../../../../domain/insurance/insurance_data.dart';
 
 class InsuranceCard extends HookWidget {
   InsuranceCard({

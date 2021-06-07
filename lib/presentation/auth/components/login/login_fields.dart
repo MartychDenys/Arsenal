@@ -18,11 +18,15 @@ import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
   PhoneNumber number = PhoneNumber(isoCode: 'UA');
+  final phoneController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final login = useProvider(loginStateNotifierProvider);
     final loginFormKey = useProvider(loginFormKeyProvider);
     final showPassword = useProvider(showPasswordStateProvider);
+
+    print('login.state: ${login.state.phone}');
 
     return Form(
       key: loginFormKey,
@@ -41,13 +45,15 @@ class LoginFields extends HookWidget {
             InternationalPhoneNumberInput(
                 onInputChanged: (PhoneNumber number) {
                   login.updatePhone(number.phoneNumber.substring(1));
+                  print('login.state: ${login.state.phone}');
                 },
                 selectorConfig: SelectorConfig(
                   selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
                 selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
                 ignoreBlank: false,
-                initialValue: number,
+                textFieldController: phoneController,
+                initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: login.state.phone.isNotEmpty ? login.state.phone.substring(3) : ''),
                 formatInput: true,
                 hintText: 'phone_number'.tr(),
                 errorMessage: 'phone_number_error'.tr(),
