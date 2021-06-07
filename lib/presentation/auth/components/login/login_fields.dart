@@ -7,17 +7,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-import '../../../../application/auth/login_form_key_provider.dart';
-import '../../../../application/auth/login_state_notifier_provider.dart';
 import '../../../app/components/friz_text.dart';
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
 import '../../../helpers/validators/login/validate_password.dart';
+import '../../../../application/auth/login_form_key_provider.dart';
+import '../../../../application/auth/login_state_notifier_provider.dart';
 import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
-  PhoneNumber number = PhoneNumber(isoCode: 'UA');
+  final PhoneNumber number = PhoneNumber(isoCode: 'UA');
   final phoneController = new TextEditingController();
 
   @override
@@ -25,8 +25,6 @@ class LoginFields extends HookWidget {
     final login = useProvider(loginStateNotifierProvider);
     final loginFormKey = useProvider(loginFormKeyProvider);
     final showPassword = useProvider(showPasswordStateProvider);
-
-    print('login.state: ${login.state.phone}');
 
     return Form(
       key: loginFormKey,
@@ -45,7 +43,6 @@ class LoginFields extends HookWidget {
             InternationalPhoneNumberInput(
                 onInputChanged: (PhoneNumber number) {
                   login.updatePhone(number.phoneNumber.substring(1));
-                  print('login.state: ${login.state.phone}');
                 },
                 selectorConfig: SelectorConfig(
                   selectorType: PhoneInputSelectorType.DROPDOWN,

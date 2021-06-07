@@ -1,30 +1,27 @@
-import 'package:arsenal_app/application/app/contact/contact_future_provider.dart';
-import 'package:arsenal_app/application/app/contact/current_contact_state_notifier_provider.dart';
-import 'package:arsenal_app/domain/auth/auth_data.dart';
-import 'package:arsenal_app/domain/contact/contact.dart';
-import 'package:arsenal_app/infrastructure/contact/contact_service.dart';
-
-import '../../../constants/spacers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../constants/spacers.dart';
+import '../../../app/components/helvetica_text.dart';
+import '../../../app/components/main_button.dart';
+import '../../../constants/style_constants.dart';
+import '../../../helpers/show_message_snack_bar.dart';
+import '../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../application/app/contact/contact_list_state_notifier_provider.dart';
 import '../../../../application/auth/auth_data_state_notifier_provider.dart';
 import '../../../../application/auth/auth_state_provider.dart';
 import '../../../../application/auth/login_form_key_provider.dart';
 import '../../../../application/auth/login_state_notifier_provider.dart';
 import '../../../../application/controller/controller_key_provider.dart';
 import '../../../../application/controller/controller_state_provider.dart';
+import '../../../../domain/auth/auth_data.dart';
+import '../../../../domain/contact/contact.dart';
 import '../../../../domain/auth/auth_state.dart';
 import '../../../../domain/controller/controller_state.dart';
 import '../../../../infrastructure/auth/auth_service.dart';
-import '../../../app/components/helvetica_text.dart';
-import '../../../app/components/main_button.dart';
-import '../../../constants/style_constants.dart';
-import '../../../helpers/show_message_snack_bar.dart';
-import '../../../loader.dart';
-import '../../../../application/app/contact/contact_list_state_notifier_provider.dart';
+import '../../../../infrastructure/contact/contact_service.dart';
 
 class LoginButtons extends HookWidget {
   @override
@@ -48,9 +45,9 @@ class LoginButtons extends HookWidget {
         controller.state = ControllerState.authorized;
       } else {
         showMessageSnackBar(
-          message: 'Incorrect data',
+          message: 'auth_error'.tr(),
           scaffoldKey: controllerKey,
-          color: mainColor,
+          color: errorColor,
         );
         auth.state = AuthState.login;
       }
@@ -97,9 +94,9 @@ class LoginButtons extends HookWidget {
                       _processResponse(response);
                     } else {
                       showMessageSnackBar(
-                        message: 'Incorrect data',
+                        message: 'auth_error'.tr(),
                         scaffoldKey: controllerKey,
-                        color: mainColor,
+                        color: errorColor,
                       );
                       auth.state = AuthState.login;
                     }
