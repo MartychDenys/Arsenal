@@ -24,12 +24,6 @@ class InsurerPanel extends StatelessWidget {
             color: textColor,
           ),
           SpaceH16(),
-          HelveticaText(
-            text: 'insurance_text_p2'.tr(),
-            size: 14,
-            color: textColor,
-          ),
-          SpaceH16(),
           RichText(
             text: TextSpan(
               children: [

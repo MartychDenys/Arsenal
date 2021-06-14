@@ -17,7 +17,7 @@ class HistoryCard extends HookWidget {
           leading: leadingIcon(),
           title: FrizText(
             text: 'history'.tr(),
-            size: 14,
+            size: 13,
             color: textColor,
           ),
           subtitle: HelveticaText(

@@ -30,7 +30,7 @@ class UserInfoCard extends HookWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width - 32,
-        height: 260,
+        height: 230,
         padding: const EdgeInsets.symmetric(
           vertical: 10,
           horizontal: 16,
