@@ -92,7 +92,7 @@ class InsuranceCard extends HookWidget {
                               children: <InlineSpan>[
                                 TextSpan(
                                   text: insuranceList[0].dealInfo.dmsLimit +
-                                      ' грн',
+                                      ' ' + 'uah'.tr(),
                                   style: TextStyle(
                                     fontFamily: 'HelveticaRegular',
                                     fontWeight: FontWeight.w700,

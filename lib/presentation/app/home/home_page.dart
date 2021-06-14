@@ -50,8 +50,7 @@ class HomePage extends HookWidget {
             physics: const ScrollPhysics(),
             children: [
               Container(
-                //height: 380,
-                height: 240 + contacts.length * 32.0,
+                height: 250 + contacts.length * 32.0,
                 child: Stack(
                   fit: StackFit.expand,
                   alignment: Alignment.center,

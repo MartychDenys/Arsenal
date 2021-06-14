@@ -69,30 +69,20 @@ class UserContractPage extends HookWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      'contract'.tr() + ' #156/20 - ДМС/Ц8',
-                      style: TextStyle(
-                        color: Color.fromRGBO(96, 110, 117, 1),
-                        fontFamily: 'HelveticaRegular',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    SpaceH8(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'kyiv'.tr(),
+                          'contract'.tr(),
                           style: TextStyle(
                             color: Color.fromRGBO(96, 110, 117, 1),
                             fontFamily: 'HelveticaRegular',
                             fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '23.03.2020',
+                          item.dealInfo.title,
                           style: TextStyle(
                             color: Color.fromRGBO(96, 110, 117, 1),
                             fontFamily: 'HelveticaRegular',
@@ -102,16 +92,77 @@ class UserContractPage extends HookWidget {
                         ),
                       ],
                     ),
-                    SpaceH24(),
-                    Text(
-                      'insuranse_example'.tr(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(40, 46, 58, 1),
-                        fontFamily: 'HelveticaRegular',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        height: 1.5,
-                      ),
+                    SpaceH8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'contract_valid_from'.tr(),
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          item.dealInfo.beginDate.split(' ')[0],
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SpaceH8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'contract_valid_to'.tr(),
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          item.dealInfo.closeDate.split(' ')[0],
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SpaceH8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'contract_limit'.tr(),
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          item.dealInfo.dmsLimit + ' ' + 'uah'.tr(),
+                          style: TextStyle(
+                            color: Color.fromRGBO(96, 110, 117, 1),
+                            fontFamily: 'HelveticaRegular',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                     SpaceH24(),
                     Divider(

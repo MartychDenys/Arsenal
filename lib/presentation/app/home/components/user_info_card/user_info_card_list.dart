@@ -1,10 +1,6 @@
-import '../../../../../application/app/contact/contact_future_provider.dart';
-import '../../../../../application/auth/auth_data_state_notifier_provider.dart';
-import '../../../../../domain/contact/contact.dart';
 import '../../../../constants/style_constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../loader.dart';
 import 'components/user_info_card.dart';
 import '../../../../../domain/contact/contact_data.dart';
 import 'package:flutter/material.dart';
