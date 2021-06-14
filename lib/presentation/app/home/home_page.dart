@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'components/call_assistant_button.dart';
 import 'components/user_info_card/components/user_info_card.dart';
 import 'components/user_insurances_card/icsurance_card.dart';
-import '../../constants/spacers.dart';
 
+import '../../constants/spacers.dart';
 import '../../constants/style_constants.dart';
 import '../../loader.dart';
 import '../../../application/app/insurances/insurances_future_provider.dart';
@@ -59,7 +60,7 @@ class HomePage extends HookWidget {
                       Positioned(
                         top: contacts.length.toDouble() * 28 - i * 32.0,
                         child: UserInfoCard(
-                          userCode: contacts[i].userCode,
+                          userCode: contacts[i].userCode != null ? contacts[i].userCode : '',
                           userName: contacts[i].fullName,
                           color: i == 0
                               ? userCardBackground
@@ -95,7 +96,7 @@ class HomePage extends HookWidget {
                 loading: () => Loader(),
                 error: (object, stackTrace) {
                   return Center(
-                    child: Text('$object'),
+                    child: Text('contract_not_found'.tr()),
                   );
                 },
               ),
