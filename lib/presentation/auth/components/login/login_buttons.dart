@@ -63,11 +63,11 @@ class LoginButtons extends HookWidget {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                auth.state = AuthState.reset;
+                auth.state = AuthState.register;
               },
               child: Center(
                 child: HelveticaText(
-                  text: 'forgot_password'.tr(),
+                  text: 'register'.tr(),
                   color: mainColor,
                   size: 14,
                 ),

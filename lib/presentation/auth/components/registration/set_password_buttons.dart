@@ -1,6 +1,10 @@
-import '../../../../application/auth/reset_password/change_password_state_notifier.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../application/auth/reset_password/reset_by_sms_form_key_provider.dart';
+import '../../../../application/auth/register/set_password_state_notifier.dart';
+import '../../../../application/auth/register/register_by_sms_form_key_provider.dart';
 import '../../../../application/controller/controller_key_provider.dart';
 import '../../../helpers/show_message_snack_bar.dart';
 import '../../../../application/auth/auth_state_provider.dart';
@@ -8,28 +12,24 @@ import '../../../../domain/auth/auth_state.dart';
 import '../../../app/components/helvetica_text.dart';
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../infrastructure/reset/reset_service.dart';
-import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
+import '../../../../infrastructure/register/register_service.dart';
+import '../../../../application/auth/register/register_data_state_notifier_provider.dart';
 
-class ChangePasswordButtons extends HookWidget {
+class SetPasswordButtons extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
-    final resetPasswordFormKey = useProvider(resetPasswordSmsFormKeyProvider);
-    final _resetService = ResetService();
-    final changePasswordState =
-        useProvider(changePasswordStateNotifierProvider.state);
+    final registerPasswordFormKey = useProvider(registerPasswordSmsFormKeyProvider);
+    final _registerService = RegisterService();
+    final setPasswordState =
+        useProvider(setPasswordStateNotifierProvider.state);
     final controllerKey = useProvider(controllerKeyProvider);
-    final token = useProvider(resetDataStateNotifierProvider.state).token;
+    final token = useProvider(registerDataStateNotifierProvider.state).token;
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
         showMessageSnackBar(
-          message: 'Password successfully changed',
+          message: 'Password successfully set',
           scaffoldKey: controllerKey,
           color: mainColor,
         );
@@ -44,9 +44,9 @@ class ChangePasswordButtons extends HookWidget {
         showMessageSnackBar(
           message: 'Incorrect data',
           scaffoldKey: controllerKey,
-          color: errorColor,
+          color: mainColor,
         );
-        auth.state = AuthState.changePassword;
+        auth.state = AuthState.setPassword;
       }
     }
 
@@ -81,9 +81,9 @@ class ChangePasswordButtons extends HookWidget {
                   onPressed: () async {
                     auth.state = AuthState.loading;
 
-                    final response = await _resetService.changePassword(
-                        changePasswordState.password,
-                        changePasswordState.passwordConfirm,
+                    final response = await _registerService.setPassword(
+                        setPasswordState.password,
+                        setPasswordState.passwordConfirm,
                         token);
 
                     _processResponse(response);

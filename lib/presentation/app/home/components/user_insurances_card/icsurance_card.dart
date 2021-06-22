@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:number_display/number_display.dart';
 
 import '../user_contract_page.dart';
 import '../../../components/helvetica_text.dart';
@@ -23,6 +24,12 @@ class InsuranceCard extends HookWidget {
     // final insuranceId = useProvider(insuranceIdStateNotifierProvider);
     //
     // insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
+
+    final numberFormatter = createDisplay(
+      separator: ' ',
+      length: 9,
+      decimal: 0,
+    );
 
     if ((insuranceList[0].dealInfo.dmsLimit) == null ||
         (insuranceList[0].dealInfo.closeDate) == null) {
@@ -91,8 +98,8 @@ class InsuranceCard extends HookWidget {
                               ),
                               children: <InlineSpan>[
                                 TextSpan(
-                                  text: insuranceList[0].dealInfo.dmsLimit +
-                                      ' ' + 'uah'.tr(),
+                                  text: numberFormatter(int.parse(insuranceList[0].dealInfo.dmsLimit)) +
+                                      ' ' + 'uah_per_year'.tr(),
                                   style: TextStyle(
                                     fontFamily: 'HelveticaRegular',
                                     fontWeight: FontWeight.w700,

@@ -11,6 +11,7 @@ import 'components/auth_policy.dart';
 import 'components/auth_title_row.dart';
 import 'components/login/login_buttons.dart';
 import 'components/login/login_fields.dart';
+import 'components/login/reset_button.dart';
 import 'components/reset/reset_password_form.dart';
 import 'components/reset/reset_password_buttons.dart';
 import 'components/reset/reset_password_title.dart';
@@ -19,6 +20,14 @@ import 'components/reset/reset_by_sms_buttons.dart';
 import 'components/reset/change_password_title.dart';
 import 'components/reset/change_password_buttons.dart';
 import 'components/reset/change_password_form.dart';
+import 'components/registration/register_password_form.dart';
+import 'components/registration/register_password_buttons.dart';
+import 'components/registration/register_password_title.dart';
+import 'components/registration/register_password_sms_form.dart';
+import 'components/registration/register_by_sms_buttons.dart';
+import 'components/registration/set_password_title.dart';
+import 'components/registration/set_password_buttons.dart';
+import 'components/registration/set_password_form.dart';
 
 class Authentication extends HookWidget {
   static const routeName = '/auth';
@@ -40,8 +49,10 @@ class Authentication extends HookWidget {
                     AuthTitleRow(),
                     SpaceH16(),
                     LoginFields(),
-                    SpaceH105(),
+                    SpaceH80(),
                     LoginButtons(),
+                    SpaceH32(),
+                    ResetButton(),
                     SpaceH32(),
                   ],
                 ),
@@ -65,6 +76,26 @@ class Authentication extends HookWidget {
                 ChangePasswordForm(),
                 SpaceH100(),
                 ChangePasswordButtons(),
+              ],
+              if (auth.state == AuthState.register) ...[
+                RegisterPasswordTitle(),
+                SpaceH16(),
+                RegisterPasswordForm(),
+                SpaceH100(),
+                RegisterPasswordButtons(),
+              ],
+              if (auth.state == AuthState.registerSms) ...[
+                RegisterPasswordTitle(),
+                SpaceH16(),
+                RegisterPasswordSmsForm(),
+                SpaceH100(),
+                RegisterBySmsPasswordButtons(),
+              ],
+              if (auth.state == AuthState.setPassword) ...[
+                SetPasswordTitle(),
+                SetPasswordForm(),
+                SpaceH100(),
+                SetPasswordButtons(),
               ],
               AuthPolicy(),
             ],

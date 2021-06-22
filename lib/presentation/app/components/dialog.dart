@@ -75,7 +75,7 @@ class MainDialog extends HookWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      secondButtonAction;
+                      secondButtonAction();
                     },
                     child: HelveticaText(
                       text: secondButtonText,

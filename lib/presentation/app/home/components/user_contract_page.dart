@@ -1,5 +1,6 @@
 import 'package:arsenal_app/domain/insurance/insurance_data.dart';
 import 'package:arsenal_app/presentation/constants/style_constants.dart';
+import 'package:number_display/number_display.dart';
 
 import '../../components/friz_text.dart';
 import 'package:expandable/expandable.dart';
@@ -21,6 +22,12 @@ class UserContractPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberFormatter = createDisplay(
+      separator: ' ',
+      length: 9,
+      decimal: 0,
+    );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -154,7 +161,7 @@ class UserContractPage extends HookWidget {
                           ),
                         ),
                         Text(
-                          item.dealInfo.dmsLimit + ' ' + 'uah'.tr(),
+                            numberFormatter(int.parse(item.dealInfo.dmsLimit)) + ' ' + 'uah_per_year'.tr(),
                           style: TextStyle(
                             color: Color.fromRGBO(96, 110, 117, 1),
                             fontFamily: 'HelveticaRegular',
@@ -246,8 +253,7 @@ class UserContractPage extends HookWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: (item.contactInfo[i].birthDate)
-                                    .substring(0, 10),
+                                text: item.contactInfo[i].birthDate != null ? (item.contactInfo[i].birthDate).substring(0, 10) : '',
                                 style: TextStyle(
                                   color: textColor,
                                   fontWeight: FontWeight.normal,

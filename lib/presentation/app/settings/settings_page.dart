@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../constants/style_constants.dart';
 import 'components/exit/exit_card.dart';
 import 'components/language/language_card.dart';
 import 'components/policy_card.dart';
+import '../../constants/style_constants.dart';
 
 class SettingsPage extends HookWidget {
   @override
@@ -42,7 +42,7 @@ class SettingsPage extends HookWidget {
                 bottom: 11,
               ),
               child: Text(
-                'app_version'.tr() + ' 0.0.1(beta)',
+                'app_version'.tr() + ' 1.3',
                 style: const TextStyle(
                   color: subtitleColor,
                   fontSize: 12,

@@ -56,7 +56,7 @@ class PayPage extends HookWidget {
             ),
             FileListItem(
               title: 'statement_dmc'.tr(),
-              subtitle: 'file_size'.tr() + ' 19mb',
+              subtitle: 'file_size'.tr() + ' 417kb',
               iconPath: 'assets/icons/pdf.svg',
               link:
                   'https://cp.arsenal-strahovanie.com/upload/mobile-app/Zayava-DMS.pdf',
@@ -64,10 +64,10 @@ class PayPage extends HookWidget {
             CustomDivider(),
             FileListItem(
               title: 'statement_dmc'.tr(),
-              subtitle: 'file_size'.tr() + ' 19mb',
+              subtitle: 'file_size'.tr() + ' 20kb',
               iconPath: 'assets/icons/doc.svg',
               link:
-                  'https://cp.arsenal-strahovanie.com/upload/mobile-app/Zayava-DMS.doc',
+                  'https://cp.arsenal-strahovanie.com/upload/mobile-app/Zayava-DMS.docx',
             ),
             CustomDivider(),
             DocumentList(),

@@ -4,4 +4,7 @@ enum AuthState {
   resetSms,
   loading,
   changePassword,
+  register,
+  registerSms,
+  setPassword,
 }

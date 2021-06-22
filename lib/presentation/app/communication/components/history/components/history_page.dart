@@ -36,7 +36,7 @@ class HistoryPage extends HookWidget {
     return Scaffold(
       appBar: appBarWithBackButton(
         context: context,
-        title: 'history'.tr(),
+        title: 'history_title'.tr(),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
