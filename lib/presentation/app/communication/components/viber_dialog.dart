@@ -9,16 +9,16 @@ import '../../components/helvetica_text.dart';
 
 class ViberDialog extends StatelessWidget {
   Future<void> _launchViber(String link) async {
-    if (await canLaunch(link)) {
+    // if (await canLaunch(link)) {
       final bool nativeAppLaunchSucceeded = await launch(
         link,
         forceSafariVC: false,
-        universalLinksOnly: true,
+        universalLinksOnly: false,
       );
       if (!nativeAppLaunchSucceeded) {
         await launch(link, forceSafariVC: true);
       }
-    }
+    // }
   }
 
   @override
@@ -87,7 +87,7 @@ class ViberDialog extends StatelessWidget {
                   ),
                   onPressed: () {
                     //_launchViber('viber://chat?number=380509501099');
-                    _launchViber('https://msng.link/o/?380509501099=vi');
+                    _launchViber('viber://pa?chatURI=arsenalassistans');
                   },
                   color: mainColor,
                   child: Container(

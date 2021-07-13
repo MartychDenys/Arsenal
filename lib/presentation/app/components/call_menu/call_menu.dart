@@ -17,8 +17,8 @@ class CallMenu extends HookWidget {
     }
 
     Future<void> _launchEmailApp() async {
-      if (await canLaunch('mailto:doctor@arsenal-assistans.com?')) {
-        await launch('mailto:doctor@arsenal-assistans.com?');
+      if (await canLaunch('mailto:mobile@arsenal-assistans.com?')) {
+        await launch('mailto:mobile@arsenal-assistans.com?');
       } else {
         throw 'Could not launch';
       }

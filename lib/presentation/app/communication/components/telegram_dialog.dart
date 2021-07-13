@@ -10,14 +10,14 @@ import '../../components/helvetica_text.dart';
 
 class TelegramDialog extends StatelessWidget {
   Future<void> _launchTelegram() async {
-    if (await canLaunch('https://www.telegram.me/ArsenalAssistans')) {
+    if (await canLaunch('https://www.telegram.me/arsenalassistans_bot')) {
       final bool nativeAppLaunchSucceeded = await launch(
-        'https://www.telegram.me/ArsenalAssistans',
+        'https://www.telegram.me/arsenalassistans_bot',
         forceSafariVC: false,
         universalLinksOnly: true,
       );
       if (!nativeAppLaunchSucceeded) {
-        await launch('https://www.telegram.me/ArsenalAssistans',
+        await launch('http://t.me/arsenalassistans_bot',
             forceSafariVC: true);
       }
     }

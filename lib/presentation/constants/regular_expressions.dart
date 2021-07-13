@@ -7,10 +7,10 @@ const dateRegExp =
 
 const timeRegExp = r"^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
-const medInstitutionRegExp = r"^[а-яА-Яa-zA-Z0-9-,.:;`()\s]*$";
+const medInstitutionRegExp = r"^[а-яА-Яa-zA-Z0-9-\/,.:;`()\s]*$";
 
-const medInstitutionDoctorCouponRegExp = r"^[а-яА-Яa-zA-Z0-9-,.:;`()#№+\s]*$";
+const medInstitutionDoctorCouponRegExp = r"^[а-яА-Яa-zA-Z0-9-\/,\.:;`()#№+\s]*$";
 
-const docNameRegExp = r"^[а-яА-Яa-zA-Z0-9-.`\s]*$";
+const docNameRegExp = r"^[а-яА-Яa-zA-Z0-9-\/.`\s]*$";
 
-const commentRegExp = r"^[а-яА-Яa-zA-Z0-9-,.:;`()!?\s]*$";
+const commentRegExp = r"^[а-яА-Яa-zA-Z0-9-\/,\.:;`()!?\s]*$";
