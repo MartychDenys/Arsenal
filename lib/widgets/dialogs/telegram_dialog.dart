@@ -1,8 +1,23 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TelegramDialog extends StatelessWidget {
+  Future<void> _launchTelegram() async {
+    if (await canLaunch('https://www.telegram.me/+380509501099')) {
+      final bool nativeAppLaunchSucceeded = await launch(
+        'https://www.telegram.me/+380509501099',
+        forceSafariVC: false,
+        universalLinksOnly: true,
+      );
+      if (!nativeAppLaunchSucceeded) {
+        await launch('https://www.telegram.me/+380509501099',
+            forceSafariVC: true);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -14,7 +29,7 @@ class TelegramDialog extends StatelessWidget {
               height: 42,
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Color.fromRGBO(18, 151, 71, 1),
+                color: Color.fromRGBO(60, 171, 221, 1),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
@@ -74,7 +89,7 @@ class TelegramDialog extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  onPressed: () {},
+                  onPressed: _launchTelegram,
                   color: Color.fromRGBO(18, 151, 71, 1),
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 17),

@@ -1,9 +1,10 @@
 import 'package:arsenal_app/bottom_navigation/bar.dart';
 import 'package:arsenal_app/locale/app_localizations.dart';
-import 'package:arsenal_app/screens/communication_page.dart';
-import 'package:arsenal_app/screens/main_page.dart';
-import 'package:arsenal_app/screens/settings_page.dart';
+import 'package:arsenal_app/screens/communication_page/communication_page.dart';
+import 'package:arsenal_app/screens/home_page/home_page.dart';
+import 'package:arsenal_app/screens/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationPage extends StatefulWidget {
   static const routeName = '/navigation';
@@ -70,6 +71,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             activeColor: Colors.white,
             inactiveColor: Color.fromRGBO(96, 110, 117, 1),
+            textAlign: TextAlign.center,
           ),
           BottomNavigBarItem(
             title: Text(
@@ -80,6 +82,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             activeColor: Colors.white,
             inactiveColor: Color.fromRGBO(96, 110, 117, 1),
+            textAlign: TextAlign.center,
           ),
           BottomNavigBarItem(
             title: Text(
@@ -90,6 +93,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             activeColor: Colors.white,
             inactiveColor: Color.fromRGBO(96, 110, 117, 1),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

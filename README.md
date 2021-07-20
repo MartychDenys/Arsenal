@@ -1,6 +1,6 @@
 # arsenal_app
 
-A new Flutter application.
+Arsenalr app
 
 ## Getting Started
 

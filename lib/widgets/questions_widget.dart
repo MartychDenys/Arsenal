@@ -1,4 +1,5 @@
 import 'package:arsenal_app/locale/app_localizations.dart';
+import 'package:arsenal_app/screens/bottom_navigation_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,12 @@ class QuestionsWidget extends StatelessWidget {
                 TextSpan(
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.of(context).pushNamed('/navigation');
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => NavigationPage(
+                                    index: 2,
+                                  )));
                     },
                   text: AppLocalizations.of(context).translate('contact_us'),
                   style: TextStyle(

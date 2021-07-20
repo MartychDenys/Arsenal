@@ -42,38 +42,50 @@ class LanguagesPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  Text(
-                    AppLocalizations.of(context).translate('choose_lang'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      height: 1.5,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'HelveticaRegular',
-                      color: Color.fromRGBO(96, 110, 117, 1),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      AppLocalizations.of(context).translate('choose_lang'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        height: 1.5,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'HelveticaRegular',
+                        color: Color.fromRGBO(96, 110, 117, 1),
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 32,
                   ),
-                  Divider(
-                    height: 1,
-                    color: Color.fromRGBO(227, 227, 229, 1),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(
+                      height: 1,
+                      color: Color.fromRGBO(227, 227, 229, 1),
+                    ),
                   ),
                   (model.appLocal.languageCode == 'ru')
                       ? LanguageString('RU', 'Русский', 'ru', true, context)
                       : LanguageString('RU', 'Русский', 'ru', false, context),
-                  Divider(
-                    height: 1,
-                    color: Color.fromRGBO(227, 227, 229, 1),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(
+                      height: 1,
+                      color: Color.fromRGBO(227, 227, 229, 1),
+                    ),
                   ),
                   (model.appLocal.languageCode == 'uk')
                       ? LanguageString('UA', 'Українська', 'uk', true, context)
                       : LanguageString(
                           'UA', 'Українська', 'uk', false, context),
-                  Divider(
-                    height: 1,
-                    color: Color.fromRGBO(227, 227, 229, 1),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(
+                      height: 1,
+                      color: Color.fromRGBO(227, 227, 229, 1),
+                    ),
                   ),
                 ],
               ),
