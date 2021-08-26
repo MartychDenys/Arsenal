@@ -23,12 +23,12 @@ class InsuranceProvider {
   }
 
 
-  Future<bool> getUserInsuranceExpired(String token, String id) async {
+  Future<bool> getUserInsuranceExpired(String token, String userId) async {
     final _dio = Dio();
     Insurance insurance;
 
     final url =
-        '${apiUrl}/dms/personal/getDeals/?_token=$token&contactId=$id&filter[CATEGORY_ID]=2';
+        '${apiUrl}/dms/personal/getDeals/?_token=$token&contactId=$userId&filter[CATEGORY_ID]=2';
 
     try {
       final response = await _dio.get(url);
@@ -49,8 +49,8 @@ class InsuranceProvider {
     final insuranceMonth = insuranceDate[1];
     final insuranceYear = insuranceDate[2].split(' ')[0];
 
-    final finalInsuranceTimestamp = DateTime.utc(int.parse(insuranceYear), int.parse(insuranceMonth), int.parse(insuranceDay));
-    final insuranceTimestamp = finalInsuranceTimestamp.microsecondsSinceEpoch;
+    final dataUtc = DateTime.utc(int.parse(insuranceYear), int.parse(insuranceMonth), int.parse(insuranceDay));
+    final insuranceTimestamp = dataUtc.microsecondsSinceEpoch;
     final currentTimestamp = DateTime.now().microsecondsSinceEpoch;
 
     if (insuranceTimestamp > currentTimestamp) {

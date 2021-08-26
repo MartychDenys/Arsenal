@@ -26,9 +26,28 @@ class RegisterPasswordButtons extends HookWidget {
     final controllerKey = useProvider(controllerKeyProvider);
     final registerData = useProvider(registerDataStateNotifierProvider);
 
-    void _processResponse(dynamic response) {
+    void _processResponse(dynamic response) async {
       if (response.status == 'success') {
         if (response is PhoneResponseBody) {
+          // final contactList =
+          //     await ContactService().getContact(response.data.token);
+          // if (contactList is Contact) {
+          //   final insuranceExpired = await InsuranceService().insuranceExpired(
+          //     response.data.token,
+          //     contactList.data.first.id,
+          //   );
+          //
+          //   if (!insuranceExpired) {
+          //     showMessageSnackBar(
+          //       message: 'insurance_expired'.tr(),
+          //       scaffoldKey: controllerKey,
+          //       color: errorColor,
+          //     );
+          //     auth.state = AuthState.login;
+          //     return;
+          //   }
+          // }
+
           registerData.updateData(response.data);
           auth.state = AuthState.registerSms;
         } else {
@@ -78,7 +97,6 @@ class RegisterPasswordButtons extends HookWidget {
 
                       final response =
                           await _registerService.registerByPhone(registerState);
-
                       _processResponse(response);
                     }
                   },

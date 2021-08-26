@@ -24,7 +24,6 @@ class RegistrationApiService {
 
     var data = response.data;
     phoneResponseBody = PhoneResponseBody.fromJson(data);
-    print(response.data);
     return phoneResponseBody;
   }
 

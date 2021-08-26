@@ -40,9 +40,7 @@ class LoginButtons extends HookWidget {
 
     void _processResponse(dynamic response) async {
       authData.updateAuthData(response);
-      print(response.status);
       if (response.status == 'success') {
-        print(response.data.token);
         controller.state = ControllerState.authorized;
       } else {
         showMessageSnackBar(
@@ -92,7 +90,11 @@ class LoginButtons extends HookWidget {
                         contactData.updateContactData(contactList);
                         userId.state = contactList.data.first.id;
 
-                        final insuranceExpired = await InsuranceService().insuranceExpired(response.data.token, userId.state);
+                        final insuranceExpired =
+                            await InsuranceService().insuranceExpired(
+                          response.data.token,
+                          userId.state,
+                        );
 
                         if (!insuranceExpired) {
                           showMessageSnackBar(
@@ -103,8 +105,6 @@ class LoginButtons extends HookWidget {
                           auth.state = AuthState.login;
                           return;
                         }
-                        print('USER ID ${userId.state}');
-                        print('USER TOKEN ${response.data.token}');
                       }
                       _processResponse(response);
                     } else {
