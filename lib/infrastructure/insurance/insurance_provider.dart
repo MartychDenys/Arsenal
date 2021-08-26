@@ -4,7 +4,26 @@ import '../../domain/insurance/insurance.dart';
 import '../constants.dart';
 
 class InsuranceProvider {
-  Future<dynamic> getUserInsurance(String token, String id) async {
+  Future<Insurance> getUserInsurance(String token, String id) async {
+    final _dio = Dio();
+    Insurance insurance;
+
+    final url =
+        '${apiUrl}/dms/personal/getDeals/?_token=$token&contactId=$id&filter[CATEGORY_ID]=2';
+
+    try {
+      final response = await _dio.get(url);
+      final responseData = response.data as Map<String, dynamic>;
+      insurance = Insurance.fromJson(responseData);
+    } catch (error) {
+      print(error.toString());
+    }
+
+    return insurance;
+  }
+
+
+  Future<bool> getUserInsuranceExpired(String token, String id) async {
     final _dio = Dio();
     Insurance insurance;
 
@@ -20,13 +39,9 @@ class InsuranceProvider {
     }
 
     final expiredInsurance = checkExpiredInsurance(insurance);
-
-    if (expiredInsurance) {
-      return insurance;
-    } else {
-      return 'need logOut ';
-    }
+    return expiredInsurance;
   }
+
 
   bool checkExpiredInsurance(Insurance insurance) {
     bool answer = false;
@@ -50,7 +65,6 @@ class InsuranceProvider {
           int.parse(insuranceMonth) + int.parse(insuranceDay);
       final currentSumm = currentYear + currentMonth + currentDay;
 
-      // Todo: change <= on >=
       if (insurenceSumm <= currentSumm) {
         answer = true;
       } else {

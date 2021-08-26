@@ -1,3 +1,4 @@
+import '../../../../infrastructure/insurance/insurance_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -90,6 +91,20 @@ class LoginButtons extends HookWidget {
                       if (contactList is Contact) {
                         contactData.updateContactData(contactList);
                         userId.state = contactList.data.first.id;
+
+                        final insuranceExpired = await InsuranceService().insuranceExpired(response.data.token, userId.state);
+
+                        if (!insuranceExpired) {
+                          showMessageSnackBar(
+                            message: 'insurance_expired'.tr(),
+                            scaffoldKey: controllerKey,
+                            color: errorColor,
+                          );
+                          auth.state = AuthState.login;
+                          return;
+                        }
+                        print('USER ID ${userId.state}');
+                        print('USER TOKEN ${response.data.token}');
                       }
                       _processResponse(response);
                     } else {
