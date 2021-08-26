@@ -44,35 +44,19 @@ class InsuranceProvider {
 
 
   bool checkExpiredInsurance(Insurance insurance) {
-    bool answer = false;
-    var currentDay = DateTime
-        .now()
-        .day;
-    var currentYear = DateTime
-        .now()
-        .year;
-    var currentMonth = DateTime
-        .now()
-        .month;
-
     final insuranceDate = insurance.data[0].dealInfo.closeDate.split('.');
     final insuranceDay = insuranceDate[0];
     final insuranceMonth = insuranceDate[1];
     final insuranceYear = insuranceDate[2].split(' ')[0];
 
-    try {
-      final insurenceSumm = int.parse(insuranceYear) +
-          int.parse(insuranceMonth) + int.parse(insuranceDay);
-      final currentSumm = currentYear + currentMonth + currentDay;
+    final finalInsuranceTimestamp = DateTime.utc(int.parse(insuranceYear), int.parse(insuranceMonth), int.parse(insuranceDay));
+    final insuranceTimestamp = finalInsuranceTimestamp.microsecondsSinceEpoch;
+    final currentTimestamp = DateTime.now().microsecondsSinceEpoch;
 
-      if (insurenceSumm <= currentSumm) {
-        answer = true;
-      } else {
-        answer = false;
-      }
-    } catch (error) {
-      print('ERROR -> $error');
+    if (insuranceTimestamp > currentTimestamp) {
+      return true;
+    } else {
+      return false;
     }
-    return answer;
   }
 }
