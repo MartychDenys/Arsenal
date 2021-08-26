@@ -85,6 +85,7 @@ class HomePage extends HookWidget {
               SpaceH16(),
               insurance.when(
                 data: (data) {
+                  print('data $data');
                   if (data is Insurance) {
                     return InsuranceCard(
                       insuranceList: data.data,

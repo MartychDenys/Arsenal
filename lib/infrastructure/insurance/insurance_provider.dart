@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../domain/insurance/insurance.dart';
 import '../constants.dart';
 
 class InsuranceProvider {
-  Future<Insurance> getUserInsurance(String token, String id) async {
+  Future<dynamic> getUserInsurance(String token, String id) async {
     final _dio = Dio();
     Insurance insurance;
 
@@ -18,6 +19,46 @@ class InsuranceProvider {
       print(error.toString());
     }
 
-    return insurance;
+    final expiredInsurance = checkExpiredInsurance(insurance);
+
+    if (expiredInsurance) {
+      return insurance;
+    } else {
+      return 'need logOut ';
+    }
+  }
+
+  bool checkExpiredInsurance(Insurance insurance) {
+    bool answer = false;
+    var currentDay = DateTime
+        .now()
+        .day;
+    var currentYear = DateTime
+        .now()
+        .year;
+    var currentMonth = DateTime
+        .now()
+        .month;
+
+    final insuranceDate = insurance.data[0].dealInfo.closeDate.split('.');
+    final insuranceDay = insuranceDate[0];
+    final insuranceMonth = insuranceDate[1];
+    final insuranceYear = insuranceDate[2].split(' ')[0];
+
+    try {
+      final insurenceSumm = int.parse(insuranceYear) +
+          int.parse(insuranceMonth) + int.parse(insuranceDay);
+      final currentSumm = currentYear + currentMonth + currentDay;
+
+      // Todo: change <= on >=
+      if (insurenceSumm <= currentSumm) {
+        answer = true;
+      } else {
+        answer = false;
+      }
+    } catch (error) {
+      print('ERROR -> $error');
+    }
+    return answer;
   }
 }

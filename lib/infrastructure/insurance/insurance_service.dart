@@ -6,7 +6,7 @@ import '../../domain/request_body.dart';
 class InsuranceService {
   final _insuranceApiService = InsuranceProvider();
 
-  Future<Insurance> getInsurance(String token, String id) async {
+  Future<dynamic> getInsurance(String token, String id) async {
     return _insuranceApiService.getUserInsurance(token, id);
   }
 }
