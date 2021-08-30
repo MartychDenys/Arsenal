@@ -33,6 +33,11 @@ class InsuranceProvider {
     try {
       final response = await _dio.get(url);
       final responseData = response.data as Map<String, dynamic>;
+
+      if(responseData['data'].isEmpty) {
+        return false;
+      }
+
       insurance = Insurance.fromJson(responseData);
     } catch (error) {
       print(error.toString());
@@ -44,6 +49,7 @@ class InsuranceProvider {
 
 
   bool checkExpiredInsurance(Insurance insurance) {
+    print('insurance.data ${insurance.data}');
     final insuranceDate = insurance.data[0].dealInfo.closeDate.split('.');
     final insuranceDay = insuranceDate[0];
     final insuranceMonth = insuranceDate[1];
