@@ -1,6 +1,6 @@
 import 'package:arsenal_app/locale/app_language.dart';
 import 'package:arsenal_app/locale/app_localizations.dart';
-import 'package:circular_check_box/circular_check_box.dart';
+// import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +87,17 @@ class LanguagesPage extends StatelessWidget {
                       color: Color.fromRGBO(227, 227, 229, 1),
                     ),
                   ),
+                  (model.appLocal.languageCode == 'en')
+                      ? LanguageString('EN', 'English', 'en', true, context)
+                      : LanguageString(
+                      'EN', 'English', 'en', false, context),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(
+                      height: 1,
+                      color: Color.fromRGBO(227, 227, 229, 1),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -119,15 +130,21 @@ class LanguagesPage extends StatelessWidget {
               color: Color.fromRGBO(40, 46, 58, 1),
             ),
           ),
-          trailing: CircularCheckBox(
-            checkColor: Colors.white,
-            activeColor: Color.fromRGBO(18, 151, 71, 1),
+          trailing: Checkbox(
             value: value,
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            onChanged: (bool value) {
-              appLanguage.changeLanguage(Locale('$langCode'));
-            },
+              onChanged: (bool value) {
+                appLanguage.changeLanguage(Locale('$langCode'));
+              },
           ),
+          // trailing: CircularCheckBox(
+          //   checkColor: Colors.white,
+          //   activeColor: Color.fromRGBO(18, 151, 71, 1),
+          //   value: value,
+          //   materialTapTargetSize: MaterialTapTargetSize.padded,
+          //   onChanged: (bool value) {
+          //     appLanguage.changeLanguage(Locale('$langCode'));
+          //   },
+          // ),
         ),
       ),
     );

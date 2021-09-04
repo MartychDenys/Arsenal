@@ -67,6 +67,8 @@ flutter:
     - assets/splash/
     - i18n/uk-UA.json
     - i18n/ru-RU.json
+    - i18n/en.json
+    - i18n/en-EN.json
 
   fonts:
     - family: FrizQuadrataCTT

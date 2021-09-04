@@ -22,6 +22,7 @@ void main() async {
       supportedLocales: [
         const Locale('uk', 'UA'),
         const Locale('ru', 'RU'),
+        const Locale('en', 'EN'),
       ],
       child: ArsenalApp(),
     ),
