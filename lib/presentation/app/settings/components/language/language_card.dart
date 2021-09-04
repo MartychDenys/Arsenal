@@ -30,13 +30,21 @@ class LanguageCard extends StatelessWidget {
                       height: 12,
                     ),
                   )
-                : Center(
-                    child: Flag(
-                      'RU',
-                      width: 20,
-                      height: 12,
-                    ),
-                  ),
+                : (context.locale.languageCode == 'en')
+                    ? Center(
+                        child: Flag(
+                          'gb',
+                          width: 20,
+                          height: 12,
+                        ),
+                      )
+                    : Center(
+                        child: Flag(
+                          'RU',
+                          width: 20,
+                          height: 12,
+                        ),
+                      ),
           ),
           title: FrizText(
             text: 'app_lang'.tr(),
@@ -53,15 +61,25 @@ class LanguageCard extends StatelessWidget {
                     color: Color.fromRGBO(96, 110, 117, 1),
                   ),
                 )
-              : Text(
-                  'Выбрано: Русский',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    fontFamily: 'HelveticaRegular',
-                    color: Color.fromRGBO(96, 110, 117, 1),
-                  ),
-                ),
+              : (context.locale.languageCode == 'en')
+                  ? Text(
+                      'Selected: English',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        fontFamily: 'HelveticaRegular',
+                        color: Color.fromRGBO(96, 110, 117, 1),
+                      ),
+                    )
+                  : Text(
+                      'Выбрано: Русский',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        fontFamily: 'HelveticaRegular',
+                        color: Color.fromRGBO(96, 110, 117, 1),
+                      ),
+                    ),
           trailing: ButtonTheme(
             minWidth: 34,
             height: 34,

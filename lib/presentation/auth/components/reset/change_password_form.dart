@@ -12,7 +12,7 @@ import '../../../../application/auth/reset_password/change_password_state_notifi
 import '../../../../application/auth/reset_password/reset_by_sms_state_notifier_provider.dart';
 import '../../../../application/auth/reset_password/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChangePasswordForm extends HookWidget {
   final changePasswordFormKey = useProvider(changePasswordFormKeyProvider);
   final smsCode = useProvider(resetBySmsStateNotifierProvider);
@@ -46,7 +46,7 @@ class ChangePasswordForm extends HookWidget {
                   ? true
                   : false,
               decoration: InputDecoration(
-                hintText: 'Пароль',
+                hintText: 'password'.tr(),
                 suffixIcon: IconButton(
                   onPressed: () {
                     if (showPassword.state == ShowPasswordState.invisible) {

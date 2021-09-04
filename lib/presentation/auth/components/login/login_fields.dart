@@ -71,7 +71,7 @@ class LoginFields extends HookWidget {
                   ? true
                   : false,
               decoration: InputDecoration(
-                hintText: 'Пароль',
+                hintText: 'password'.tr(),
                 suffixIcon: IconButton(
                   onPressed: () {
                     if (showPassword.state == ShowPasswordState.invisible) {

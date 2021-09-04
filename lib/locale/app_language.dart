@@ -24,6 +24,14 @@ class AppLanguage extends ChangeNotifier {
       _appLocale = Locale('ru');
       await prefs.setString('language_code', 'ru');
       await prefs.setString('country_code', '');
+    } else if (type == Locale('gb')) {
+      _appLocale = Locale('gb');
+      await prefs.setString('language_code', 'gb');
+      await prefs.setString('country_code', 'GB');
+    } else if (type == Locale('en')) {
+      _appLocale = Locale('en');
+      await prefs.setString('language_code', 'en');
+      await prefs.setString('country_code', '');
     } else {
       _appLocale = Locale('uk');
       await prefs.setString('language_code', 'uk');

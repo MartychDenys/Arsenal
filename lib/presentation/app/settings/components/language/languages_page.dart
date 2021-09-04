@@ -1,4 +1,4 @@
-import 'package:arsenal_app/presentation/app/components/helvetica_text.dart';
+import '../../../components/helvetica_text.dart';
 
 import '../../../components/friz_text.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +97,27 @@ class LanguagesPage extends StatelessWidget {
                   countryCode: 'UA',
                   countryName: 'Українська',
                   langCode: 'uk',
+                  value: false,
+                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Divider(
+                  height: 1,
+                  color: dividerColor,
+                ),
+              ),
+              if (context.locale.languageCode == 'en')
+                const LanguageRow(
+                  countryCode: 'GB',
+                  countryName: 'English',
+                  langCode: 'en',
+                  value: true,
+                )
+              else
+                const LanguageRow(
+                  countryCode: 'GB',
+                  countryName: 'English',
+                  langCode: 'en',
                   value: false,
                 ),
               const Padding(

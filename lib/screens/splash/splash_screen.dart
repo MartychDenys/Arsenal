@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/';
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 15,
             ),
             Text(
-              'Надійна. Відкрита. СВОЯ!',
+              'reliable_open_own'.tr(),
               style: TextStyle(
                   color: Color.fromRGBO(79, 79, 79, 1),
                   fontSize: 12,
