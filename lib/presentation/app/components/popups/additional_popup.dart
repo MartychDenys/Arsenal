@@ -91,7 +91,19 @@ class ShowSystemErrorPopup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(message),
-
+            SpaceH16(),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: mainColor,
+                ),
+                child: Text('ok'.tr(), style: TextStyle(color: Colors.white),),
+              ),
+            ),
           ],
         ),
       ),

@@ -81,19 +81,19 @@ class Authentication extends HookWidget {
                     ResetButton(),
                     SpaceH32(),
 
-                    InkWell(
-                      onTap: () {
-                        showCustomDialog(
-                          context: context,
-                          child: NumberNotFoundPoppup(),
-                        );
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        color: Colors.red,
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     showCustomDialog(
+                    //       context: context,
+                    //       child: ShowSystemErrorPopup(message: 'success'),
+                    //     );
+                    //   },
+                    //   child: Container(
+                    //     width: 100,
+                    //     height: 100,
+                    //     color: Colors.red,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
