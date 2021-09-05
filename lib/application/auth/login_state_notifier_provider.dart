@@ -30,6 +30,10 @@ class LoginStateNotifier extends StateNotifier<LoginRequest> {
     );
   }
 
+  String getPhoneNumber() {
+    return state.phone;
+  }
+
   void clearFields() {
     state = LoginRequest(
       phone: '',

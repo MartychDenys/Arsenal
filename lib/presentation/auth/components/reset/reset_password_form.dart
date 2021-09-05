@@ -14,11 +14,26 @@ class ResetPasswordForm extends HookWidget {
   final resetPasswordPhoneFormKey =
       useProvider(resetPasswordPhoneFormKeyProvider);
   final reset = useProvider(resetByPhoneStateNotifierProvider);
+  final resetState = useProvider(resetByPhoneStateNotifierProvider.state);
 
   final PhoneNumber number = PhoneNumber(isoCode: 'UA');
 
   @override
   Widget build(BuildContext context) {
+    final phoneController = new TextEditingController();
+    if (resetState.phone.isNotEmpty) {
+      phoneController.text = resetState.phone.substring(3);
+    } else {
+      phoneController.text = '';
+    }
+
+    phoneController.value = phoneController.value.copyWith(
+      text: phoneController.text,
+      selection: TextSelection(
+          baseOffset: phoneController.text.length,
+          extentOffset: phoneController.text.length),
+    );
+
     return Form(
       key: resetPasswordPhoneFormKey,
       child: Container(
@@ -42,7 +57,12 @@ class ResetPasswordForm extends HookWidget {
                 ),
                 selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
                 ignoreBlank: false,
-                initialValue: number,
+                initialValue: PhoneNumber(
+                    isoCode: 'UA',
+                    phoneNumber: phoneController.text.isNotEmpty
+                        ? phoneController.text
+                        : ''
+                ),
                 formatInput: true,
                 hintText: 'phone_number'.tr(),
                 errorMessage: 'phone_number_error'.tr(),
