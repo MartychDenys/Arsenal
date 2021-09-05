@@ -218,5 +218,8 @@
   "new_password": "Введіть новий пароль",
   "confirm": "Підтвердити",
   "insurance_expired": "Термін дії договору закінчився",
-  "reliable_open_own": "Надійна. Відкрита. Своя."
+  "reliable_open_own": "Надійна. Відкрита. Своя.",
+  "phone_not_exist": "Строк дії Вашого договору закінчився.",
+  "some_question": "Є питання?",
+  "we_always_there": "Ми завжди поруч."
 }

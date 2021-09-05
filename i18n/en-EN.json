@@ -193,5 +193,8 @@
   "insurance_expired": "Insurance expired",
   "register": "Register",
   "register_condition": "To register, please provide your phone number",
-  "reliable_open_own": "Reliable. Open. Own."
+  "reliable_open_own": "Reliable. Open. Own.",
+  "phone_not_exist" : "Your contract has expired.",
+  "some_question": "Have questions?",
+  "we_always_there": "We are always there."
 }

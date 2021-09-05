@@ -17,6 +17,12 @@ import '../../../../application/auth/register/register_by_phone_state_notifier_p
 import '../../../../application/auth/register/register_data_state_notifier_provider.dart';
 
 class RegisterPasswordButtons extends HookWidget {
+  const RegisterPasswordButtons({
+    Key key,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+  final Function(String value) showSystemErrorPopup;
+
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -54,11 +60,12 @@ class RegisterPasswordButtons extends HookWidget {
           auth.state = AuthState.login;
         }
       } else {
-        showMessageSnackBar(
-          message: 'Incorrect data',
-          scaffoldKey: controllerKey,
-          color: errorColor,
-        );
+        showSystemErrorPopup('Incorrect data');
+        // showMessageSnackBar(
+        //   message: 'Incorrect data',
+        //   scaffoldKey: controllerKey,
+        //   color: errorColor,
+        // );
         auth.state = AuthState.register;
       }
     }

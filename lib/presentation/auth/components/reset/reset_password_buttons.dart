@@ -19,6 +19,12 @@ import '../../../../application/auth/reset_password/reset_by_phone_state_notifie
 import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
 
 class ResetPasswordButtons extends HookWidget {
+  const ResetPasswordButtons({
+    Key key,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+
+  final Function(String value) showSystemErrorPopup;
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -37,11 +43,12 @@ class ResetPasswordButtons extends HookWidget {
           auth.state = AuthState.login;
         }
       } else {
-        showMessageSnackBar(
-          message: 'Incorrect data',
-          scaffoldKey: controllerKey,
-          color: mainColor,
-        );
+        showSystemErrorPopup('Incorrect data');
+        // showMessageSnackBar(
+        //   message: 'Incorrect data',
+        //   scaffoldKey: controllerKey,
+        //   color: mainColor,
+        // );
         auth.state = AuthState.reset;
       }
     }

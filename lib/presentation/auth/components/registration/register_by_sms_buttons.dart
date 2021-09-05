@@ -16,6 +16,11 @@ import '../../../../infrastructure/register/register_service.dart';
 import '../../../../domain/auth/auth_state.dart';
 
 class RegisterBySmsPasswordButtons extends HookWidget {
+  const RegisterBySmsPasswordButtons({
+    Key key,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+  final Function(String value) showSystemErrorPopup;
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -29,11 +34,12 @@ class RegisterBySmsPasswordButtons extends HookWidget {
       if (response.status == 'success') {
         auth.state = AuthState.setPassword;
       } else {
-        showMessageSnackBar(
-          message: 'Incorrect data',
-          scaffoldKey: controllerKey,
-          color: errorColor,
-        );
+        showSystemErrorPopup('Incorrect data');
+        // showMessageSnackBar(
+        //   message: 'Incorrect data',
+        //   scaffoldKey: controllerKey,
+        //   color: errorColor,
+        // );
         auth.state = AuthState.registerSms;
       }
     }

@@ -25,6 +25,14 @@ import '../../../../infrastructure/auth/auth_service.dart';
 import '../../../../infrastructure/contact/contact_service.dart';
 
 class LoginButtons extends HookWidget {
+  LoginButtons({
+    Key key,
+    this.showNumberNotFoundPopup,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+  final Function() showNumberNotFoundPopup;
+  final Function(String error) showSystemErrorPopup;
+
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -43,11 +51,14 @@ class LoginButtons extends HookWidget {
       if (response.status == 'success') {
         controller.state = ControllerState.authorized;
       } else {
-        showMessageSnackBar(
-          message: 'auth_error'.tr(),
-          scaffoldKey: controllerKey,
-          color: errorColor,
-        );
+
+        showSystemErrorPopup('auth_error'.tr());
+
+        // showMessageSnackBar(
+        //   message: 'auth_error'.tr(),
+        //   scaffoldKey: controllerKey,
+        //   color: errorColor,
+        // );
         auth.state = AuthState.login;
       }
     }
@@ -97,22 +108,14 @@ class LoginButtons extends HookWidget {
                         );
 
                         if (!insuranceExpired) {
-                          showMessageSnackBar(
-                            message: 'insurance_expired'.tr(),
-                            scaffoldKey: controllerKey,
-                            color: errorColor,
-                          );
+                          showNumberNotFoundPopup();
                           auth.state = AuthState.login;
                           return;
                         }
                       }
                       _processResponse(response);
                     } else {
-                      showMessageSnackBar(
-                        message: 'auth_error'.tr(),
-                        scaffoldKey: controllerKey,
-                        color: errorColor,
-                      );
+                      showSystemErrorPopup('auth_error'.tr());
                       auth.state = AuthState.login;
                     }
                   }

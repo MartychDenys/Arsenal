@@ -193,5 +193,8 @@
   "policy_p5": "When using the Application and / or registration of insurance products, personal data may be transferred to such third parties as: insurance companies and insurance intermediaries, systems for collecting statistics on visits to the Application, banking institutions, NBU, services for providing data from open state registers, etc. \n",
   "policy_p6": "The application automatically stores, processes and uses non-personal Client data, for example: Client's IP address, Client's location data, which can be determined by his IP address, technical parameters of the Client's computer, presence or absence in the computer of the Client's specific software, settings of this software, cookies, as well as statistical information about the Client's activity.",
   "policy_p7": "Access to the user's personal information is carried out through the authorization system with login and password. The Client undertakes to ensure the preservation of authorization data, in any case not to disclose them to third parties. Any changes to personal information made using authorization data will be deemed to have been made personally by the user.",
-  "insurance_expired": "Insurance expired"
+  "insurance_expired": "Insurance expired",
+  "phone_not_exist" : "Your contract has expired.",
+  "some_question": "Have questions?",
+  "we_always_there": "We are always there."
 }
