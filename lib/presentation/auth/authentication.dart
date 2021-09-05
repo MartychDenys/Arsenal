@@ -42,11 +42,9 @@ class Authentication extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     useProvider(loginStateNotifierProvider.state);
     useProvider(registerByPhoneStateNotifierProvider.state);
     useProvider(resetByPhoneStateNotifierProvider.state);
-
 
     if (auth.state != AuthState.loading) {
       return Scaffold(

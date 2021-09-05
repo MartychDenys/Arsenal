@@ -5,8 +5,14 @@ import 'package:flutter/services.dart';
 import '../../../constants/spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NumberNotFoundPoppup extends StatelessWidget {
+
+  Future<void> _makePhoneCall(num) async {
+    launch('tel://$num');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,7 +37,8 @@ class NumberNotFoundPoppup extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Clipboard.setData(ClipboardData(text: '0800604453'));
+                    // Clipboard.setData(ClipboardData(text: '0800604453'));
+                    _makePhoneCall('0800604453');
                     Navigator.of(context).pop();
                   },
                   child: Container(
@@ -63,7 +70,6 @@ class NumberNotFoundPoppup extends StatelessWidget {
                 ),
               ],
             ),
-
           ],
         ),
       ),
