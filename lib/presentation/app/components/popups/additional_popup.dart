@@ -22,13 +22,16 @@ class NumberNotFoundPoppup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('phone_not_exist'.tr()),
+            Text('phone_not_exist'.tr(), style: TextStyle(fontSize: 16.0,),),
             const Divider(),
             Text(
-              'some_question'.tr()
+              'some_question'.tr(),
+              style: TextStyle(fontSize: 16.0,),
             ),
+            SpaceH16(),
             Text(
               'we_always_there'.tr(),
+              style: TextStyle(fontSize: 16.0,),
             ),
             SpaceH16(),
 
