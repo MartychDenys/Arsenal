@@ -68,12 +68,14 @@ class LoginFields extends HookWidget {
                 ),
                 selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
                 ignoreBlank: false,
-                initialValue: PhoneNumber(
-                    isoCode: 'UA',
-                    phoneNumber: phoneController.text.isNotEmpty
-                        ? phoneController.text
-                        : '',
-                ),
+                textFieldController: phoneController,
+                initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: phoneController.text),
+                // initialValue: PhoneNumber(
+                //     isoCode: 'UA',
+                //     phoneNumber: phoneController.text.isNotEmpty
+                //         ? phoneController.text
+                //         : '',
+                // ),
                 formatInput: true,
                 hintText: 'phone_number'.tr(),
                 errorMessage: 'phone_number_error'.tr(),

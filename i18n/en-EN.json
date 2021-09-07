@@ -196,5 +196,15 @@
   "reliable_open_own": "Reliable. Open. Own.",
   "phone_not_exist" : "Your contract has expired.",
   "some_question": "Have questions?",
-  "we_always_there": "We are always there."
+  "we_always_there": "We are always there.",
+  "doctors_conclusion": "Doctor's conclusion",
+  "provide": "Provide",
+  "date_conclusion" : "Specify the date",
+  "date_conclusion_visit": "Indicate the date of the visit to the doctor",
+  "make_photo": "Take a photo",
+  "make_photo_title": "Take a photo of the doctor's conclusion",
+  "upload_photo_title": "Upload a photo of the doctor's conclusion",
+  "upload": "upload",
+  "make_upload_photo": "make photo",
+  "uploaded": "uploaded"
 }

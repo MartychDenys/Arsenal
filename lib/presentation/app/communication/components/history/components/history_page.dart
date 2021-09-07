@@ -270,10 +270,12 @@ class HistoryPage extends HookWidget {
                                         text: 'medical institution'.tr() + ': ',
                                         size: 14,
                                       ),
-                                      HelveticaText(
-                                        text: item.medInstitution,
-                                        size: 14,
-                                        color: textColor,
+                                      Expanded(
+                                        child: HelveticaText(
+                                          text: item.medInstitution,
+                                          size: 14,
+                                          color: textColor,
+                                        ),
                                       ),
                                     ],
                                   ),

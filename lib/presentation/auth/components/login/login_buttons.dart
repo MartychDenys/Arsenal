@@ -32,6 +32,7 @@ class LoginButtons extends HookWidget {
   }): super(key: key);
   final Function() showNumberNotFoundPopup;
   final Function(String error) showSystemErrorPopup;
+  final loginFormKey = useProvider(loginFormKeyProvider);
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +90,10 @@ class LoginButtons extends HookWidget {
             child: MainButton(
               text: 'enter'.tr(),
               onTap: () async {
+                print('loginFormKey.currentState ${loginFormKey.currentWidget}');
+                print('loginFormKey.currentContext ${loginFormKey.currentState.context.widget}');
+                print('loginState ${loginState.phone}');
+
                 if (loginFormKey.currentState.validate()) {
                   auth.state = AuthState.loading;
 

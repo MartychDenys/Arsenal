@@ -37,23 +37,32 @@ class NumberNotFoundPoppup extends StatelessWidget {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () {
-                    // Clipboard.setData(ClipboardData(text: '0800604453'));
+              children: <Widget>[
+                CallMenuItem(
+                  title: 'call'.tr(),
+                  iconPath: viber,
+                  onPressButton: () {
                     _makePhoneCall('0800604453');
                     Navigator.of(context).pop();
                   },
-                  child: Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                      ),
-                      child: Text(
-                        '0800604453',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      )),
+                  buttonColor: mainColor,
                 ),
+                // InkWell(
+                //   onTap: () {
+                //     // Clipboard.setData(ClipboardData(text: '0800604453'));
+                //     _makePhoneCall('0800604453');
+                //     Navigator.of(context).pop();
+                //   },
+                //   child: Container(
+                //       padding: EdgeInsets.all(8.0),
+                //       decoration: BoxDecoration(
+                //         color: Colors.green,
+                //       ),
+                //       child: Text(
+                //         '0800604453',
+                //         style: TextStyle(fontSize: 18, color: Colors.white),
+                //       )),
+                // ),
                 Container(
                   child: CallMenuItem(
                     title: 'Viber',
