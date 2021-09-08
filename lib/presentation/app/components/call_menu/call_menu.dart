@@ -37,7 +37,9 @@ class CallMenu extends HookWidget {
       showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return ViberDialog();
+          return ViberDialog(
+            viberPath: 'viber://pa?chatURI=arsenalassistans',
+          );
         },
       );
     }

@@ -16,6 +16,11 @@ import '../../../../infrastructure/reset/reset_service.dart';
 import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
 
 class ChangePasswordButtons extends HookWidget {
+  ChangePasswordButtons({
+    Key key,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+  final Function(String value) showSystemErrorPopup;
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -28,11 +33,12 @@ class ChangePasswordButtons extends HookWidget {
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        showMessageSnackBar(
-          message: 'Password successfully changed',
-          scaffoldKey: controllerKey,
-          color: mainColor,
-        );
+        showSystemErrorPopup('Password successfully changed');
+        // showMessageSnackBar(
+        //   message: 'Password successfully changed',
+        //   scaffoldKey: controllerKey,
+        //   color: mainColor,
+        // );
         /*showDialog(
           context: context,
           builder: (BuildContext ctx) {
@@ -41,11 +47,12 @@ class ChangePasswordButtons extends HookWidget {
         );*/
         auth.state = AuthState.login;
       } else {
-        showMessageSnackBar(
-          message: 'Incorrect data',
-          scaffoldKey: controllerKey,
-          color: errorColor,
-        );
+        showSystemErrorPopup('Incorrect data');
+        // showMessageSnackBar(
+        //   message: 'Incorrect data',
+        //   scaffoldKey: controllerKey,
+        //   color: errorColor,
+        // );
         auth.state = AuthState.changePassword;
       }
     }

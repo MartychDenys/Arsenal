@@ -1,3 +1,9 @@
+import '../app/components/popups/additional_popup.dart';
+import '../app/components/popups/popup_auth.dart';
+
+import '../../application/auth/login_state_notifier_provider.dart';
+import '../../application/auth/register/register_by_phone_state_notifier_provider.dart';
+import '../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,6 +42,10 @@ class Authentication extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    useProvider(loginStateNotifierProvider.state);
+    useProvider(registerByPhoneStateNotifierProvider.state);
+    useProvider(resetByPhoneStateNotifierProvider.state);
+
     if (auth.state != AuthState.loading) {
       return Scaffold(
         body: SingleChildScrollView(
@@ -50,10 +60,38 @@ class Authentication extends HookWidget {
                     SpaceH16(),
                     LoginFields(),
                     SpaceH80(),
-                    LoginButtons(),
+                    LoginButtons(
+                      showNumberNotFoundPopup: () {
+                        showCustomDialog(
+                          context: context,
+                          child: NumberNotFoundPoppup(),
+                        );
+                      },
+
+                      showSystemErrorPopup: (String error) {
+                        showCustomDialog(
+                          context: context,
+                          child: ShowSystemErrorPopup(message: error,),
+                        );
+                      },
+                    ),
                     SpaceH32(),
                     ResetButton(),
                     SpaceH32(),
+
+                    // InkWell(
+                    //   onTap: () {
+                    //     showCustomDialog(
+                    //       context: context,
+                    //       child: ShowSystemErrorPopup(message: 'Invalid crendentials',),
+                    //     );
+                    //   },
+                    //   child: Container(
+                    //     width: 100,
+                    //     height: 100,
+                    //     color: Colors.red,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
@@ -62,40 +100,82 @@ class Authentication extends HookWidget {
                 SpaceH16(),
                 ResetPasswordForm(),
                 SpaceH100(),
-                ResetPasswordButtons(),
+                ResetPasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               if (auth.state == AuthState.resetSms) ...[
                 ResetPasswordTitle(),
                 SpaceH16(),
                 ResetPasswordSmsForm(),
                 SpaceH100(),
-                ResetBySmsPasswordButtons(),
+                ResetBySmsPasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               if (auth.state == AuthState.changePassword) ...[
                 ChangePasswordTitle(),
                 ChangePasswordForm(),
                 SpaceH100(),
-                ChangePasswordButtons(),
+                ChangePasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               if (auth.state == AuthState.register) ...[
                 RegisterPasswordTitle(),
                 SpaceH16(),
                 RegisterPasswordForm(),
                 SpaceH100(),
-                RegisterPasswordButtons(),
+                RegisterPasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               if (auth.state == AuthState.registerSms) ...[
                 RegisterPasswordTitle(),
                 SpaceH16(),
                 RegisterPasswordSmsForm(),
                 SpaceH100(),
-                RegisterBySmsPasswordButtons(),
+                RegisterBySmsPasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               if (auth.state == AuthState.setPassword) ...[
                 SetPasswordTitle(),
                 SetPasswordForm(),
                 SpaceH100(),
-                SetPasswordButtons(),
+                SetPasswordButtons(
+                  showSystemErrorPopup: (String value) {
+                    showCustomDialog(
+                      context: context,
+                      child: ShowSystemErrorPopup(message: value,),
+                    );
+                  },
+                ),
               ],
               AuthPolicy(),
             ],

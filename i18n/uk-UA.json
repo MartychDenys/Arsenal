@@ -218,5 +218,18 @@
   "new_password": "Введіть новий пароль",
   "confirm": "Підтвердити",
   "insurance_expired": "Термін дії договору закінчився",
-  "reliable_open_own": "Надійна. Відкрита. Своя."
+  "reliable_open_own": "Надійна. Відкрита. Своя.",
+  "phone_not_exist": "Строк дії Вашого договору закінчився.",
+  "some_question": "Є питання?",
+  "we_always_there": "Ми завжди поруч.",
+  "doctors_conclusion": "Висновок лікаря",
+  "provide": "Надати",
+  "date_conclusion": "Вкажіть дату",
+  "date_conclusion_visit": "Вкажіть дату візиту до лікаря",
+  "make_photo": "Зробіть фото",
+  "make_photo_title": "Зробіть фото висновку лікаря",
+  "upload_photo_title": "Завантажте фото заключения доктора",
+  "upload": "завантажити",
+  "make_upload_photo": "зробити фото",
+  "uploaded": "завантажено"
 }

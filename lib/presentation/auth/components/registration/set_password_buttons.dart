@@ -16,6 +16,11 @@ import '../../../../infrastructure/register/register_service.dart';
 import '../../../../application/auth/register/register_data_state_notifier_provider.dart';
 
 class SetPasswordButtons extends HookWidget {
+  const SetPasswordButtons({
+    Key key,
+    this.showSystemErrorPopup,
+  }): super(key: key);
+  final Function(String value) showSystemErrorPopup;
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
@@ -28,11 +33,12 @@ class SetPasswordButtons extends HookWidget {
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
-        showMessageSnackBar(
-          message: 'Password successfully set',
-          scaffoldKey: controllerKey,
-          color: mainColor,
-        );
+        showSystemErrorPopup('Password successfully set');
+        // showMessageSnackBar(
+        //   message: 'Password successfully set',
+        //   scaffoldKey: controllerKey,
+        //   color: mainColor,
+        // );
         /*showDialog(
           context: context,
           builder: (BuildContext ctx) {
@@ -41,11 +47,12 @@ class SetPasswordButtons extends HookWidget {
         );*/
         auth.state = AuthState.login;
       } else {
-        showMessageSnackBar(
-          message: 'Incorrect data',
-          scaffoldKey: controllerKey,
-          color: mainColor,
-        );
+        showSystemErrorPopup('Incorrect data');
+        // showMessageSnackBar(
+        //   message: 'Incorrect data',
+        //   scaffoldKey: controllerKey,
+        //   color: mainColor,
+        // );
         auth.state = AuthState.setPassword;
       }
     }

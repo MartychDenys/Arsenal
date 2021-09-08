@@ -17,14 +17,31 @@ import '../../../../application/auth/login/show_password_provider.dart';
 import '../../../../domain/auth/show_password_state.dart';
 
 class LoginFields extends HookWidget {
+  LoginFields({
+    Key key,
+  }) : super(key: key);
+
   final PhoneNumber number = PhoneNumber(isoCode: 'UA');
-  final phoneController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final login = useProvider(loginStateNotifierProvider);
+    final loginState = useProvider(loginStateNotifierProvider.state);
     final loginFormKey = useProvider(loginFormKeyProvider);
     final showPassword = useProvider(showPasswordStateProvider);
+    final phoneController = new TextEditingController();
+
+    if (loginState.phone.isNotEmpty) {
+      phoneController.text = loginState.phone.substring(3);
+    } else {
+      phoneController.text = '';
+    }
+
+    phoneController.value = phoneController.value.copyWith(
+      text: phoneController.text,
+      selection: TextSelection(
+          baseOffset: phoneController.text.length,
+          extentOffset: phoneController.text.length),
+    );
 
     return Form(
       key: loginFormKey,
@@ -42,7 +59,9 @@ class LoginFields extends HookWidget {
             ),
             InternationalPhoneNumberInput(
                 onInputChanged: (PhoneNumber number) {
-                  login.updatePhone(number.phoneNumber.substring(1));
+                  context
+                      .read(loginStateNotifierProvider)
+                      .updatePhone(number.phoneNumber.substring(1));
                 },
                 selectorConfig: SelectorConfig(
                   selectorType: PhoneInputSelectorType.DROPDOWN,
@@ -50,13 +69,19 @@ class LoginFields extends HookWidget {
                 selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
                 ignoreBlank: false,
                 textFieldController: phoneController,
-                initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: login.state.phone.isNotEmpty ? login.state.phone.substring(3) : ''),
+                initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: phoneController.text),
+                // initialValue: PhoneNumber(
+                //     isoCode: 'UA',
+                //     phoneNumber: phoneController.text.isNotEmpty
+                //         ? phoneController.text
+                //         : '',
+                // ),
                 formatInput: true,
                 hintText: 'phone_number'.tr(),
                 errorMessage: 'phone_number_error'.tr(),
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.phone,
-                countries: ['UA']
+                countries: ['UA'],
             ),
             SpaceH45(),
             FrizText(
@@ -97,7 +122,9 @@ class LoginFields extends HookWidget {
                   color: subtitleColor,
                 ),*/
               ),
-              onChanged: (String value) => login.updatePassword(value),
+              onChanged: (String value) => context
+                  .read(loginStateNotifierProvider)
+                  .updatePassword(value),
               validator: validatePassword,
             ),
           ],

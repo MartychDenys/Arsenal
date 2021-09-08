@@ -21,6 +21,10 @@ dependencies:
   pin_code_fields: ^7.1.0 #reset password fields
   expandable: ^5.0.1 # Expandable containers
 
+  # IMAGE PICKER
+  path_provider: ^0.4.1
+  image_picker: ^0.4.4
+
   # STATE MANAGEMENT
   provider: ^5.0.0
   hooks_riverpod: ^0.12.2 # Riverpod with hooks from Remi Rousselet

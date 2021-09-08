@@ -8,6 +8,11 @@ import '../../components/friz_text.dart';
 import '../../components/helvetica_text.dart';
 
 class ViberDialog extends StatelessWidget {
+  const ViberDialog({
+    Key key,
+    @required this.viberPath,
+  }): super(key: key);
+  final String viberPath;
   Future<void> _launchViber(String link) async {
     // if (await canLaunch(link)) {
       final bool nativeAppLaunchSucceeded = await launch(
@@ -87,7 +92,7 @@ class ViberDialog extends StatelessWidget {
                   ),
                   onPressed: () {
                     //_launchViber('viber://chat?number=380509501099');
-                    _launchViber('viber://pa?chatURI=arsenalassistans');
+                    _launchViber(viberPath);
                   },
                   color: mainColor,
                   child: Container(

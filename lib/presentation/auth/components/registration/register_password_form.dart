@@ -17,8 +17,26 @@ class RegisterPasswordForm extends HookWidget {
 
   final PhoneNumber number = PhoneNumber(isoCode: 'UA');
 
+  final phoneController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final registerState = useProvider(registerByPhoneStateNotifierProvider.state);
+
+
+    if (registerState.phone.isNotEmpty) {
+      phoneController.text = registerState.phone.substring(3);
+    } else {
+      phoneController.text = '';
+    }
+
+    phoneController.value = phoneController.value.copyWith(
+      text: phoneController.text,
+      selection: TextSelection(
+          baseOffset: phoneController.text.length,
+          extentOffset: phoneController.text.length),
+    );
+
     return Form(
       key: registerPasswordPhoneFormKey,
       child: Container(
@@ -42,7 +60,12 @@ class RegisterPasswordForm extends HookWidget {
                 ),
                 selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
                 ignoreBlank: false,
-                initialValue: number,
+                initialValue: PhoneNumber(
+                  isoCode: 'UA',
+                  phoneNumber: phoneController.text.isNotEmpty
+                      ? phoneController.text
+                      : '',
+                ),
                 formatInput: true,
                 hintText: 'phone_number'.tr(),
                 errorMessage: 'phone_number_error'.tr(),
