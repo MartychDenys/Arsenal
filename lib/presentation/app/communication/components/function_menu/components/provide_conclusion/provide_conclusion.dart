@@ -195,15 +195,10 @@ class ProvideConclusion extends HookWidget {
                   title:
                       "${'upload'.tr()[0].toUpperCase()}${'upload'.tr().substring(1)}",
                   onTap: () async {
-                    print('start');
                     if (provideConclusionFormKey.currentState.validate()) {
-                      // await context.read(provideConclusionFutureProvider);
-                      print('start2 ${provideConclusionState.image}');
                       if (provideConclusionState.image != null) {
-                        print('start3');
                         await context.read(provideConclusionFutureProvider);
                       } else {
-                        print('change to true');
                         provideConclusionPhotoError.state = true;
                       }
                     }
