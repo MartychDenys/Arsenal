@@ -40,4 +40,6 @@ class LoginStateNotifier extends StateNotifier<LoginRequest> {
       password: '',
     );
   }
+
+  String get phoneGet => state.phone;
 }

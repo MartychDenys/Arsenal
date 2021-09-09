@@ -2,7 +2,6 @@ import '../app/components/popups/additional_popup.dart';
 import '../app/components/popups/popup_auth.dart';
 
 import '../../application/auth/login_state_notifier_provider.dart';
-import '../../application/auth/register/register_by_phone_state_notifier_provider.dart';
 import '../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -42,9 +41,11 @@ class Authentication extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    useProvider(loginStateNotifierProvider.state);
-    useProvider(registerByPhoneStateNotifierProvider.state);
     useProvider(resetByPhoneStateNotifierProvider.state);
+
+    final loginState = useProvider(loginStateNotifierProvider.state);
+    final phoneController = new TextEditingController();
+    phoneController.value = TextEditingValue(text: loginState.phone);
 
     if (auth.state != AuthState.loading) {
       return Scaffold(
@@ -58,7 +59,9 @@ class Authentication extends HookWidget {
                   children: [
                     AuthTitleRow(),
                     SpaceH16(),
-                    LoginFields(),
+                    LoginFields(
+                        phoneController: phoneController,
+                    ),
                     SpaceH80(),
                     LoginButtons(
                       showNumberNotFoundPopup: () {
@@ -78,27 +81,15 @@ class Authentication extends HookWidget {
                     SpaceH32(),
                     ResetButton(),
                     SpaceH32(),
-
-                    // InkWell(
-                    //   onTap: () {
-                    //     showCustomDialog(
-                    //       context: context,
-                    //       child: ShowSystemErrorPopup(message: 'Invalid crendentials',),
-                    //     );
-                    //   },
-                    //   child: Container(
-                    //     width: 100,
-                    //     height: 100,
-                    //     color: Colors.red,
-                    //   ),
-                    // ),
                   ],
                 ),
               ],
               if (auth.state == AuthState.reset) ...[
                 ResetPasswordTitle(),
                 SpaceH16(),
-                ResetPasswordForm(),
+                ResetPasswordForm(
+                  phoneController: phoneController,
+                ),
                 SpaceH100(),
                 ResetPasswordButtons(
                   showSystemErrorPopup: (String value) {
@@ -139,7 +130,9 @@ class Authentication extends HookWidget {
               if (auth.state == AuthState.register) ...[
                 RegisterPasswordTitle(),
                 SpaceH16(),
-                RegisterPasswordForm(),
+                RegisterPasswordForm(
+                  phoneController: phoneController,
+                ),
                 SpaceH100(),
                 RegisterPasswordButtons(
                   showSystemErrorPopup: (String value) {

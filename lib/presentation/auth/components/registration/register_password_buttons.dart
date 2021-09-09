@@ -1,11 +1,11 @@
+import '../../../../application/auth/login/phone_text_editing_controller_provider.dart';
+import '../../../../application/auth/login_state_notifier_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../domain/auth/registration/phone_response_body.dart';
-import '../../../../application/controller/controller_key_provider.dart';
-import '../../../helpers/show_message_snack_bar.dart';
 import '../../../../application/auth/register/register_phone_form_key_provider.dart';
 import '../../../../application/auth/auth_state_provider.dart';
 import '../../../../domain/auth/auth_state.dart';
@@ -13,24 +13,26 @@ import '../../../app/components/helvetica_text.dart';
 import '../../../constants/spacers.dart';
 import '../../../constants/style_constants.dart';
 import '../../../../infrastructure/register/register_service.dart';
-import '../../../../application/auth/register/register_by_phone_state_notifier_provider.dart';
 import '../../../../application/auth/register/register_data_state_notifier_provider.dart';
 
 class RegisterPasswordButtons extends HookWidget {
   const RegisterPasswordButtons({
     Key key,
     this.showSystemErrorPopup,
-  }): super(key: key);
+  }) : super(key: key);
   final Function(String value) showSystemErrorPopup;
 
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
-    final resetPasswordFormKey = useProvider(registerPasswordPhoneFormKeyProvider);
+    final resetPasswordFormKey =
+        useProvider(registerPasswordPhoneFormKeyProvider);
     final _registerService = RegisterService();
-    final registerState = useProvider(registerByPhoneStateNotifierProvider.state);
-    final controllerKey = useProvider(controllerKeyProvider);
     final registerData = useProvider(registerDataStateNotifierProvider);
+    final loginStateProvider = useProvider(loginStateNotifierProvider);
+
+    final phoneTextEditingController =
+        useProvider(phoneTextEditingControllerProvider);
 
     void _processResponse(dynamic response) async {
       if (response.status == 'success') {
@@ -60,7 +62,7 @@ class RegisterPasswordButtons extends HookWidget {
           auth.state = AuthState.login;
         }
       } else {
-        showSystemErrorPopup('Incorrect data');
+        showSystemErrorPopup('auth_error'.tr());
         // showMessageSnackBar(
         //   message: 'Incorrect data',
         //   scaffoldKey: controllerKey,
@@ -99,11 +101,13 @@ class RegisterPasswordButtons extends HookWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   onPressed: () async {
+                    loginStateProvider
+                        .updatePhone(phoneTextEditingController.state.text);
                     if (resetPasswordFormKey.currentState.validate()) {
                       auth.state = AuthState.loading;
 
-                      final response =
-                          await _registerService.registerByPhone(registerState);
+                      final response = await _registerService.registerByPhone(
+                          phoneTextEditingController.state.text);
                       _processResponse(response);
                     }
                   },

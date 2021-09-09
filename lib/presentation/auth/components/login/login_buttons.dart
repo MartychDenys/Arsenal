@@ -1,3 +1,5 @@
+import '../../../../application/auth/login/phone_text_editing_controller_provider.dart';
+
 import '../../../../infrastructure/insurance/insurance_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,6 @@ import '../../../constants/spacers.dart';
 import '../../../app/components/helvetica_text.dart';
 import '../../../app/components/main_button.dart';
 import '../../../constants/style_constants.dart';
-import '../../../helpers/show_message_snack_bar.dart';
 import '../../../../application/app/contact/current_contact_state_notifier_provider.dart';
 import '../../../../application/app/contact/contact_list_state_notifier_provider.dart';
 import '../../../../application/auth/auth_data_state_notifier_provider.dart';
@@ -29,7 +30,8 @@ class LoginButtons extends HookWidget {
     Key key,
     this.showNumberNotFoundPopup,
     this.showSystemErrorPopup,
-  }): super(key: key);
+  }) : super(key: key);
+
   final Function() showNumberNotFoundPopup;
   final Function(String error) showSystemErrorPopup;
   final loginFormKey = useProvider(loginFormKeyProvider);
@@ -40,19 +42,26 @@ class LoginButtons extends HookWidget {
     final loginFormKey = useProvider(loginFormKeyProvider);
     final _authService = AuthService();
     final _contactService = ContactService();
-    final loginState = useProvider(loginStateNotifierProvider.state);
+
+    final loginStateProvider = useProvider(loginStateNotifierProvider);
+
     final authData = useProvider(authDataStateNotifierProvider);
     final contactData = useProvider(contactListStateNotifierProvider);
     final userId = useProvider(currentContactStateNotifierProvider);
     final controller = useProvider(controllerStateProvider);
     final controllerKey = useProvider(controllerKeyProvider);
 
+    final phoneTextEditingController =
+        useProvider(phoneTextEditingControllerProvider);
+    final passwordTextEditingController =
+        useProvider(passwordTextEditingControllerProvider);
+
     void _processResponse(dynamic response) async {
       authData.updateAuthData(response);
       if (response.status == 'success') {
         controller.state = ControllerState.authorized;
+        passwordTextEditingController.state.text = '';
       } else {
-
         showSystemErrorPopup('auth_error'.tr());
 
         // showMessageSnackBar(
@@ -90,14 +99,16 @@ class LoginButtons extends HookWidget {
             child: MainButton(
               text: 'enter'.tr(),
               onTap: () async {
-                print('loginFormKey.currentState ${loginFormKey.currentWidget}');
-                print('loginFormKey.currentContext ${loginFormKey.currentState.context.widget}');
-                print('loginState ${loginState.phone}');
+                loginStateProvider
+                    .updatePhone(phoneTextEditingController.state.text);
 
                 if (loginFormKey.currentState.validate()) {
                   auth.state = AuthState.loading;
 
-                  final response = await _authService.login(loginState);
+                  final response = await _authService.login(
+                      phoneTextEditingController.state.text,
+                      passwordTextEditingController.state.text);
+
                   if (response is AuthData) {
                     if (response.status == 'success') {
                       final contactList =

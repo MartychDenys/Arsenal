@@ -10,11 +10,13 @@ import '../../domain/auth/registration/set_password_response_body.dart';
 class RegistrationApiService {
   final _dio = Dio();
 
-  Future<dynamic> resetByPhone(PhoneRequest phoneRequest) async {
+  Future<dynamic> resetByPhone(String phoneNumber) async {
     PhoneResponseBody phoneResponseBody;
 
+    final phone = phoneNumber.split(' ').join('');
+
     var formData = FormData.fromMap({
-      'data[phone]': '${phoneRequest.phone}',
+      'data[phone]': '380$phone',
     });
 
     var response = await _dio.post(

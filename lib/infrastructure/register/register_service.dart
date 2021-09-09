@@ -6,8 +6,8 @@ import '../../domain/auth/registration/phone_request.dart';
 class RegisterService {
   final _resetService = RegistrationApiService();
 
-  Future<dynamic> registerByPhone(PhoneRequest phoneRequest) {
-    return _resetService.resetByPhone(phoneRequest);
+  Future<dynamic> registerByPhone(String phone) {
+    return _resetService.resetByPhone(phone);
   }
 
   Future<dynamic> registerBySms(SmsRequest smsRequest, String token) {
