@@ -1,3 +1,4 @@
+import 'package:arsenal_app/application/auth/login/phone_text_editing_controller_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,29 +20,17 @@ import '../../../../domain/auth/show_password_state.dart';
 class LoginFields extends HookWidget {
   LoginFields({
     Key key,
+    this.phoneController,
   }) : super(key: key);
 
-  final PhoneNumber number = PhoneNumber(isoCode: 'UA');
+  final TextEditingController phoneController;
 
   @override
   Widget build(BuildContext context) {
-    final loginState = useProvider(loginStateNotifierProvider.state);
     final loginFormKey = useProvider(loginFormKeyProvider);
     final showPassword = useProvider(showPasswordStateProvider);
-    final phoneController = new TextEditingController();
-
-    if (loginState.phone.isNotEmpty) {
-      phoneController.text = loginState.phone.substring(3);
-    } else {
-      phoneController.text = '';
-    }
-
-    phoneController.value = phoneController.value.copyWith(
-      text: phoneController.text,
-      selection: TextSelection(
-          baseOffset: phoneController.text.length,
-          extentOffset: phoneController.text.length),
-    );
+    final phoneTextEditingController = useProvider(phoneTextEditingControllerProvider);
+    final passwordTextEditingController = useProvider(passwordTextEditingControllerProvider);
 
     return Form(
       key: loginFormKey,
@@ -58,30 +47,20 @@ class LoginFields extends HookWidget {
               color: textColor,
             ),
             InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  context
-                      .read(loginStateNotifierProvider)
-                      .updatePhone(number.phoneNumber.substring(1));
-                },
-                selectorConfig: SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DROPDOWN,
-                ),
-                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
-                ignoreBlank: false,
-                textFieldController: phoneController,
-                initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: phoneController.text),
-                // initialValue: PhoneNumber(
-                //     isoCode: 'UA',
-                //     phoneNumber: phoneController.text.isNotEmpty
-                //         ? phoneController.text
-                //         : '',
-                // ),
-                formatInput: true,
-                hintText: 'phone_number'.tr(),
-                errorMessage: 'phone_number_error'.tr(),
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                keyboardType: TextInputType.phone,
-                countries: ['UA'],
+              selectorConfig: SelectorConfig(
+                selectorType: PhoneInputSelectorType.DROPDOWN,
+              ),
+              selectorTextStyle: TextStyle(color: Colors.black, fontSize: 16),
+              ignoreBlank: false,
+              textFieldController: phoneTextEditingController.state,
+              initialValue: PhoneNumber(isoCode: 'UA', phoneNumber: phoneController.text),
+              formatInput: true,
+              hintText: 'phone_number'.tr(),
+              errorMessage: 'phone_number_error'.tr(),
+              autoValidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: TextInputType.phone,
+              countries: ['UA'],
+              onInputChanged: (PhoneNumber value) {},
             ),
             SpaceH45(),
             FrizText(
@@ -91,7 +70,8 @@ class LoginFields extends HookWidget {
             ),
             TextFormField(
               cursorColor: mainColor,
-              initialValue: '',
+              // initialValue: '',
+              controller: passwordTextEditingController.state,
               obscureText: (showPassword.state == ShowPasswordState.invisible)
                   ? true
                   : false,

@@ -3,18 +3,18 @@ import 'package:dio/dio.dart';
 import '../../domain/auth/reset/sms_request.dart';
 import '../../domain/auth/reset/sms_response_body.dart';
 import '../../domain/auth/reset/phone_response_body.dart';
-import '../../domain/auth/reset/phone_request.dart';
 import '../../domain/auth/reset/change_password_response_body.dart';
 import '../constants.dart';
 
 class ResetApiService {
   final _dio = Dio();
 
-  Future<dynamic> resetByPhone(PhoneRequest phoneRequest) async {
+  Future<dynamic> resetByPhone(String phoneNumber) async {
     PhoneResponseBody phoneResponseBody;
+    final phone = phoneNumber.split(' ').join('');
 
     var formData = FormData.fromMap({
-      'data[phone]': '${phoneRequest.phone}',
+      'data[phone]': '380$phone',
     });
 
     var response = await _dio.post(

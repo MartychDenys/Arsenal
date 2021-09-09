@@ -1,7 +1,6 @@
-import 'package:arsenal_app/domain/auth/reset/phone_response_body.dart';
-
-import '../../../../application/controller/controller_key_provider.dart';
-import '../../../helpers/show_message_snack_bar.dart';
+import '../../../../application/auth/login/phone_text_editing_controller_provider.dart';
+import '../../../../application/auth/login_state_notifier_provider.dart';
+import '../../../../domain/auth/reset/phone_response_body.dart';
 
 import '../../../../application/auth/reset_password/reset_phone_form_key_provider.dart';
 
@@ -15,24 +14,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../infrastructure/reset/reset_service.dart';
-import '../../../../application/auth/reset_password/reset_by_phone_state_notifier_provider.dart';
 import '../../../../application/auth/reset_password/reset_data_state_notifier_provider.dart';
 
 class ResetPasswordButtons extends HookWidget {
   const ResetPasswordButtons({
     Key key,
     this.showSystemErrorPopup,
-  }): super(key: key);
+  }) : super(key: key);
 
   final Function(String value) showSystemErrorPopup;
+
   @override
   Widget build(BuildContext context) {
     final auth = useProvider(authStateProvider);
     final resetPasswordFormKey = useProvider(resetPasswordPhoneFormKeyProvider);
     final _resetService = ResetService();
-    final resetState = useProvider(resetByPhoneStateNotifierProvider.state);
-    final controllerKey = useProvider(controllerKeyProvider);
     final resetData = useProvider(resetDataStateNotifierProvider);
+    final loginStateProvider = useProvider(loginStateNotifierProvider);
+    final phoneTextEditingController =
+        useProvider(phoneTextEditingControllerProvider);
 
     void _processResponse(dynamic response) {
       if (response.status == 'success') {
@@ -43,7 +43,7 @@ class ResetPasswordButtons extends HookWidget {
           auth.state = AuthState.login;
         }
       } else {
-        showSystemErrorPopup('Incorrect data');
+        showSystemErrorPopup('auth_error'.tr());
         // showMessageSnackBar(
         //   message: 'Incorrect data',
         //   scaffoldKey: controllerKey,
@@ -82,11 +82,13 @@ class ResetPasswordButtons extends HookWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   onPressed: () async {
+                    loginStateProvider
+                        .updatePhone(phoneTextEditingController.state.text);
                     if (resetPasswordFormKey.currentState.validate()) {
                       auth.state = AuthState.loading;
 
-                      final response =
-                          await _resetService.resetByPhone(resetState);
+                      final response = await _resetService
+                          .resetByPhone(phoneTextEditingController.state.text);
 
                       _processResponse(response);
                     }

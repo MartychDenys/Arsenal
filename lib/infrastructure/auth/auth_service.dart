@@ -4,7 +4,7 @@ import 'auth_api_service.dart';
 class AuthService {
   final _authApiService = AuthApiService();
 
-  Future<dynamic> login(LoginRequest loginRequest) {
-    return _authApiService.login(loginRequest);
+  Future<dynamic> login(String phone, String password) {
+    return _authApiService.login(phone, password);
   }
 }
