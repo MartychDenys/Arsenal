@@ -1,15 +1,20 @@
+import '../../../../../../../../application/controller/controller_state_provider.dart';
+import '../../../../../../../../application/controller/index_page_state_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../bottom_navigation/bottom_navigation_page.dart';
 import '../../../../../../../constants/spacers.dart';
 import '../../../../../../../constants/style_constants.dart';
 import '../../../../../../components/friz_text.dart';
 
-class QuestionsWidget extends StatelessWidget {
+class QuestionsWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final indexPageProvider = useProvider(indexPageStateProvider);
+    final _pageController = useProvider(pageControllerStateProvider);
     return Container(
       child: Column(
         children: [
@@ -25,15 +30,8 @@ class QuestionsWidget extends StatelessWidget {
                 TextSpan(
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const NavigationPage(
-                            index: 2,
-                          ),
-                        ),
-                      );
+                      indexPageProvider.state = 2;
+                      _pageController.state.jumpToPage(2);
                     },
                   text: 'contact_us'.tr(),
                   style: const TextStyle(

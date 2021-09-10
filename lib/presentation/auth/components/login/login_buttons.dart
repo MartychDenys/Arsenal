@@ -116,18 +116,6 @@ class LoginButtons extends HookWidget {
                       if (contactList is Contact) {
                         contactData.updateContactData(contactList);
                         userId.state = contactList.data.first.id;
-
-                        final insuranceExpired =
-                            await InsuranceService().insuranceExpired(
-                          response.data.token,
-                          userId.state,
-                        );
-
-                        if (!insuranceExpired) {
-                          showNumberNotFoundPopup();
-                          auth.state = AuthState.login;
-                          return;
-                        }
                       }
                       _processResponse(response);
                     } else {

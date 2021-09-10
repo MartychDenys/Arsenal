@@ -1,6 +1,7 @@
+import '../../../../application/controller/controller_state_provider.dart';
+import '../../../../application/controller/index_page_state_provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import '../../../bottom_navigation/bottom_navigation_page.dart';
-import '../../../helpers/navigator_push.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ import '../../components/helvetica_text.dart';
 class DoctorDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final _pageController = useProvider(pageControllerStateProvider);
+    final indexPageProvider = useProvider(indexPageStateProvider);
+
     return AlertDialog(
       title: Center(
         child: Column(
@@ -86,12 +90,8 @@ class DoctorDialog extends HookWidget {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamedAndRemoveUntil('/controller', (r) => false);
-                    navigatorPushReplacement(
-                      context,
-                      const NavigationPage(
-                        index: 0,
-                      ),
-                    );
+                    indexPageProvider.state = 0;
+                    _pageController.state.jumpToPage(0);
                   },
                   color: mainColor,
                   child: Container(
