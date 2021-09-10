@@ -1,13 +1,18 @@
+import '../../../../../application/auth/login/phone_text_editing_controller_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../constants/style_constants.dart';
 import '../../../components/dialog.dart';
 
 class ExitCard extends HookWidget {
   Widget build(BuildContext context) {
+    final phoneTextEditingController =
+    useProvider(phoneTextEditingControllerProvider);
+
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Card(
@@ -38,6 +43,8 @@ class ExitCard extends HookWidget {
               onPressed: () async {
                 /*await authData.resetAuthData();
                 controller.state = ControllerState.unauthorized;*/
+
+                phoneTextEditingController.state.text = '';
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {

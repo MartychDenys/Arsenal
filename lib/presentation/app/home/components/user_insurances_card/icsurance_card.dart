@@ -1,6 +1,12 @@
+import '../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../../application/auth/auth_data_state_notifier_provider.dart';
+import '../../../../../infrastructure/insurance/insurance_service.dart';
+import '../../../components/popups/additional_popup.dart';
+import '../../../components/popups/popup_auth.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:number_display/number_display.dart';
 
 import '../user_contract_page.dart';
@@ -25,6 +31,9 @@ class InsuranceCard extends HookWidget {
     //
     // insuranceId.updateInsuranceId(insuranceList[0].dealInfo.id);
 
+    final userId = useProvider(currentContactStateNotifierProvider);
+    final authData = useProvider(authDataStateNotifierProvider);
+
     final numberFormatter = createDisplay(
       separator: ' ',
       length: 9,
@@ -36,12 +45,26 @@ class InsuranceCard extends HookWidget {
       return Text('Error data');
     } else {
       return InkWell(
-        onTap: () => navigatorPush(
-          context,
-          UserContractPage(
-            item: insuranceList[0],
-          ),
-        ),
+        onTap: () async {
+          final insuranceExpired = await InsuranceService().insuranceExpired(
+            authData.state.data.token,
+            userId.state,
+          );
+
+          if (!insuranceExpired) {
+            showCustomDialog(
+              context: context,
+              child: NumberNotFoundPoppup(),
+            );
+            return;
+          }
+          navigatorPush(
+            context,
+            UserContractPage(
+              item: insuranceList[0],
+            ),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.only(
             top: 12,

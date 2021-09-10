@@ -49,7 +49,6 @@ class InsuranceProvider {
 
 
   bool checkExpiredInsurance(Insurance insurance) {
-    print('insurance.data ${insurance.data}');
     final insuranceDate = insurance.data[0].dealInfo.closeDate.split('.');
     final insuranceDay = insuranceDate[0];
     final insuranceMonth = insuranceDate[1];

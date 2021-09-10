@@ -1,3 +1,5 @@
+import '../components/popups/additional_popup.dart';
+import '../components/popups/popup_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -81,7 +83,14 @@ class HomePage extends HookWidget {
                 ),
               ),
               SpaceH16(),
-              CallAssistantButton(),
+              CallAssistantButton(
+                  showNumberNotFoundPopup: () {
+                    showCustomDialog(
+                      context: context,
+                      child: NumberNotFoundPoppup(),
+                    );
+                  },
+              ),
               SpaceH16(),
               insurance.when(
                 data: (data) {
