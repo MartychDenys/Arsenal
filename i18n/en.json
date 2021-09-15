@@ -206,5 +206,12 @@
   "upload_photo_title": "Upload a photo of the doctor's conclusion",
   "upload": "upload",
   "make_upload_photo": "make photo",
-  "uploaded": "uploaded"
+  "uploaded": "uploaded",
+  "conclusion_was_upload_success" : "The doctor's report was successfully uploaded",
+  "conclusion_was_upload_error": "An error has occurred",
+  "conclusion_xmm": "Hmm... Seems to expire",
+  "conclusion_xmm2": "Your contract has expired.",
+  "conclusion_text1": "Contact a handy manager",
+  "conclusion_text2": "for you way and we will decide",
+  "conclusion_text3": "this question as soon as possible"
 }

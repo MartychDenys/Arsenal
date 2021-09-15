@@ -1,14 +1,12 @@
 import '../../communication/components/viber_dialog.dart';
 import '../call_menu/call_menu_item.dart';
 import '../../../constants/style_constants.dart';
-import 'package:flutter/services.dart';
 import '../../../constants/spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NumberNotFoundPoppup extends StatelessWidget {
-
   Future<void> _makePhoneCall(num) async {
     launch('tel://$num');
   }
@@ -20,21 +18,59 @@ class NumberNotFoundPoppup extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('phone_not_exist'.tr(), style: TextStyle(fontSize: 16.0,),),
-            const Divider(),
-            Text(
-              'some_question'.tr(),
-              style: TextStyle(fontSize: 16.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: ExactAssetImage(close),
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SpaceH16(),
-            Text(
-              'we_always_there'.tr(),
-              style: TextStyle(fontSize: 16.0,),
-            ),
-            SpaceH16(),
+            SpaceH30(),
+            Center(child: Image.asset('assets/images/docs.png')),
+            SpaceH30(),
 
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                'conclusion_xmm'.tr(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0,),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                'conclusion_xmm2'.tr(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0,),
+              ),
+            ),
+
+            SpaceH20(),
+
+            Container(
+              child: Column(
+                children: <Widget>[
+                  Text('conclusion_text1'.tr()),
+                  Text('conclusion_text2'.tr()),
+                  Text('conclusion_text3'.tr()),
+                ],
+              ),
+            ),
+            SpaceH30(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
@@ -47,22 +83,6 @@ class NumberNotFoundPoppup extends StatelessWidget {
                   },
                   buttonColor: mainColor,
                 ),
-                // InkWell(
-                //   onTap: () {
-                //     // Clipboard.setData(ClipboardData(text: '0800604453'));
-                //     _makePhoneCall('0800604453');
-                //     Navigator.of(context).pop();
-                //   },
-                //   child: Container(
-                //       padding: EdgeInsets.all(8.0),
-                //       decoration: BoxDecoration(
-                //         color: Colors.green,
-                //       ),
-                //       child: Text(
-                //         '0800604453',
-                //         style: TextStyle(fontSize: 18, color: Colors.white),
-                //       )),
-                // ),
                 Container(
                   child: CallMenuItem(
                     title: 'Viber',
@@ -72,7 +92,8 @@ class NumberNotFoundPoppup extends StatelessWidget {
                         context: context,
                         builder: (BuildContext ctx) {
                           return ViberDialog(
-                            viberPath: 'https://www.viber.com/httpsarsenal-icua',
+                            viberPath:
+                                'https://www.viber.com/httpsarsenal-icua',
                           );
                         },
                       );
@@ -89,16 +110,14 @@ class NumberNotFoundPoppup extends StatelessWidget {
   }
 }
 
-
-
-
 class ShowSystemErrorPopup extends StatelessWidget {
   ShowSystemErrorPopup({
     Key key,
-    this.message,
-  }): super(key: key);
+    @required this.message,
+    this.closePopup
+  }) : super(key: key);
   final String message;
-
+  final Function closePopup;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -108,10 +127,32 @@ class ShowSystemErrorPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    closePopup();
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: ExactAssetImage(close),
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Text(message),
             SpaceH16(),
             InkWell(
               onTap: () {
+                closePopup();
                 Navigator.of(context).pop();
               },
               child: Container(
@@ -119,7 +160,10 @@ class ShowSystemErrorPopup extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: mainColor,
                 ),
-                child: Text('ok'.tr(), style: TextStyle(color: Colors.white),),
+                child: Text(
+                  'ok'.tr(),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

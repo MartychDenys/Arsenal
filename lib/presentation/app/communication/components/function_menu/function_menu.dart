@@ -1,4 +1,4 @@
-import 'package:arsenal_app/presentation/app/communication/components/function_menu/components/provide_conclusion/provide_conclusion.dart';
+import 'components/provide_conclusion/provide_conclusion.dart';
 
 import 'components/already_signed/come_to_doctor_page.dart';
 import '../../../../helpers/navigator_push.dart';
@@ -73,25 +73,25 @@ class FunctionMenu extends StatelessWidget {
                 1,
               ),
             ),
-            // FunctionMenuItem(
-            //   title: 'doctors_conclusion'.tr(),
-            //   buttonFunc: () {
-            //     navigatorPush(
-            //       context,
-            //       ProvideConclusion(),
-            //     );
-            //   },
-            //   buttonTitle: 'provide'.tr(),
-            // ),
-            // const Divider(
-            //   height: 1,
-            //   color: Color.fromRGBO(
-            //     227,
-            //     227,
-            //     229,
-            //     1,
-            //   ),
-            // ),
+            FunctionMenuItem(
+              title: 'doctors_conclusion'.tr(),
+              buttonFunc: () {
+                navigatorPush(
+                  context,
+                  ProvideConclusion(),
+                );
+              },
+              buttonTitle: 'provide'.tr(),
+            ),
+            const Divider(
+              height: 1,
+              color: Color.fromRGBO(
+                227,
+                227,
+                229,
+                1,
+              ),
+            ),
           ],
         ),
       ),

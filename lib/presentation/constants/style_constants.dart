@@ -30,3 +30,5 @@ const String alarm = 'assets/icons/alarm.svg';
 // ASSET NAMES OF IMAGE FILES
 const String logoImage = 'assets/auth/logo.png';
 const String logoBackgroundImage = 'assets/images/bg.png';
+const String close = 'assets/images/mdi_close.png';
+const String docs = 'assets/images/docs.png';
