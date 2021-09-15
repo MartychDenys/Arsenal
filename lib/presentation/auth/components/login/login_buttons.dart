@@ -49,7 +49,6 @@ class LoginButtons extends HookWidget {
     final contactData = useProvider(contactListStateNotifierProvider);
     final userId = useProvider(currentContactStateNotifierProvider);
     final controller = useProvider(controllerStateProvider);
-    final controllerKey = useProvider(controllerKeyProvider);
 
     final phoneTextEditingController =
         useProvider(phoneTextEditingControllerProvider);
@@ -63,12 +62,6 @@ class LoginButtons extends HookWidget {
         passwordTextEditingController.state.text = '';
       } else {
         showSystemErrorPopup('auth_error'.tr());
-
-        // showMessageSnackBar(
-        //   message: 'auth_error'.tr(),
-        //   scaffoldKey: controllerKey,
-        //   color: errorColor,
-        // );
         auth.state = AuthState.login;
       }
     }

@@ -1,6 +1,11 @@
-import '../../../../../../../application/app/communication/provide_conclusion/provide_conclusion_photo_error_state.dart';
+import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
+import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
+import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
+import '../../../../../../../infrastructure/provide_conclusion/provide_conclusion.service.dart';
+import '../../../../../components/popups/additional_popup.dart';
+import '../../../../../components/popups/popup_auth.dart';
 
-import '../../../../../../../application/app/communication/provide_conclusion/provide_conclusion_future_rovider.dart';
+import '../../../../../../../application/app/communication/provide_conclusion/provide_conclusion_photo_error_state.dart';
 import '../../../../../../../application/app/communication/provide_conclusion/provide_conclusion_state_notifier.dart';
 import '../../../../../../../infrastructure/provide_conclusion/provide_conclusion_image.service.dart';
 import '../submit_button.dart';
@@ -27,6 +32,13 @@ class ProvideConclusion extends HookWidget {
     final provideConclusionFormKey =
         useProvider(provideConclusionFormKeyProvider);
     final provideConclusionState = useProvider(provideConclusionStateNotifier);
+
+    final provideConclusionStateProvider = useProvider(provideConclusionStateNotifier.state);
+    final authData = useProvider(authDataStateNotifierProvider.state);
+    final userId = useProvider(currentContactStateNotifierProvider.state);
+    final insuranceId = useProvider(insuranceIdStateNotifierProvider.state);
+
+
     final provideConclusionPhotoError =
         useProvider(provideConclusionPhotoErrorProvide);
     final dateController = new TextEditingController();
@@ -197,7 +209,26 @@ class ProvideConclusion extends HookWidget {
                   onTap: () async {
                     if (provideConclusionFormKey.currentState.validate()) {
                       if (provideConclusionState.image != null) {
-                        await context.read(provideConclusionFutureProvider);
+                        // await context.read(provideConclusionFutureProvider(context));
+
+                        final response = await ProvideConclusionService().sendQuery2(
+                          provideConclusionStateProvider,
+                          authData.data.token,
+                          userId,
+                          insuranceId,
+                        );
+
+                        if (response == 'success') {
+                          showCustomDialog(
+                            context: context,
+                            child: ShowSystemErrorPopup(message: 'conclusion_was_upload_success'.tr(), closePopup: () {Navigator.pop(context);},),
+                          );
+                        } else {
+                          showCustomDialog(
+                            context: context,
+                            child: ShowSystemErrorPopup(message: 'conclusion_was_upload_error'.tr(), closePopup: () {Navigator.pop(context);}),
+                          );
+                        }
                       } else {
                         provideConclusionPhotoError.state = true;
                       }

@@ -231,5 +231,12 @@
   "upload_photo_title": "Завантажте фото заключения доктора",
   "upload": "завантажити",
   "make_upload_photo": "зробити фото",
-  "uploaded": "завантажено"
+  "uploaded": "завантажено",
+  "conclusion_was_upload_success" : "Висновок лікаря було успішно завантажено",
+  "conclusion_was_upload_error": "Виникла помилка",
+  "conclusion_xmm": "Хмм... Здається термін дії",
+  "conclusion_xmm2": "Вашого договору закінчився.",
+  "conclusion_text1": "Зв'яжіться з менеджером зручним",
+  "conclusion_text2": "для Вас способом і ми вирішемо",
+  "conclusion_text3": "це питання якомога скоріше"
 }

@@ -1,6 +1,6 @@
-import 'package:arsenal_app/domain/history/doctor_list.dart';
-import 'package:arsenal_app/domain/request_body.dart';
-import 'package:arsenal_app/infrastructure/history/history_service.dart';
+import '../../../../domain/history/doctor_list.dart';
+import '../../../../domain/request_body.dart';
+import '../../../../infrastructure/history/history_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final doctorHistoryFutureProvider = FutureProvider.autoDispose

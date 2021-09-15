@@ -1,16 +1,15 @@
-import 'dart:convert';
-import 'dart:io';
-
+import '../../../presentation/helpers/img_convertor_form_data.dart';
 import 'package:dio/dio.dart';
 import '../../constants.dart';
 import '../../../domain/provide_conclusion/provide_conclusion_request.dart';
 
 class ProvideConclusionApiService {
-  Future<dynamic> sendRequest(ProvideConclusionRequest provideConclusionRequest,
+  Future<String> sendRequest(ProvideConclusionRequest provideConclusionRequest,
       String token, String userId, String insuranceId) async {
     const url = '${apiUrl}/dms/doctorConclusions/add/';
     final _dio = Dio();
-    final bytes = provideConclusionRequest.image.readAsBytesSync();
+    final imgBase64 = await convertToBase64(provideConclusionRequest.image);
+    String sendRequestResponse;
 
     Map<String, dynamic> _query = {
       '_token': token,
@@ -21,21 +20,81 @@ class ProvideConclusionApiService {
     };
 
     Map<String, dynamic> _body = {
-      'data[PHOTO]': [provideConclusionRequest.image.uri],
+      '_token': token,
+      'contactId': userId,
+      'dealID': insuranceId,
+      'data[DATE]': provideConclusionRequest.visitDate,
+      'data[COMMENT]': '${provideConclusionRequest.comment}',
+      'data[PHOTO][]': [imgBase64]
     };
+
+    _dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
     try {
       final response =
       await _dio.post(
         url,
-        data: jsonEncode(_body),
+        data: _body,
         queryParameters: _query,
       );
 
-      print('response with POST(body) $response');
+      if (response.data['data']['status'] == 'success') {
+        sendRequestResponse = response.data['data']['status'];
+      } else {
+        sendRequestResponse = 'error';
+      }
     } catch (error) {
       print('Error ===> $error');
     }
 
+    return sendRequestResponse;
+  }
+
+
+
+  Future<String> sendRequest2(ProvideConclusionRequest provideConclusionRequest,
+      String token, String userId, String insuranceId) async {
+    const url = '${apiUrl}/dms/doctorConclusions/add/';
+    final _dio = Dio();
+    final imgBase64 = await convertToBase64(provideConclusionRequest.image);
+    String sendRequestResponse;
+
+    Map<String, dynamic> _query = {
+      '_token': token,
+      'contactId': userId,
+      'dealID': insuranceId,
+      'data[DATE]': provideConclusionRequest.visitDate,
+      'data[COMMENT]': '${provideConclusionRequest.comment}',
+    };
+
+    Map<String, dynamic> _body = {
+      '_token': token,
+      'contactId': userId,
+      'dealID': insuranceId,
+      'data[DATE]': provideConclusionRequest.visitDate,
+      'data[COMMENT]': '${provideConclusionRequest.comment}',
+      'data[PHOTO][]': [imgBase64]
+    };
+
+    _dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+    try {
+      final response =
+      await _dio.post(
+        url,
+        data: _body,
+        queryParameters: _query,
+      );
+
+      if (response.data['data']['status'] == 'success') {
+        sendRequestResponse = response.data['data']['status'];
+      } else {
+        sendRequestResponse = 'error';
+      }
+    } catch (error) {
+      print('Error ===> $error');
+    }
+
+    return sendRequestResponse;
   }
 }

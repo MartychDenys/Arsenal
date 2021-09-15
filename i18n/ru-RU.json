@@ -225,5 +225,13 @@
   "upload_photo_title": "Загрузите фото заключения доктора",
   "upload": "загрузить",
   "make_upload_photo": "сделать фото",
-  "uploaded": "загружено"
+  "uploaded": "загружено",
+  "conclusion_was_upload_success": "Заключение врача было успешно загружено",
+  "conclusion_was_upload_error": "Произошла ошибка",
+  "conclusion_xmm": "Хмм ... Кажется срок действия",
+  "conclusion_xmm2": "Вашего договора истек.",
+  "conclusion_text1": "Свяжитесь с менеджером удобным",
+  "conclusion_text2": "для Вас способом и мы решим",
+  "conclusion_text3": "этот вопрос можно скорее"
+
 }
