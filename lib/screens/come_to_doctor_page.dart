@@ -1,5 +1,5 @@
-import 'package:arsenal_app/locale/app_localizations.dart';
-import 'package:arsenal_app/widgets/dialogs/doctor_confirm_dialog.dart';
+import '../locale/app_localizations.dart';
+import '../widgets/dialogs/doctor_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ComeToDoctorPage extends StatelessWidget {

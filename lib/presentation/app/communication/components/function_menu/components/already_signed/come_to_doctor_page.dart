@@ -146,15 +146,15 @@ class ComeToDoctorPage extends HookWidget {
                                       '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
                                   );
                                 },
-                                currentTime: DateTime.now(), locale: LocaleType.ru);
+                                currentTime: DateTime.now(), locale: context.locale.languageCode == 'en' ? LocaleType.en : LocaleType.ru);
                           },
                           validator: validateDate,
                           onChanged: (String value) =>
                               comeToDoctor.updateVisitDate(value),
                           showCursor: true,
                           readOnly: true,
-                          decoration: const InputDecoration(
-                            hintText: 'дд.мм.гггг',
+                          decoration: InputDecoration(
+                            hintText: 'dd_mm_yyyy'.tr(),
                             suffixIcon: Icon(
                               Icons.calendar_today,
                               color: mainColor,

@@ -27,12 +27,12 @@ final provideConclusionFutureProvider = FutureProvider.autoDispose.family<void, 
   if (response == 'success') {
     showCustomDialog(
       context: context,
-      child: ShowSystemErrorPopup(message: 'conclusion_was_upload_success'.tr(),),
+      child: ShowSystemErrorPopup(message: 'conclusion_was_upload_success'.tr(), closePopup: () {Navigator.pop(context);},),
     );
   } else {
     showCustomDialog(
       context: context,
-      child: ShowSystemErrorPopup(message: 'conclusion_was_upload_error'.tr(),),
+      child: ShowSystemErrorPopup(message: 'conclusion_was_upload_error'.tr(), closePopup: () {Navigator.pop(context);},),
     );
   }
 });

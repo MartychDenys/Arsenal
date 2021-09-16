@@ -62,6 +62,7 @@ class LoginButtons extends HookWidget {
         passwordTextEditingController.state.text = '';
       } else {
         showSystemErrorPopup('auth_error'.tr());
+        passwordTextEditingController.state.text = '';
         auth.state = AuthState.login;
       }
     }
@@ -102,6 +103,7 @@ class LoginButtons extends HookWidget {
                       phoneTextEditingController.state.text,
                       passwordTextEditingController.state.text);
 
+                  passwordTextEditingController.state.text = '';
                   if (response is AuthData) {
                     if (response.status == 'success') {
                       final contactList =

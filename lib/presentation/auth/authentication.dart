@@ -74,7 +74,7 @@ class Authentication extends HookWidget {
                       showSystemErrorPopup: (String error) {
                         showCustomDialog(
                           context: context,
-                          child: ShowSystemErrorPopup(message: error,),
+                          child: ShowSystemErrorPopup(message: error, closePopup: () {},),
                         );
                       },
                     ),
@@ -95,7 +95,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),
@@ -109,7 +109,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),
@@ -122,7 +122,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),
@@ -138,7 +138,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),
@@ -152,7 +152,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),
@@ -165,7 +165,7 @@ class Authentication extends HookWidget {
                   showSystemErrorPopup: (String value) {
                     showCustomDialog(
                       context: context,
-                      child: ShowSystemErrorPopup(message: value,),
+                      child: ShowSystemErrorPopup(message: value, closePopup: () {},),
                     );
                   },
                 ),

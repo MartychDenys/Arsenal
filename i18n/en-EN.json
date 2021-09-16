@@ -124,7 +124,7 @@
   "docs_list_details_4": "From a doctor: an extract with the specified diagnosis and recommendations (original or copy certified by the seal from a doctor and a medical institution)",
   "docs_list_details_5": "Checks, receipt for payment for medical services, medicines (originals). If the names of medicines are not specified in the fiscal receipt, you must additionally provide a sales receipt with a decryption",
   "docs_list_details_6": "For dentistry: Certificate of completion (in the original or a copy certified with wet seals)",
-  "docs_list_details_7": "A copy from those private entrepreneurs institutions (business entities) with which there is no agreement (for government institutions this item is not relevant, since they are not private entrepreneurs):\\n • copy of the taxpayer's license; \\n • copy of the license for the right to conduct medical services; \\n • copy of the certificate of state registration",
+  "docs_list_details_7": "A copy from those private entrepreneurs institutions (business entities) with which there is no agreement (for government institutions this item is not relevant, since they are not private entrepreneurs):\n • copy of the taxpayer's license; \n • copy of the license for the right to conduct medical services; \n • copy of the certificate of state registration",
   "how_to_sent": "You can send the entire package of documents in paper form by Ukrposhta (or Nova Poshta with delivery or other courier services) or give a lift during business hours to the address: Kiev, 01042, st. Ioanna Pavla II, building 3, 5th floor, \"Arsenal assistance\"",
   "have_questions": "Have questions?",
   "set_question": "Ask question",
@@ -172,14 +172,14 @@
 
 
   "internet_troubles": "No internet",
-  "connection_error": "Unable to connect to our servers. \\ nIt looks like there are some connection problems.",
+  "connection_error": "Unable to connect to our servers. It looks like there are some connection problems.",
   "please_check_connection": "Please check your network or Wi-Fi connection and try refreshing the page by clicking the button below.",
   "refresh": "Refresh page",
   "does_not_work": "Unsuccessful? Contact us in a convenient way and we'll provide professional assistance",
 
 
   "app_version": "Version of app",
-  "choose_lang": "Choose the language of the app. \\nYou can always change it in this menu.",
+  "choose_lang": "Choose the language of the app. \nYou can always change it in this menu.",
   "about_project": "About project",
   "first_steps": "First steps",
 
@@ -213,5 +213,18 @@
   "conclusion_xmm2": "Your contract has expired.",
   "conclusion_text1": "Contact a handy manager",
   "conclusion_text2": "for you way and we will decide",
-  "conclusion_text3": "this question as soon as possible"
+  "conclusion_text3": "this question as soon as possible",
+  "contract_valid_from": "Effective date",
+  "contract_valid_to": "Expiration date",
+  "contract_limit": "Limit",
+  "period_of_validity_contract": "The period of the contract",
+  "insurance_text_p1": "Private Joint Stock Company \"Insurance Company\" ARSENAL INSURANCE \", hereinafter referred to as the\" Insurer \", which is a payer of income tax at the rate determined in accordance with paragraph 136.1 of Article 136 of the Tax Code, and income tax at the rate determined in accordance with subparagraphs 136.2. 1 and 136.2.2 of clause 136.2 of article 136 of GCC",
+  "legal_address": "Legal address: ",
+  "legal_address_value": "03056, m.Kiyiv, st. Borschagivska, 154",
+  "letter_address": "Letter addresses: ",
+  "username": "Username: ",
+  "birth_date": "Date of birth: ",
+  "uah_per_year": "UAH per year",
+  "dd_mm_yyyy": "dd.mm.yyyy",
+  "history_title": "History of requests"
 }

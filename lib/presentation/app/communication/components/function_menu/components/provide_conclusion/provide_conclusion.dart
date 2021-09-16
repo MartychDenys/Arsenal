@@ -1,3 +1,5 @@
+import '../../../../../../../locale/app_localizations.dart';
+
 import '../../../../../../../application/app/contact/current_contact_state_notifier_provider.dart';
 import '../../../../../../../application/app/insurances/insurance_id_state_notifier_provider.dart';
 import '../../../../../../../application/auth/auth_data_state_notifier_provider.dart';
@@ -110,8 +112,8 @@ class ProvideConclusion extends HookWidget {
                           validator: validateDate,
                           showCursor: true,
                           readOnly: true,
-                          decoration: const InputDecoration(
-                            hintText: 'дд.мм.гггг',
+                          decoration: InputDecoration(
+                            hintText: 'dd_mm_yyyy'.tr(),
                             suffixIcon: Icon(
                               Icons.calendar_today,
                               color: Color.fromRGBO(18, 151, 71, 1),

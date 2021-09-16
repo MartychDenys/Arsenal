@@ -102,9 +102,11 @@ class LoginFields extends HookWidget {
                   color: subtitleColor,
                 ),*/
               ),
-              onChanged: (String value) => context
-                  .read(loginStateNotifierProvider)
-                  .updatePassword(value),
+              onChanged: (String value) {
+                // context
+                //     .read(loginStateNotifierProvider)
+                //     .updatePassword(value);
+              },
               validator: validatePassword,
             ),
           ],

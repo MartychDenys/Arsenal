@@ -21,6 +21,9 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
+  Map<String, String> get localizedStringsTest => _localizedStrings;
+
+
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
     String jsonString =
@@ -57,6 +60,7 @@ class _AppLocalizationsDelegate
     // AppLocalizations class is where the JSON loading actually runs
     AppLocalizations localizations = new AppLocalizations(locale);
     await localizations.load();
+    print('RETURN LOCALIZATIOONS $localizations');
     return localizations;
   }
 

@@ -8,7 +8,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NumberNotFoundPoppup extends StatelessWidget {
   Future<void> _makePhoneCall(num) async {
-    launch('tel://$num');
+    if (await canLaunch('tel:$num')) {
+      await launch('tel://$num');
+    } else {
+      throw 'Could not launch $num';
+    }
   }
 
   @override
@@ -93,7 +97,7 @@ class NumberNotFoundPoppup extends StatelessWidget {
                         builder: (BuildContext ctx) {
                           return ViberDialog(
                             viberPath:
-                                'https://www.viber.com/httpsarsenal-icua',
+                                'viber://pa?chatURI=httpsarsenal-icua'
                           );
                         },
                       );
@@ -117,7 +121,8 @@ class ShowSystemErrorPopup extends StatelessWidget {
     this.closePopup
   }) : super(key: key);
   final String message;
-  final Function closePopup;
+  final Function() closePopup;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
