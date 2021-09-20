@@ -36,8 +36,8 @@ class HistoryPage extends HookWidget {
         RequestBody(token: authData, id: userId, insuranceId: insuranceId)));
     final doctorHistoryData = useProvider(doctorHistoryFutureProvider(
         RequestBody(token: authData, id: userId, insuranceId: insuranceId)));
-    // final conclusionHistoryData = useProvider(conclusionHistoryFutureProvider(
-    //     RequestBody(token: authData, id: userId, insuranceId: insuranceId)));
+    final conclusionHistoryData = useProvider(conclusionHistoryFutureProvider(
+        RequestBody(token: authData, id: userId, insuranceId: insuranceId)));
 
     return Scaffold(
       appBar: appBarWithBackButton(
@@ -94,28 +94,28 @@ class HistoryPage extends HookWidget {
                 );
               },
             ),
-            // conclusionHistoryData.when(
-            //   data: (conclusions) {
-            //     if (conclusions is ConclusionList) {
-            //       return ListView(
-            //         shrinkWrap: true,
-            //         physics: const ScrollPhysics(),
-            //         children: <Widget>[
-            //           for (final conclusion in conclusions.data)
-            //             ConclusionTile(conclusion: conclusion),
-            //         ],
-            //       );
-            //     } else {
-            //       return Text('Unknown error');
-            //     }
-            //   },
-            //   loading: () => Loader(),
-            //   error: (object, stackTrace) {
-            //     return Center(
-            //       child: Text('$object'),
-            //     );
-            //   },
-            // ),
+            conclusionHistoryData.when(
+              data: (conclusions) {
+                if (conclusions is ConclusionList && conclusions.data.isNotEmpty) {
+                  return ListView(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    children: <Widget>[
+                      for (final conclusion in conclusions.data)
+                        ConclusionTile(conclusion: conclusion),
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+              },
+              loading: () => Loader(),
+              error: (object, stackTrace) {
+                return Center(
+                  child: Text('$object'),
+                );
+              },
+            ),
           ],
         ),
       ),
