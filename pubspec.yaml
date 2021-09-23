@@ -23,7 +23,7 @@ dependencies:
 
   # IMAGE PICKER
   path_provider: ^0.4.1
-  image_picker: ^0.4.4
+  image_picker: ^0.7.2+1
 
   # STATE MANAGEMENT
   provider: ^5.0.0

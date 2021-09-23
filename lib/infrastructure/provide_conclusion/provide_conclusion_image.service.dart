@@ -4,12 +4,12 @@ import 'package:image_picker/image_picker.dart';
 
 class ProvideConclusionImageService {
   Future<File> getImageGallery() async {
-    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    return image;
+    final image = await ImagePicker().getImage(source: ImageSource.gallery);
+    return File(image.path);
   }
 
   Future<File> getImageCamera() async {
-    final image = await ImagePicker.pickImage(source: ImageSource.camera);
-    return image;
+    final image = await ImagePicker().getImage(source: ImageSource.camera);
+    return File(image.path);
   }
 }
