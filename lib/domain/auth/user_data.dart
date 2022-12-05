@@ -6,9 +6,10 @@ part 'user_data.g.dart';
 @JsonSerializable()
 class UserData {
   UserData(
-    @required this.message,
-    @required this.id,
-    @required this.token,
+    this.message,
+    this.id,
+    this.token,
+    this.refreshToken,
   );
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
@@ -20,4 +21,6 @@ class UserData {
   final String id;
   @JsonKey(name: '_token')
   final String token;
+  @JsonKey(name: '_refresh_token')
+  final String refreshToken;
 }
